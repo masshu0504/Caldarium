@@ -1,0 +1,80 @@
+services:
+
+  # ---------------------------
+  # Postgres database
+  # ---------------------------
+  ls-postgres:
+    image: postgres:15
+    container_name: ls-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  # ---------------------------
+  # MinIO object storage
+  # ---------------------------
+  ls-minio:
+    image: minio/minio:latest
+    container_name: ls-minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio123
+      MINIO_BROWSER: "on"        # enable browser
+      MINIO_DOMAIN: ""  # allow browser requests via localhost
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - backend
+
+
+  # ---------------------------
+  # Label Studio 
+  # ---------------------------
+  labelstudio:
+    image: heartexlabs/label-studio:latest
+    container_name: labelstudio
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@ls_postgres:5432/labelstudio
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ls-postgres
+      - ls-minio
+    networks:
+      - backend
+
+  # ---------------------------
+  # Helper container for bootstrap/export
+  # ---------------------------
+  helper:
+    build:
+      context: .
+      dockerfile: Dockerfiles/helper.Dockerfile
+    container_name: ls-helper
+    volumes:
+      - .:/workspace
+    networks:
+      - backend
+    tty: true
+
+
+volumes:
+  postgres_data:
+  minio_data:
+
+networks:
+  backend:
+    driver: bridge
+
+

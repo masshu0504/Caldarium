@@ -1,0 +1,108 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": {
+      "type": "string",
+      "description": "Unique invoice ID"
+    },
+    "patient_id": {
+      "type": "string",
+      "description": "Patient record ID, default"
+    },
+    "invoice_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date invoice was issued"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment due date"
+    },
+    "patient_name": {
+      "type": "string",
+      "description": "Full patient name"
+    },
+    "patient_age": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Patient age in years"
+    },
+    "patient_address": {
+      "type": "string",
+      "description": "Patient mailing address"
+    },
+    "patient_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Patient phone number (optional)"
+    },
+    "patient_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email",
+      "description": "Patient email, typically derived from patient_name"
+    },
+    "admission_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Admission date of patient"
+    },
+    "discharge_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Discharge date of patient"
+    },
+    "subtotal_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Subtotal amount before discounts"
+    },
+    "discount_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Discount applied to invoice"
+    },
+    "total_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total invoice amount after discounts"
+    },
+    "line_items": {
+      "type": "array",
+      "description": "List of individual line items on the invoice",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "description",
+          "amount"
+        ]
+      }
+    }
+  },
+  "required": [
+    "invoice_number",
+    "patient_id",
+    "subtotal_amount",
+    "invoice_date",
+    "total_amount",
+    "line_items"
+  ]
+}
