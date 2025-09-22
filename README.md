@@ -45,7 +45,7 @@ You will also need Python installed for schema_validation.py
 
 First, you need to download the code onto your computer:
 
-***git clone https://github.com/j-sh-park/caldarium_med_parsing_start/***
+***git clone https://github.com/masshu0504/Caldarium***
 
 ***cd caldarium_med_parsing_start***
 
