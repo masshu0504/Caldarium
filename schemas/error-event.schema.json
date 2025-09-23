@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/error-event.schema.json",
+  "title": "Intake Agent Error Event",
+  "type": "object",
+  "required": ["error_code", "stage", "message", "timestamp"],
+  "properties": {
+    "error_code": {
+      "type": "string",
+      "enum": ["EXTRACTION_FAIL", "SCHEMA_MISMATCH", "MISSING_FIELD", "OCR_NOISE"]
+    },
+    "stage": {
+      "type": "string",
+      "enum": ["OCR", "PARSER", "VALIDATOR", "POSTPROC"]
+    },
+    "message": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "file_path": { "type": "string" },
+        "document_id": { "type": "string" }
+      }
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

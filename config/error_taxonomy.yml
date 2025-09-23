@@ -1,0 +1,11 @@
+version: 1
+categories:
+  - EXTRACTION_FAIL
+  - SCHEMA_MISMATCH
+  - MISSING_FIELD
+  - OCR_NOISE
+stages:
+  - OCR
+  - PARSER
+  - VALIDATOR
+  - POSTPROC
