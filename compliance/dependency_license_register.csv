@@ -1,0 +1,6 @@
+Category,Name,Version,SPDX License,License source URL,Direct or Transitive,Used in (module/container),Purpose / Notes,Approval status,Risk notes
+Python package,pdfplumber,,MIT,https://pypi.org/project/pdfplumber/,Direct,PDF parsing,Extract text/layout from PDFs,Allowed,
+Python package,great-expectations,,Apache-2.0,https://pypi.org/project/great-expectations/,Direct,Schema & data validation,Define and run data quality checks,Allowed,
+Service (Docker image),heartexlabs/label-studio,,Apache-2.0,https://github.com/heartexlabs/label-studio/blob/master/LICENSE,Direct,Annotation service,Labeling UI for training/evaluation data,Allowed,
+Service (Docker image),minio/minio,,AGPL-3.0-only,https://github.com/minio/minio/blob/master/LICENSE,Direct,Object storage (S3-compatible),Stores PDFs/outputs; community edition is AGPL,Needs Review,Network-copyleft obligations if modified & offered as a service
+Service (Docker image),postgres,,PostgreSQL,https://www.postgresql.org/about/licence/,Direct,Database,Relational database used by services like Label Studio,Allowed,

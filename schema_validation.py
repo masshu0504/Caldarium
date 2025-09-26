@@ -2,7 +2,7 @@ import argparse
 import json
 from jsonschema import validate, ValidationError
 from pathlib import Path
-from med_parsing.errors import ErrorEvent, ErrorCode, Stage
+from errors import ErrorEvent, ErrorCode, Stage
 
 def validate_invoice(payload: dict, source_path: str | None = None) -> bool:
         schema_path = Path("schemas/invoice.json")
