@@ -2,7 +2,7 @@ import pdfplumber
 
 # Replace 'path/to/your/sample/invoice.pdf' with the actual path to one of your sample PDFs.
 # You can find the sample PDFs in the repository you cloned.
-pdf_path = 'path/to/your/sample/invoice.pdf'
+pdf_path = 'minio_buckets\invoices\invoice_T1_gen1.pdf'
 
 try:
     with pdfplumber.open(pdf_path) as pdf:
