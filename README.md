@@ -17,8 +17,8 @@ We recommend that students clone this repository and use it as a starting point 
     |       ├── invoice_T1_gen1.pdf                        - (Provided File) This is an invoice pdf
     |       ├── invoice_T1_gen2.pdf                        - (Provided File) Another invoice pdf...
     |       ├── the rest of the invoices...                - (Provided File) ...
-    ├── postgres_dump/                                     - (Provided Folder) This folder houses the PostGres dump file
-    |   └── med_parsing_dump.sql                           - (Provided File) This file will contain your PostGres data that can be loaded into/from the PostGres server
+    ├── postgres_dump/                                     - (Not Provided Folder) This folder houses the PostGres dump file
+    |   └── med_parsing_dump.sql                           - (Not Provided File) This file will contain your PostGres data that can be loaded into/from the PostGres server
     ├── FastAPI/                                           - (Not Provided Folder) This folder would contain the files that you create, including FastAPI files
     |   ├── your first api files                           - (Not Provided File) FastAPI file
     |   ├── the rest of your api files or other files      - (Not Provided File) FastAPI file or other project file
@@ -29,7 +29,14 @@ We recommend that students clone this repository and use it as a starting point 
     ├── export_data.sh                                     - (Provided File) Script to export data from MinIO and PostGres server.
     ├── bootstrap.sh                                       - (Provided File) Script to load data into MinIO and PostGres server.
     ├── schema_validation.py                               - (Provided File) Python script to validation parse .json files against the provided schema.
+    ├── Meta Prompt                                        - (Provided File) A prompt you can add when asking questions to an AI chatbot of your choice. Highly recommended for a response that's broken down and easy to understand.
+    ├── labelstudio_invoice_label_config_template.xml      - (Provided File) A template that you can copy and paste into the labelstudio label config code editor.
+    ├── NOTICE.txt                                         - (Provided File) Contains license for students to use.
     └── .gitignore                                         - (Provided File) Tells github which files to ignore.
+    
+    
+    
+    
 
 ## Docker Container Setup Instructions and How to Use boostrap and export_data scripts
 
@@ -45,7 +52,7 @@ You will also need Python installed for schema_validation.py
 
 First, you need to download the code onto your computer:
 
-***git clone https://github.com/masshu0504/Caldarium***
+***git clone https://github.com/j-sh-park/caldarium_med_parsing_start/***
 
 ***cd caldarium_med_parsing_start***
 
@@ -87,7 +94,7 @@ This opens an interactive bash session in the helper container.
 
 After commiting changes to the PostGres DB or uploading pdfs to MinIO, you can export these changes by running the export_data.sh script.
 
-All PostGres data will be dumped into a postgres_dumps folder as a file named med_parsing_dump.sql.
+All PostGres data will be dumped into a postgres_dumps folder as a file named med_parsing_dump.sql. **NOTE:** The  postgres_dumps folder may need to be created before exporting PostGres data.
 
 All files uploaded to MinIO will be saved into folders within the minio_buckets folder. For example, a pdf file named file.pdf stored in MinIO in a bucket named test will be saved into the following file path: minio_buckets/test/file.pdf.
 
@@ -141,14 +148,33 @@ db: med_parsing
 
 Once you are ready to validate your .json file (hopefully containing fields and values parsed from the pdfs) you will need to execute the schema_validation.py script.
 
+The script takes the following arguments:
+
+1. instance: [REQUIRED] the file path to the .json file you want to compare to the schema.
+2. schema: [OPTIONAL, ENABLE WITH '--schema' FLAG] the file path to the .json schema that the instance will be compared against. Default file path is: schemas/invoice.json.
+
 ## Licensing
 
 This project is provided under the **Apache 2.0** license.  
 See [NOTICE.txt](NOTICE.txt) for details.
 
 
-The script takes the following arguments:
+# Week 1 Deliverable Setup Update
+- .env.example set up with DB URLS parameters and postgres inputs
+- If postgres not set up, install psql shell
+- Run psql shell and run: CREATE DATABASE med_parsing;
+- After running the database, create the parsed_documents table using this sql:
+CREATE TABLE IF NOT EXISTS parsed_documents (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payload JSONB NOT NULL
+); - Database now has a table which is ready for inserts
+- To insert into the table, run this sql:
+INSERT INTO parsed_documents (payload)
+VALUES ('{"title": "Test Document", "content": "This is a dummy row."}');
 
-1. instance: [REQUIRED] the file path to the .json file you want to compare to the schema.
-2. schema: [OPTIONAL, ENABLE WITH '--schema' FLAG] the file path to the .json schema that the instance will be compared against. Default file path is: schemas/invoice.json.
+- Insert corresponding fields mentioned earlier in README into .env.example file
+- run uvicorn main:app --reload to run the routes
+- after running go to [localhost:8000](http://127.0.0.1:8000)/docs to test the routes
+
 
