@@ -1,6 +1,40 @@
 import argparse
 import json
 from jsonschema import validate, ValidationError
+from pathlib import Path
+from errors import ErrorEvent, ErrorCode, Stage
+
+def validate_invoice(payload: dict, source_path: str | None = None) -> bool:
+        schema_path = Path("schemas/invoice.json")
+        schema = json.loads(schema_path.read_text())
+        try:
+            validate(instance=payload, schema=schema)
+            return True
+        except ValidationError as e:
+            # Decide: missing field vs schema mismatch
+            # Heuristic: if 'is a required property' appears, call it MISSING_FIELD
+            message = str(e.message)
+            if "is a required property" in message:
+                code = ErrorCode.MISSING_FIELD
+                details = {"missing_property": getattr(e, "path", None) and list(e.path),
+                        "validator": e.validator, "validator_value": e.validator_value}
+            else:
+                code = ErrorCode.SCHEMA_MISMATCH
+                details = {"error": message,
+                        "path": list(e.path),
+                        "validator": e.validator,
+                        "validator_value": e.validator_value}
+
+            event = ErrorEvent(
+                error_code=code,
+                stage=Stage.VALIDATOR,
+                message=f"Invoice schema validation failed: {message}",
+                source={"file_path": source_path} if source_path else None,
+                details=details
+            )
+            print("INTAKE_ERROR " + json.dumps(event.to_dict()))  # simple JSON-line log
+            return False
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -40,6 +74,7 @@ def main():
         if e.schema_path:
             print("Schema path:")
             print(f"  {' -> '.join(map(str, e.schema_path))}")
+    
 
 if __name__ == "__main__":
     main()
