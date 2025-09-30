@@ -1,0 +1,24 @@
+MEDICAL
+HOT SPRINGS GENERAL
+INVOICE HOSPITAL
+3705 Bridge Avenue, Tulsa OK, 74101 (123) 456-7890 info@hotspringsgen.com www.hotspringsgen.com
+Invoice Details
+Due Account
+Invoice # INV377776 Date: 2020-03-30 2020-04-29 MRN53310
+Date No.
+Patient Details
+Patient Name: Heather Anderson Hospital No: HS-123548-18
+Patient Age: 80 Bed No: BED4887
+684 Adrienne Trafficway Suite 418
+Address: Admission Date: 2020-03-22
+Warrenfurt, WY 64879
+Consultant: Dr. Brittney Santos Discharge Date: 2020-03-28
+Code Particulars Amount
+LP12 Lab Panel $180.00
+DC04 Dermatology Consultation $180.00
+HT02 Hearing Test $70.00
+Sub Total $430.00
+Discount $197.80
+Tax: 4.5%
+Total $251.55
+THANK YOU!
