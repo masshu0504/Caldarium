@@ -5,7 +5,7 @@ services:
   # ---------------------------
   ls-postgres:
     image: postgres:15
-    container_name: ls-postgres
+    #container_name: ls-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -16,6 +16,11 @@ services:
       - "5432:5432"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   # ---------------------------
   # MinIO object storage
@@ -68,6 +73,48 @@ services:
       - backend
     tty: true
 
+  # ---------------------------
+  # FastAPI service
+  # ---------------------------
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfiles/fastapi.Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
+
+  
+  #fastapi:
+  #  build:
+  #    context: ./api
+  #    dockerfile: Dockerfile
+  #  container_name: intake-api
+  #  environment:
+  #    DATABASE_URL: posgres://postgres:postgres@ls-postgres:5432/med_parsing
+  #    POSTGRES_USER: postgres
+  #    POSTGRES_PASSWORD: postgres
+  #    POSTGRES_DB: med_parsing
+  #    POSTGRES_HOST: ls-postgres
+  #    POSTGRES_PORT: 5432
+  #  ports:
+  #    - "8000:8000"   # maps container port to host
+  ##  depends_on:
+  #    - ls-postgres
+  #  networks:
+  #    - backend
+
 
 volumes:
   postgres_data:
@@ -75,6 +122,6 @@ volumes:
 
 networks:
   backend:
-    driver: bridge
+
 
 
