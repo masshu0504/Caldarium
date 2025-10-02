@@ -159,7 +159,7 @@ This project is provided under the **Apache 2.0** license.
 See [NOTICE.txt](NOTICE.txt) for details.
 
 
-# Week 1 Deliverable Setup Update
+# Deliverable Setup Update
 - .env.example set up with DB URLS parameters and postgres inputs
 - If postgres not set up, install psql shell
 - Run psql shell and run: CREATE DATABASE med_parsing;
@@ -176,5 +176,33 @@ VALUES ('{"title": "Test Document", "content": "This is a dummy row."}');
 - Insert corresponding fields mentioned earlier in README into .env.example file
 - run uvicorn main:app --reload to run the routes
 - after running go to [localhost:8000](http://127.0.0.1:8000)/docs to test the routes
+
+
+- To log into the database, run docker exec -it caldarium-ls-postgres-1 psql -U postgres -d med_parsing
+- Then create the table for insertion using this command: CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE IF NOT EXISTS parsed_data (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    extracted_data JSONB NOT NULL
+);
+
+- In the docker-compose.yml file, also add this service: fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfiles/fastapi.Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
 
 
