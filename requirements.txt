@@ -1,6 +1,7 @@
 fastapi==0.118.0
 psycopg2-binary==2.9.10
 python-dotenv==1.1.1
+python-multipart==0.0.20
 
 # Data validation
 great-expectations==0.18.12
