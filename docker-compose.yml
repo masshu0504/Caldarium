@@ -55,6 +55,29 @@ services:
       - backend
 
   # ---------------------------
+  # NEW PARSER SERVICE (FastAPI + Great Expectations)
+  # ---------------------------
+  parser:
+    build:
+      context: .
+      # Assuming the Dockerfile is in a 'Dockerfiles' directory, or adjust context/Dockerfile path
+      dockerfile: Dockerfiles/parser.Dockerfile
+    container_name: intake-parser
+    # This URL allows the parser to connect to the Postgres database
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@ls-postgres:5432/med_parsing
+    # Expose the FastAPI port for validation/testing (e.g., http://localhost:8000)
+    ports:
+      - "8000:8000" 
+    # The parser needs the database and storage to be running before it starts
+    depends_on:
+      - ls-postgres
+      - ls-minio
+    networks:
+      - backend
+
+
+  # ---------------------------
   # Helper container for bootstrap/export
   # ---------------------------
   helper:
