@@ -1,0 +1,98 @@
+{
+    "id": 28,
+    "annotations": [
+        {
+            "id": 19,
+            "completed_by": 1,
+            "result": [
+                {
+                    "value": {
+                        "start": 58,
+                        "end": 71,
+                        "text": "David Chan II",
+                        "labels": [
+                            "PATIENT_NAME"
+                        ]
+                    },
+                    "id": "qQ8gEcChBx",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 0,
+                        "end": 19,
+                        "text": "ROSE PETAL CLINIC",
+                        "labels": [
+                            "HOSPITAL_NAME"
+                        ]
+                    },
+                    "id": "rR9hDbBgCy",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 139,
+                        "end": 149,
+                        "text": "2014-10-19",
+                        "labels": [
+                            "DATE"
+                        ]
+                    },
+                    "id": "sS0iCaFfDz",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 245,
+                        "end": 252,
+                        "text": "$444.12",
+                        "labels": [
+                            "TOTAL_AMOUNT"
+                        ]
+                    },
+                    "id": "tT1jBbEeEa",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 84,
+                        "end": 93,
+                        "text": "INV257144",
+                        "labels": [
+                            "INVOICE_NUMBER"
+                        ]
+                    },
+                    "id": "uU2kBcFdFb",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                }
+            ],
+            "was_cancelled": false,
+            "ground_truth": false,
+            "created_at": "2025-10-07T21:23:01.123456Z",
+            "updated_at": "2025-10-07T21:23:01.123456Z",
+            "lead_time": 66.456,
+            "task": 28,
+            "project": 5
+        }
+    ],
+    "file_upload": "64aa45df-invoices_text.json",
+    "data": {
+        "text": "ROSE PETAL CLINIC INVOICE\n4117 Cedarstone Drive, Amherst, NH, 03031\nDavid Chan II\nInvoice No: INV257144\n(421)626-5991\nE: david.chan@gmail.com\nDue Date: 2014-11-18\nDate: 2014-10-19\nDescription Code Total\nX-Ray XR01 $200.00\nEye Exam EE09 $75.00\nConsultation C001 $150.00\nSubtotal: $425.00\nTax (X%) 4.5%\nTotal: $444.12\nThank you for choosing Rose Petal Clinic.\nFor any questions regarding this invoice, please contact (123) 456-7890 or info@rosepetalclinic.org.\nAddress: 4117 Cedarstone Drive, Amherst NH, 03031\nPhone Number: (123) 456-7890\nEmail: info@rosepetalclinic.org\nWebsite: www.rosepetalclinic.org",
+        "filename": "invoice_T2_gen2.pdf"
+    }
+}

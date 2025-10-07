@@ -1,0 +1,98 @@
+{
+    "id": 24,
+    "annotations": [
+        {
+            "id": 15,
+            "completed_by": 1,
+            "result": [
+                {
+                    "value": {
+                        "start": 279,
+                        "end": 295,
+                        "text": "Heather Anderson",
+                        "labels": [
+                            "PATIENT_NAME"
+                        ]
+                    },
+                    "id": "rT9uVbLwKp",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 8,
+                        "end": 27,
+                        "text": "HOT SPRINGS GENERAL",
+                        "labels": [
+                            "HOSPITAL_NAME"
+                        ]
+                    },
+                    "id": "mN8xYzAqJh",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 204,
+                        "end": 214,
+                        "text": "2020-03-30",
+                        "labels": [
+                            "DATE"
+                        ]
+                    },
+                    "id": "dF7gHjKlBv",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 600,
+                        "end": 606,
+                        "text": "$251.55",
+                        "labels": [
+                            "TOTAL_AMOUNT"
+                        ]
+                    },
+                    "id": "pS6tYjBnXz",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 188,
+                        "end": 197,
+                        "text": "INV377776",
+                        "labels": [
+                            "INVOICE_NUMBER"
+                        ]
+                    },
+                    "id": "wE5hGfKjDc",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                }
+            ],
+            "was_cancelled": false,
+            "ground_truth": false,
+            "created_at": "2025-10-07T21:19:01.123456Z",
+            "updated_at": "2025-10-07T21:19:01.123456Z",
+            "lead_time": 68.456,
+            "task": 24,
+            "project": 5
+        }
+    ],
+    "file_upload": "64aa45df-invoices_text.json",
+    "data": {
+        "text": "MEDICAL\nHOT SPRINGS GENERAL\nINVOICE HOSPITAL\n3705 Bridge Avenue, Tulsa OK, 74101 (123) 456-7890 info@hotspringsgen.com www.hotspringsgen.com\nInvoice Details\nDue Account\nInvoice # INV377776 Date: 2020-03-30 2020-04-29 MRN53310\nDate No.\nPatient Details\nPatient Name: Heather Anderson Hospital No: HS-123548-18\nPatient Age: 80 Bed No: BED4887\n684 Adrienne Trafficway Suite 418\nAddress: Admission Date: 2020-03-22\nWarrenfurt, WY 64879\nConsultant: Dr. Brittney Santos Discharge Date: 2020-03-28\nCode Particulars Amount\nLP12 Lab Panel $180.00\nDC04 Dermatology Consultation $180.00\nHT02 Hearing Test $70.00\nSub Total $430.00\nDiscount $197.80\nTax: 4.5%\nTotal $251.55\nTHANK YOU!",
+        "filename": "invoice_T1_gen1.pdf"
+    }
+}

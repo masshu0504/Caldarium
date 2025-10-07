@@ -1,0 +1,98 @@
+{
+    "id": 27,
+    "annotations": [
+        {
+            "id": 18,
+            "completed_by": 1,
+            "result": [
+                {
+                    "value": {
+                        "start": 52,
+                        "end": 64,
+                        "text": "Angel Kaiser",
+                        "labels": [
+                            "PATIENT_NAME"
+                        ]
+                    },
+                    "id": "lL3bJhHiWs",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 0,
+                        "end": 28,
+                        "text": "White Petal Hospital Center",
+                        "labels": [
+                            "HOSPITAL_NAME"
+                        ]
+                    },
+                    "id": "mM4cIgGjXt",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 143,
+                        "end": 153,
+                        "text": "2018-08-13",
+                        "labels": [
+                            "DATE"
+                        ]
+                    },
+                    "id": "nN5dHfFkYu",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 316,
+                        "end": 323,
+                        "text": "$218.93",
+                        "labels": [
+                            "TOTAL_AMOUNT"
+                        ]
+                    },
+                    "id": "oO6eGeEjZv",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 119,
+                        "end": 128,
+                        "text": "INV140822",
+                        "labels": [
+                            "INVOICE_NUMBER"
+                        ]
+                    },
+                    "id": "pP7fFdDiAw",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                }
+            ],
+            "was_cancelled": false,
+            "ground_truth": false,
+            "created_at": "2025-10-07T21:22:01.123456Z",
+            "updated_at": "2025-10-07T21:22:01.123456Z",
+            "lead_time": 64.789,
+            "task": 27,
+            "project": 5
+        }
+    ],
+    "file_upload": "64aa45df-invoices_text.json",
+    "data": {
+        "text": "White Petal Hospital Center\nInvoice\nBILLED TO: Angel Kaiser\n365 Haley Islands Apt. 563\nLinmouth, OR 62248\nINVOICE DETAILS:\nInvoice # INV140822\nDate of Issue 2018-08-13\nDue Date 2018-09-12\nCODE DESCRIPTION AMOUNT\nCH05 Cholesterol Test $60.00\nPT07 Physical Therapy $120.00\nCH05 Cholesterol Test $60.00\nEE09 Eye Exam $75.00\nSubtotal $315.00\nDiscount $110.25\nTax Rate 4.5%\nTOTAL $218.93\nPayment Instructions:\nPlease remit payment within 30 days of the invoice date. We accept checks, credit cards, and online\npayments through our patient portal.\nDisclaimer:\nThis invoice is generated for services rendered. If you believe any information is incorrect, please contact\nour billing department immediately.\n\ninfo@whitepetalhospital.org +1 (234)-567-8900 www.whitepetalhospital.org",
+        "filename": "invoice_T3_gen2.pdf"
+    }
+}

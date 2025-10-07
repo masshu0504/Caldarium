@@ -1,0 +1,98 @@
+{
+    "id": 25,
+    "annotations": [
+        {
+            "id": 16,
+            "completed_by": 1,
+            "result": [
+                {
+                    "value": {
+                        "start": 58,
+                        "end": 76,
+                        "text": "Jennifer Patterson",
+                        "labels": [
+                            "PATIENT_NAME"
+                        ]
+                    },
+                    "id": "aZ3sXcVbNh",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 0,
+                        "end": 19,
+                        "text": "ROSE PETAL CLINIC",
+                        "labels": [
+                            "HOSPITAL_NAME"
+                        ]
+                    },
+                    "id": "bY4tWdUaMj",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 129,
+                        "end": 139,
+                        "text": "1998-04-28",
+                        "labels": [
+                            "DATE"
+                        ]
+                    },
+                    "id": "cX5vSgRfLk",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 315,
+                        "end": 323,
+                        "text": "$2429.62",
+                        "labels": [
+                            "TOTAL_AMOUNT"
+                        ]
+                    },
+                    "id": "dE6uRhQgPl",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                },
+                {
+                    "value": {
+                        "start": 89,
+                        "end": 98,
+                        "text": "INV492305",
+                        "labels": [
+                            "INVOICE_NUMBER"
+                        ]
+                    },
+                    "id": "fF7vQjPiNm",
+                    "from_name": "ner",
+                    "to_name": "text",
+                    "type": "labels",
+                    "origin": "manual"
+                }
+            ],
+            "was_cancelled": false,
+            "ground_truth": false,
+            "created_at": "2025-10-07T21:20:01.123456Z",
+            "updated_at": "2025-10-07T21:20:01.123456Z",
+            "lead_time": 72.789,
+            "task": 25,
+            "project": 5
+        }
+    ],
+    "file_upload": "64aa45df-invoices_text.json",
+    "data": {
+        "text": "ROSE PETAL CLINIC INVOICE\n4117 Cedarstone Drive, Amherst, NH, 03031\nJennifer Patterson\nInvoice No: INV492305\n940.951.0538\nE: jennifer.patterson@gmail.com\nDue Date: 1998-05-28\nDate: 1998-04-28\nDescription Code Total\nSurgery Consultation SC03 $250.00\nCT Scan CT15 $1000.00\nCT Scan CT15 $1000.00\nEye Exam EE09 $75.00\nSubtotal: $2325.00\nTax (X%) 4.5%\nTotal: $2429.62\nThank you for choosing Rose Petal Clinic.\nFor any questions regarding this invoice, please contact (123) 456-7890 or info@rosepetalclinic.org.\nAddress: 4117 Cedarstone Drive, Amherst NH, 03031\nPhone Number: (123) 456-7890\nEmail: info@rosepetalclinic.org\nWebsite: www.rosepetalclinic.org",
+        "filename": "invoice_T2_gen1.pdf"
+    }
+}
