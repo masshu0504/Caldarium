@@ -77,10 +77,10 @@ services:
   # FastAPI service
   # ---------------------------
 
-  fastapi:
+  parser:
     build:
       context: .
-      dockerfile: Dockerfiles/fastapi.Dockerfile
+      dockerfile: Dockerfiles/parser.Dockerfile
     ports:
       - "8000:8000"
     depends_on:
