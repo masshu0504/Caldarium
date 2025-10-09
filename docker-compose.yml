@@ -115,6 +115,19 @@ services:
   #  networks:
   #    - backend
 
+  # Benchmark runner (Python/Java/Ghostscript)
+  # ---------------------------
+  bench:
+    build:
+      context: .
+      dockerfile: Dockerfiles/bench.Dockerfile
+    volumes:
+      - ./:/app               # bind-mount your repo into /app
+    working_dir: /app         # run commands from repo root
+    networks:
+      - backend
+    tty: true
+
 
 volumes:
   postgres_data:
@@ -124,4 +137,5 @@ networks:
   backend:
 
 
+ 
 

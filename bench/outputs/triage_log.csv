@@ -1,0 +1,10 @@
+filename,embedded_text,triage_status,taxonomy_tag
+invoice_T1_gen1.pdf,True,DIGITAL,doc.type=digital
+invoice_T1_gen2.pdf,True,DIGITAL,doc.type=digital
+invoice_T1_gen3.pdf,True,DIGITAL,doc.type=digital
+invoice_T2_gen1.pdf,True,DIGITAL,doc.type=digital
+invoice_T2_gen2.pdf,True,DIGITAL,doc.type=digital
+invoice_T2_gen3.pdf,True,DIGITAL,doc.type=digital
+invoice_T3_gen1.pdf,True,DIGITAL,doc.type=digital
+invoice_T3_gen2.pdf,True,DIGITAL,doc.type=digital
+invoice_T3_gen3.pdf,True,DIGITAL,doc.type=digital
