@@ -1,19 +1,19 @@
-filename,engine,elapsed_s,pred_invoice_id,pred_patient_id,pred_total_amount,em_invoice_id,em_patient_id,num_total_ok
-invoice_T1_gen1.pdf,pdfplumber,0.097,INV377776,,430.0,1,0,0
-invoice_T1_gen1.pdf,pdfminer,0.1,INV377776,,430.0,1,0,0
-invoice_T1_gen2.pdf,pdfplumber,0.173,INV665469,,1380.0,1,0,0
-invoice_T1_gen2.pdf,pdfminer,0.122,INV665469,,1380.0,1,0,0
-invoice_T1_gen3.pdf,pdfplumber,0.095,INV701760,,645.0,1,0,0
-invoice_T1_gen3.pdf,pdfminer,0.104,INV701760,,645.0,1,0,0
-invoice_T2_gen1.pdf,pdfplumber,0.098,INV492305,,2325.0,1,0,0
-invoice_T2_gen1.pdf,pdfminer,0.16,INV492305,,,1,0,0
-invoice_T2_gen2.pdf,pdfplumber,0.106,INV257144,,425.0,1,0,0
-invoice_T2_gen2.pdf,pdfminer,0.048,INV257144,,,1,0,0
-invoice_T2_gen3.pdf,pdfplumber,0.057,INV26344,,1595.0,1,0,0
-invoice_T2_gen3.pdf,pdfminer,0.057,INV26344,,,1,0,0
-invoice_T3_gen1.pdf,pdfplumber,0.11,INV244194,,1435.0,0,0,0
-invoice_T3_gen1.pdf,pdfminer,0.102,Date,,1435.0,0,0,0
-invoice_T3_gen2.pdf,pdfplumber,0.091,INV140822,,315.0,0,0,0
-invoice_T3_gen2.pdf,pdfminer,0.099,Date,,218.93,0,0,0
-invoice_T3_gen3.pdf,pdfplumber,0.098,INV590270,,480.0,0,0,0
-invoice_T3_gen3.pdf,pdfminer,0.095,Date,,480.0,0,0,0
+filename,engine,elapsed_s,pred_invoice_number,pred_patient_id,pred_invoice_date,pred_subtotal_amount,pred_total_amount,pred_line_items,em_invoice_number,em_patient_id,em_invoice_date,num_subtotal_ok,num_total_ok,em_line_items
+invoice_T1_gen1.pdf,pdfplumber,0.046,INV377776,,2020-03-30,430.0,,[],1,0,1,1,0,0
+invoice_T1_gen1.pdf,pdfminer,0.045,INV377776,,2020-03-30,,,[],1,0,1,0,0,0
+invoice_T1_gen2.pdf,pdfplumber,0.048,INV665469,,1983-04-25,1380.0,,[],1,0,1,1,0,0
+invoice_T1_gen2.pdf,pdfminer,0.047,INV665469,,1983-04-25,,,[],1,0,1,0,0,0
+invoice_T1_gen3.pdf,pdfplumber,0.047,INV701760,,2012-02-03,645.0,,[],1,0,1,1,0,0
+invoice_T1_gen3.pdf,pdfminer,0.04,INV701760,,2012-02-03,,,[],1,0,1,0,0,0
+invoice_T2_gen1.pdf,pdfplumber,0.038,INV492305,,1998-05-28,2325.0,,"[{'code': 'Surgery Consultation', 'description': 'SC03', 'amount': 250.0}, {'code': 'CT Scan', 'description': 'CT15', 'amount': 1000.0}, {'code': 'CT Scan', 'description': 'CT15', 'amount': 1000.0}, {'code': 'Eye Exam', 'description': 'EE09', 'amount': 75.0}]",1,0,0,1,0,0
+invoice_T2_gen1.pdf,pdfminer,0.03,INV492305,,1998-05-28,,,"[{'code': 'Surgery Consultation', 'description': 'SC03', 'amount': 250.0}, {'code': 'CT Scan', 'description': 'CT15', 'amount': 1000.0}, {'code': 'CT Scan', 'description': 'CT15', 'amount': 1000.0}, {'code': 'Eye Exam', 'description': 'EE09', 'amount': 75.0}]",1,0,0,0,0,0
+invoice_T2_gen2.pdf,pdfplumber,0.042,INV257144,,2014-11-18,425.0,,"[{'code': 'X-Ray', 'description': 'XR01', 'amount': 200.0}, {'code': 'Eye Exam', 'description': 'EE09', 'amount': 75.0}, {'code': 'Consultation', 'description': 'C001', 'amount': 150.0}]",1,0,0,1,0,0
+invoice_T2_gen2.pdf,pdfminer,0.053,INV257144,,2014-11-18,,,"[{'code': 'X-Ray', 'description': 'XR01', 'amount': 200.0}, {'code': 'Eye Exam', 'description': 'EE09', 'amount': 75.0}, {'code': 'Consultation', 'description': 'C001', 'amount': 150.0}]",1,0,0,0,0,0
+invoice_T2_gen3.pdf,pdfplumber,0.053,INV26344,,2024-01-27,1595.0,,"[{'code': 'Urine Test', 'description': 'UT01', 'amount': 40.0}, {'code': 'Vaccination Booster', 'description': 'VB08', 'amount': 55.0}, {'code': 'Ultrasound', 'description': 'US10', 'amount': 300.0}, {'code': 'MRI Scan', 'description': 'MRI5', 'amount': 1200.0}]",1,0,0,1,0,0
+invoice_T2_gen3.pdf,pdfminer,0.043,INV26344,,2024-01-27,,,"[{'code': 'Urine Test', 'description': 'UT01', 'amount': 40.0}, {'code': 'Vaccination Booster', 'description': 'VB08', 'amount': 55.0}, {'code': 'Ultrasound', 'description': 'US10', 'amount': 300.0}, {'code': 'MRI Scan', 'description': 'MRI5', 'amount': 1200.0}]",1,0,0,0,0,0
+invoice_T3_gen1.pdf,pdfplumber,0.085,INV244194,,2003-12-03,1435.0,,[],1,0,0,1,0,0
+invoice_T3_gen1.pdf,pdfminer,0.056,Date,,,1435.0,,[],0,0,0,1,0,0
+invoice_T3_gen2.pdf,pdfplumber,0.054,INV140822,,2018-09-12,315.0,,[],1,0,0,1,0,0
+invoice_T3_gen2.pdf,pdfminer,0.039,Date,,,,,[],0,0,0,0,0,0
+invoice_T3_gen3.pdf,pdfplumber,0.044,INV590270,,2015-11-16,480.0,,[],1,0,0,1,0,0
+invoice_T3_gen3.pdf,pdfminer,0.034,Date,,,480.0,,[],0,0,0,1,0,0
