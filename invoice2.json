@@ -1,0 +1,241 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": {
+      "type": "string",
+      "description": "Unique invoice ID"
+    },
+    "patient_id": {
+      "type": "string",
+      "description": "Patient record ID, default"
+    },
+    "invoice_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date invoice was issued"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment due date"
+    },
+    "patient_name": {
+      "type": "string",
+      "description": "Full patient name"
+    },
+    "patient_age": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Patient age in years"
+    },
+    "patient_address": {
+      "type": "string",
+      "description": "Patient mailing address"
+    },
+    "patient_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Patient phone number (optional)"
+    },
+    "patient_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email",
+      "description": "Patient email, typically derived from patient_name"
+    },
+    "admission_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Admission date of patient"
+    },
+    "discharge_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Discharge date of patient"
+    },
+    "subtotal_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Subtotal amount before discounts"
+    },
+    "discount_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Discount applied to invoice"
+    },
+    "total_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total invoice amount after discounts"
+    },
+    "line_items": {
+      "type": "array",
+      "description": "List of individual line items on the invoice",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "quantity": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Quantity for this line item (defaults to 1)"
+          },
+          "line_total": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Amount × quantity if available"
+          }
+        },
+        "required": [
+          "description",
+          "amount"
+        ]
+      }
+    },
+    "provider_name": {
+      "type": "string",
+      "description": "Healthcare provider or facility name"
+    },
+    "provider_address": {
+      "type": "string",
+      "description": "Provider address (street, city, state, ZIP)"
+    },
+    "provider_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Provider phone number (optional)"
+    },
+    "provider_email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email",
+      "description": "Provider email (optional)"
+    },
+    "provider_website": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "Provider website URL (optional)"
+    },
+    "account_no": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hospital account number (if applicable)"
+    },
+    "mrn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Medical Record Number (if applicable)"
+    },
+    "hospital_no": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Hospital number (if applicable)"
+    },
+    "bed_no": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Assigned bed number (inpatient only)"
+    },
+    "consultant": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Attending doctor or consultant name (if shown)"
+    },
+    "billed_to_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Billing party or guarantor full name"
+    },
+    "billed_to_address": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Billing party address"
+    },
+    "tax_rate": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Tax rate as a percentage (e.g., 4.5 for 4.5%)"
+    },
+    "tax_amount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Calculated tax amount"
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Currency code or label (e.g., USD)"
+    },
+    "payment_instructions": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Payment methods, bank details, or instructions"
+    },
+    "disclaimer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Legal or informational disclaimer printed on the invoice"
+    }
+  },
+  "required": [
+    "invoice_number",
+    "patient_id",
+    "subtotal_amount",
+    "invoice_date",
+    "total_amount",
+    "line_items"
+  ]
+}
