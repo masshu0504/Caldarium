@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/schemas/audit-log.schema.json",
+  "title": "Caldarium Intake Agent Audit Log (v0.1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["doc_id", "timestamp", "stage", "error_type", "details", "run_id"],
+  "properties": {
+    "doc_id": {
+      "type": "string",
+      "description": "Unique document identifier (e.g., invoice_T1_gen1.pdf)"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 UTC timestamp of the operation"
+    },
+    "stage": {
+      "type": "string",
+      "enum": ["parse", "validate", "postprocess", "table_extract"],
+      "description": "Pipeline stage where the operation occurred"
+    },
+    "error_type": {
+      "type": "string",
+      "enum": ["EXTRACTION_FAIL", "SCHEMA_MISMATCH", "MISSING_FIELD", "TEXT_NOISE", "TABLE_EXTRACTION_FAIL", "FIELD_PARSING_ERROR", "SUCCESS"],
+      "description": "Error type from taxonomy enum, or SUCCESS if no error"
+    },
+    "details": {
+      "type": "object",
+      "description": "Detailed information about the operation",
+      "properties": {
+        "extracted_fields": {
+          "type": "object",
+          "description": "Fields successfully extracted"
+        },
+        "missing_fields": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "List of fields that failed to extract"
+        },
+        "confidence_scores": {
+          "type": "object",
+          "description": "Confidence scores for extracted fields"
+        },
+        "processing_time_ms": {
+          "type": "number",
+          "description": "Time taken to process this document in milliseconds"
+        },
+        "engine_used": {
+          "type": "string",
+          "enum": ["pdfplumber", "pdfminer", "camelot_lattice", "camelot_stream", "tabula"],
+          "description": "Parsing engine used"
+        }
+      }
+    },
+    "resolution": {
+      "type": "string",
+      "enum": ["resolved", "unresolved", "escalated", "ignored"],
+      "description": "How the error was handled"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for this parsing run (seed/config hash)"
+    }
+  }
+}

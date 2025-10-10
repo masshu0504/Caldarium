@@ -1,6 +1,13 @@
-Category,Name,Version,SPDX License,License source URL,Direct or Transitive,Used in (module/container),Purpose / Notes,Approval status,Risk notes
-Python package,pdfplumber,,MIT,https://pypi.org/project/pdfplumber/,Direct,PDF parsing,Extract text/layout from PDFs,Allowed,
-Python package,great-expectations,,Apache-2.0,https://pypi.org/project/great-expectations/,Direct,Schema & data validation,Define and run data quality checks,Allowed,
-Service (Docker image),heartexlabs/label-studio,,Apache-2.0,https://github.com/heartexlabs/label-studio/blob/master/LICENSE,Direct,Annotation service,Labeling UI for training/evaluation data,Allowed,
-Service (Docker image),minio/minio,,AGPL-3.0-only,https://github.com/minio/minio/blob/master/LICENSE,Direct,Object storage (S3-compatible),Stores PDFs/outputs; community edition is AGPL,Needs Review,Network-copyleft obligations if modified & offered as a service
-Service (Docker image),postgres,,PostgreSQL,https://www.postgresql.org/about/licence/,Direct,Database,Relational database used by services like Label Studio,Allowed,
+Category,Name,Version,SPDX License,License source URL,Direct or Transitive,Used in (module/container),Purpose / Notes,Approval status,Risk notes,CVEs,Maintenance Status,Last Checked
+Python package,pdfplumber,0.9.0,MIT,https://pypi.org/project/pdfplumber/,Direct,PDF parsing,Extract text/layout from PDFs,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Python package,great-expectations,0.18.12,Apache-2.0,https://pypi.org/project/great-expectations/,Direct,Schema & data validation,Define and run data quality checks,Allowed,Low risk - enterprise grade,None,Active,2025-10-10
+Service (Docker image),heartexlabs/label-studio,latest,Apache-2.0,https://github.com/heartexlabs/label-studio/blob/master/LICENSE,Direct,Annotation service,Labeling UI for training/evaluation data,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Service (Docker image),minio/minio,latest,AGPL-3.0-only,https://github.com/minio/minio/blob/master/LICENSE,Direct,Object storage (S3-compatible),Stores PDFs/outputs; community edition is AGPL,Needs Review,Medium risk - AGPL license implications,None,Active,2025-10-10
+Service (Docker image),postgres,15,PostgreSQL,https://www.postgresql.org/about/licence/,Direct,Database,Relational database used by services like Label Studio,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Python package,pandas,2.2.2,BSD-3-Clause,https://pypi.org/project/pandas/,Direct,Data processing,Data manipulation and analysis,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Python package,numpy,1.26.4,BSD-3-Clause,https://pypi.org/project/numpy/,Direct,Numerical computing,Numerical operations,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Python package,camelot-py,0.11.0,MIT,https://pypi.org/project/camelot-py/,Direct,Table extraction,PDF table extraction,Allowed,Medium risk - less frequent updates,None,Moderate,2025-10-10
+Python package,tabula-py,2.9.3,MIT,https://pypi.org/project/tabula-py/,Direct,Table extraction,PDF table extraction via Java,Allowed,Medium risk - Java dependency,None,Moderate,2025-10-10
+Python package,pdfminer.six,20221105,MIT,https://pypi.org/project/pdfminer.six/,Direct,PDF parsing,PDF text extraction,Allowed,Medium risk - less frequent updates,None,Moderate,2025-10-10
+Python package,PyPDF2,3.0.1,BSD-3-Clause,https://pypi.org/project/PyPDF2/,Direct,PDF manipulation,PDF file operations,Allowed,Low risk - well maintained,None,Active,2025-10-10
+Python package,jpype1,1.5.0,Apache-2.0,https://pypi.org/project/JPype1/,Direct,Java bridge,Java-Python integration,Allowed,Low risk - well maintained,None,Active,2025-10-10
