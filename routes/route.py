@@ -143,6 +143,7 @@ async def parse(file: UploadFile = File(...)):
         admission_date = 0
         discharge_date = 0
         discount_amount = 0
+        bed_no = 0
         provider_name = 0
         provider_email = 0
         provider_website = 0
@@ -156,6 +157,7 @@ async def parse(file: UploadFile = File(...)):
         currency = 0
         payment_instructions = 0
         disclaimer = 0
+
 
 
         extracted_data = {
@@ -174,6 +176,8 @@ async def parse(file: UploadFile = File(...)):
             "admission_date": admission_date,
             "discharge_date": discharge_date,
             "discount_amount": discount_amount,
+            "bed_no": bed_no,
+            "provider_name": provider_name,
             "file_metadata": {
                 "original_filename": filename,
                 "file_size_bytes": size,
