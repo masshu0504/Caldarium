@@ -1,0 +1,40 @@
+{
+  "invoice_number": null,
+  "patient_id": null,
+  "invoice_date": "1998-04-28",
+  "due_date": "1998-05-28",
+  "patient_name": "Jennifer Patterson",
+  "patient_age": null,
+  "patient_address": "7442 Alicia Court Suite 507, Rollinsbury, DE 23480",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "2325.00",
+  "discount_amount": null,
+  "total_amount": "2429.62",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Surgery Consultation",
+      "code": "SC03",
+      "amount": "250.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "1000.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "1000.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "75.00"
+    }
+  ]
+}

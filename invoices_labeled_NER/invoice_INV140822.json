@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV140822",
+  "patient_id": null,
+  "invoice_date": "2018-08-13",
+  "due_date": "2018-09-12",
+  "patient_name": "Angel Kaiser",
+  "patient_age": "83",
+  "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2018-01-25",
+  "discharge_date": "2018-02-01",
+  "subtotal_amount": "1435.00",
+  "discount_amount": "110.25",
+  "total_amount": "1485.23",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "PR06 Prescription Refill",
+      "code": "PR06",
+      "amount": "30.00"
+    },
+    {
+      "description": "ECG2 ECG",
+      "code": "ECG2",
+      "amount": "100.00"
+    },
+    {
+      "description": "VAX9 Vaccination",
+      "code": "VAX9",
+      "amount": "50.00"
+    },
+    {
+      "description": "US10 Ultrasound",
+      "code": "US10",
+      "amount": "300.00"
+    }
+  ]
+}

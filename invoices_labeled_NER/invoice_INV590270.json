@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV590270",
+  "patient_id": null,
+  "invoice_date": "2015-10-17",
+  "due_date": "2015-11-16",
+  "patient_name": "Angela Holmes",
+  "patient_age": null,
+  "patient_address": "58605 Ramos Forge, Roachland, FM 45953",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "480.00",
+  "discount_amount": "28.80",
+  "total_amount": "472.80",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "LP12 Lab Panel",
+      "code": "LP12",
+      "amount": "180.00"
+    },
+    {
+      "description": "CT15 CT Scan",
+      "code": "CT15",
+      "amount": "1000.00"
+    },
+    {
+      "description": "EE09 Eye Exam",
+      "code": "EE09",
+      "amount": "75.00"
+    },
+    {
+      "description": "DC04 Dermatology Consultation",
+      "code": "DC04",
+      "amount": "180.00"
+    }
+  ]
+}
