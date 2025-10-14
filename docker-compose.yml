@@ -95,6 +95,30 @@ services:
     networks:
       - backend
 
+
+    # ---------------------------
+  # FastAPI Parser Service
+  # ---------------------------
+  parser:
+    build:
+      context: .
+      dockerfile: Dockerfiles/parser.Dockerfile
+    volumes:                 # <-- ADDED for fast local development
+      - .:/app               # <-- Mounts local code to container's /app directory
+    ports:
+      - "8001:8000"          # HOST PORT 8001 -> CONTAINER PORT 8000 (Avoids Windows conflict)
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
+
   
   #fastapi:
   #  build:

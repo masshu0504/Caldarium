@@ -2,11 +2,13 @@ from fastapi import APIRouter, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
 import psycopg2
 from datetime import datetime
-
+from parser_prototype import preprocess_text, clean_and_convert, extract_fields, extract_line_items, parse_invoice, parse_pdf_bytes
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 from typing import Any, Dict
+import pdfplumber, re, json
+from io import BytesIO
 
 
 env_path = Path('.') / '.env.example'
@@ -124,25 +126,27 @@ async def parse(file: UploadFile = File(...)):
 
         # uses parser*
         contents = await file.read()
+        data = parse_pdf_bytes(contents)
+
         size = len(contents)
         # change after getting parser
         
-        invoice_number = 0
-        patient_id = 0
-        subtotal_amount = 0
-        invoice_date = 0
-        total_amount = 0
-        line_items = 0
+        invoice_number = data["invoice_number"]
+        #patient_id = 0
+        subtotal_amount = data["subtotal_amount"]
+        invoice_date = data["invoice_date"]
+        total_amount = data["total_amount"]
+        line_items = data["line_items"]
 
-        due_date = 0
-        patient_name = 0
-        patient_age = 0
-        patient_address = 0
+        due_date = data["due_date"]
+        patient_name = data["patient_name"]
+        patient_age = data["patient_age"]
+        patient_address = data["patient_address"]
         patient_phone = 0
         patient_email = 0
-        admission_date = 0
-        discharge_date = 0
-        discount_amount = 0
+        admission_date = data["admission_date"]
+        discharge_date = data["discharge_date"]
+        discount_amount = data["discount_amount"]
         bed_no = 0
         provider_name = 0
         provider_email = 0
@@ -152,32 +156,29 @@ async def parse(file: UploadFile = File(...)):
         bed_no = 0
         consultant = 0
         billed_to_address = 0
-        tax_rate = 0
+        tax_percent = data["tax_percent"]
         tax_amount = 0
         currency = 0
         payment_instructions = 0
         disclaimer = 0
+        total_amount = data["total_amount"]
 
 
 
         extracted_data = {
             "invoice_number": invoice_number,
-            "patient_id": patient_id,
             "subtotal_amount": subtotal_amount,
             "invoice_date": invoice_date,
             "total_amount": total_amount,
             "line_items": line_items,
-            "due_date": due_date,
             "patient_name": patient_name,
             "patient_age": patient_age,
             "patient_address": patient_address,
-            "patient_phone": patient_phone,
-            "patient_email": patient_email,
             "admission_date": admission_date,
             "discharge_date": discharge_date,
             "discount_amount": discount_amount,
-            "bed_no": bed_no,
-            "provider_name": provider_name,
+            "tax_percent": tax_percent,
+            "due_date": due_date,
             "file_metadata": {
                 "original_filename": filename,
                 "file_size_bytes": size,
@@ -185,7 +186,19 @@ async def parse(file: UploadFile = File(...)):
             }
         }
 
-        if invoice_number is None or patient_id is None or subtotal_amount is None or invoice_date is None or total_amount is None or line_items is None:
+        if (invoice_number is None and
+        subtotal_amount is None and
+        invoice_date is None and
+        total_amount is None and
+        line_items is None and
+        patient_name is None and
+        patient_age is None and
+        patient_address is None and
+        admission_date is None and
+        discharge_date is None and
+        discount_amount is None and
+        tax_percent is None and
+        due_date is None):
             return JSONResponse(
                 status_code=422,
                 content={
