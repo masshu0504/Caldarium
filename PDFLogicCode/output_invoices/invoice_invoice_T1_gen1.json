@@ -1,6 +1,6 @@
 {
   "invoice_number": "INV377776",
-  "patient_id": null,
+  "patient_id": "MRN53310",
   "invoice_date": "2020-03-30",
   "due_date": "2020-04-29",
   "patient_name": "Heather Anderson",
@@ -17,17 +17,17 @@
   "bed_id": "BED4887",
   "line_items": [
     {
-      "description": "LP12 Lab Panel",
+      "description": "Lab Panel",
       "code": "LP12",
       "amount": "180.00"
     },
     {
-      "description": "DC04 Dermatology Consultation",
+      "description": "Dermatology Consultation",
       "code": "DC04",
       "amount": "180.00"
     },
     {
-      "description": "HT02 Hearing Test",
+      "description": "Hearing Test",
       "code": "HT02",
       "amount": "70.00"
     }

@@ -1,6 +1,6 @@
 {
   "invoice_number": "INV701760",
-  "patient_id": null,
+  "patient_id": "MRN38745",
   "invoice_date": "2012-02-03",
   "due_date": "2012-03-04",
   "patient_name": "Manuel Gutierrez",
