@@ -1,7 +1,25 @@
 import pdfplumber, re, json
 from io import BytesIO
 
-# ---------- Preprocessing helpers ----------
+def normalize_to_invoice_schema_v1(data: dict) -> dict:
+    out = dict(data) if data else {}
+
+    # account_number -> patient_id
+    if 'patient_id' not in out and out.get('account_number'):
+        out['patient_id'] = out.pop('account_number')
+    else:
+        out.pop('account_number', None)
+
+    # remove deprecated field
+    out.pop('tax_percent', None)
+
+    # ensure nullable fields exist
+    out.setdefault('provider_name', None)
+    out.setdefault('bed_id', None)
+
+    return out
+
+# ---------- Preprocessing ----------
 LABEL_NORMALIZATIONS = [
     (r"Due\s+Date", "Due Date"),
     (r"Account\s*No\.?", "Account No"),
@@ -16,23 +34,15 @@ LABEL_NORMALIZATIONS = [
 ]
 
 def preprocess_text(raw: str) -> str:
-    """Make scattered PDF text more regex-friendly."""
-    if not raw: return raw
+    if not raw:
+        return raw
     txt = raw.replace("\r", "\n")
-
-    # Fuse broken money tokens like "$\n430.00"
     txt = re.sub(r"\$\s*\n\s*", "$", txt)
-
-    # Fuse split label tokens caused by column breaks
     txt = re.sub(r"(Due)\s*\n\s*(Date)", r"\1 \2", txt, flags=re.IGNORECASE)
     txt = re.sub(r"(Account)\s*\n\s*(No\.?)", r"\1 \2", txt, flags=re.IGNORECASE)
     txt = re.sub(r"(Invoice)\s*\n\s*(#)", r"\1 \2", txt, flags=re.IGNORECASE)
-
-    # Normalize common label variants
     for pat, rep in LABEL_NORMALIZATIONS:
         txt = re.sub(pat, rep, txt, flags=re.IGNORECASE)
-
-    # Tidy whitespace (keep single newlines as soft separators)
     txt = re.sub(r"\n{3,}", "\n\n", txt)
     sentinel = " \u2028 "
     txt = txt.replace("\n", sentinel)
@@ -41,14 +51,15 @@ def preprocess_text(raw: str) -> str:
     txt = "\n".join(line.strip() for line in txt.splitlines())
     return txt
 
-# ---------- Regex patterns (compiled once) ----------
+# ---------- Regex patterns ----------
 FIELD_PATTERNS = {
     # IDs
     "invoice_number": re.compile(r"Invoice\s*#\s*([A-Z0-9-]+)", re.IGNORECASE),
     "account_number": re.compile(r"Account\s*No\.?\s*([A-Z0-9-]+)", re.IGNORECASE),
 
     # Dates
-    "invoice_date": re.compile(r"\bDate:\s*(\d{4}-\d{2}-\d{2})\b"),
+    # accept "Invoice Date: 2020-03-30" or "Date: 2020-03-30"
+    "invoice_date": re.compile(r"(?:Invoice\s*Date|Date):\s*(\d{4}-\d{2}-\d{2})\b", re.IGNORECASE),
     "due_date": re.compile(r"Due\s*Date\s*(\d{4}-\d{2}-\d{2})\b", re.IGNORECASE),
     "admission_date": re.compile(r"Admission\s*Date:\s*(\d{4}-\d{2}-\d{2})\b", re.IGNORECASE),
     "discharge_date": re.compile(r"Discharge\s*Date:\s*(\d{4}-\d{2}-\d{2})\b", re.IGNORECASE),
@@ -67,9 +78,9 @@ FIELD_PATTERNS = {
     # Financials
     "subtotal_amount": re.compile(r"Sub\s*Total\s*\$?([\d,]+(?:\.\d{2})?)", re.IGNORECASE),
     "discount_amount": re.compile(r"Discount\s*\$?([\d,]+(?:\.\d{2})?)", re.IGNORECASE),
-    "tax_percent": re.compile(r"Tax:\s*([\d.]+)%", re.IGNORECASE),
     # IMPORTANT: anchor 'Total' to start of line so it doesn't match "Sub Total"
     "total_amount": re.compile(r"^\s*Total\b\s*\$?([\d,]+(?:\.\d{2})?)", re.IGNORECASE | re.MULTILINE),
+    # no tax_percent on purpose
 }
 
 def clean_and_convert(key, value):
@@ -77,11 +88,15 @@ def clean_and_convert(key, value):
         return None
     cleaned = re.sub(r"\s+", " ", str(value)).strip().replace(",", "")
     if key in {"subtotal_amount","discount_amount","total_amount","amount"}:
-        try: return float(cleaned)
-        except ValueError: return None
+        try:
+            return float(cleaned)
+        except ValueError:
+            return None
     if key == "patient_age":
-        try: return int(float(cleaned))
-        except ValueError: return None
+        try:
+            return int(float(cleaned))
+        except ValueError:
+            return None
     return cleaned
 
 def extract_fields(prepped_text: str) -> dict:
@@ -92,7 +107,6 @@ def extract_fields(prepped_text: str) -> dict:
     return data
 
 def extract_line_items(first_page) -> list:
-    """Prefer table extraction; fall back to text lines."""
     items = []
     try:
         tables = first_page.extract_tables(
@@ -101,7 +115,7 @@ def extract_line_items(first_page) -> list:
         for table in tables or []:
             if table and any("code" in (c or "").strip().lower() for c in table[0]):
                 for row in table[1:]:
-                    if not row or len(row) < 3: 
+                    if not row or len(row) < 3:
                         continue
                     code = (row[0] or "").strip() or None
                     desc = (row[1] or "").strip() or None
@@ -123,61 +137,57 @@ def extract_line_items(first_page) -> list:
 def parse_invoice(prepped_text: str, page) -> dict:
     data = extract_fields(prepped_text)
 
-    # --- Fallbacks for tricky layouts ---
-    # account_number: allow standalone MRN*
+    # account_number fallback (MRN##### in free text)
     if not data.get("account_number"):
         m = re.search(r"\bMRN[0-9]+\b", prepped_text)
-        if m: data["account_number"] = m.group(0)
+        if m:
+            data["account_number"] = m.group(0)
 
-    # due_date: often the second ISO date in the Invoice Details block
+    # due_date fallback: second ISO date near header
     if not data.get("due_date"):
-        block = []
-        for line in prepped_text.splitlines():
-            block.append(line)
+        lines = prepped_text.splitlines()
+        header = []
+        for line in lines:
+            header.append(line)
             if "Patient Details" in line:
                 break
-        dates = re.findall(r"\b(\d{4}-\d{2}-\d{2})\b", "\n".join(block))
+        dates = re.findall(r"\b(\d{4}-\d{2}-\d{2})\b", "\n".join(header))
         inv = data.get("invoice_date")
         if inv and inv in dates and len(dates) > 1:
-            for d in dates:
-                if d != inv:
-                    data["due_date"] = d
-                    break
+            data["due_date"] = next((d for d in dates if d != inv), None)
         elif len(dates) >= 2:
             data["due_date"] = dates[1]
 
-    # patient_address: if regex failed, stitch prev/next lines around 'Address:'
+    # patient_address fallback
     if not data.get("patient_address"):
         lines = prepped_text.splitlines()
         for i, line in enumerate(lines):
             if re.search(r"\bAddress:", line):
                 parts = []
-                # previous line may contain street
                 if i-1 >= 0 and (":" not in lines[i-1]):
                     parts.append(lines[i-1].strip())
-                # collect next couple lines if they look like address/city-state-zip or not labels
                 for j in (1, 2):
                     if i+j < len(lines):
                         nxt = lines[i+j].strip()
                         if re.search(r"\b[A-Z]{2}\s*\d{5}\b", nxt) or (":" not in nxt):
                             parts.append(nxt)
-                stitched = " ".join(p for p in parts if p).strip()
-                data["patient_address"] = stitched or None
+                data["patient_address"] = (" ".join(p for p in parts if p).strip()) or None
                 break
 
-    # line items
     data["line_items"] = extract_line_items(page)
     return data
 
 def parse_pdf_bytes(pdf_bytes: bytes) -> dict:
     try:
         with pdfplumber.open(BytesIO(pdf_bytes)) as pdf:
-            if not pdf.pages:
-                return {"error": "The uploaded PDF appears to be empty."}
-            raw_text = pdf.pages[0].extract_text()
+            page = pdf.pages[0]
+            raw_text = page.extract_text()
             if not raw_text:
                 return {"error": "Could not extract text from PDF."}
+
             prepped = preprocess_text(raw_text)
-            return parse_invoice(prepped, pdf.pages[0])
+            parsed = parse_invoice(prepped, page)
+            return normalize_to_invoice_schema_v1(parsed)
+
     except Exception as e:
         return {"error": f"An unexpected error occurred during PDF processing: {e}"}
