@@ -97,24 +97,28 @@ services:
       - backend
 
   
-  #fastapi:
-  #  build:
-  #    context: ./api
-  #    dockerfile: Dockerfile
-  #  container_name: intake-api
-  #  environment:
-  #    DATABASE_URL: posgres://postgres:postgres@ls-postgres:5432/med_parsing
-  #    POSTGRES_USER: postgres
-  #    POSTGRES_PASSWORD: postgres
-  #    POSTGRES_DB: med_parsing
-  #    POSTGRES_HOST: ls-postgres
-  #    POSTGRES_PORT: 5432
-  #  ports:
-  #    - "8000:8000"   # maps container port to host
-  ##  depends_on:
-  #    - ls-postgres
-  #  networks:
-  #    - backend
+  # ---------------------------
+  # FastAPI service
+  # ---------------------------
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfiles/fastapi.Dockerfile
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
 
   # Benchmark runner (Python/Java/Ghostscript)
   # ---------------------------
