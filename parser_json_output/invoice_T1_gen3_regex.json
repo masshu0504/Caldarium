@@ -1,6 +1,5 @@
 {
   "invoice_number": "INV701760",
-  "account_number": "MRN38745",
   "invoice_date": "2012-02-03",
   "due_date": "2012-03-04",
   "admission_date": "2012-01-25",
@@ -10,7 +9,6 @@
   "patient_address": "143 Graham Key Apt. 753 West Jameschester, IN 41731",
   "subtotal_amount": 645,
   "discount_amount": 174.15,
-  "tax_percent": "4.5",
   "total_amount": 499.88,
   "line_items": [
     {
@@ -33,5 +31,8 @@
       "description": "X-Ray",
       "amount": 200
     }
-  ]
+  ],
+  "patient_id": "MRN38745",
+  "provider_name": null,
+  "bed_id": null
 }
