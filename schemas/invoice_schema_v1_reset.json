@@ -73,6 +73,14 @@
       "minimum": 0,
       "description": "Total invoice amount after discounts"
     },
+    "provider_name": {
+      "type": "string",
+      "description": "Name of the healthcare provider"
+    },
+    "bed_id": {
+      "type": "string",
+      "description": "Assigned bed or room ID"
+    },
     "line_items": {
       "type": "array",
       "description": "List of individual line items on the invoice",
@@ -99,7 +107,8 @@
   },
   "required": [
     "invoice_number",
-    "patient_id",
+    "due_date",
+    "patient_name",
     "subtotal_amount",
     "invoice_date",
     "total_amount",
