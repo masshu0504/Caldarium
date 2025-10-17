@@ -177,7 +177,6 @@ async def parse(file: UploadFile = File(...)):
             "admission_date": admission_date,
             "discharge_date": discharge_date,
             "discount_amount": discount_amount,
-            "tax_percent": tax_percent,
             "due_date": due_date,
             "file_metadata": {
                 "original_filename": filename,

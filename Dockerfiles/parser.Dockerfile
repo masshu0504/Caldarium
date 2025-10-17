@@ -34,4 +34,4 @@ EXPOSE 8000
 
 # Command to run the FastAPI application using Uvicorn
 # The command starts the server permanently.
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port 8000 & uvicorn app:app --host 0.0.0.0 --port 8001"]
