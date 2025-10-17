@@ -1,0 +1,38 @@
+{
+  "invoice_number": "INV701760",
+  "invoice_date": "2012-02-03",
+  "due_date": "2012-03-04",
+  "admission_date": "2012-01-25",
+  "discharge_date": "2012-02-01",
+  "patient_name": "Manuel Gutierrez",
+  "patient_age": 83,
+  "patient_address": "143 Graham Key Apt. 753 West Jameschester, IN 41731",
+  "subtotal_amount": 645,
+  "discount_amount": 174.15,
+  "total_amount": 499.88,
+  "line_items": [
+    {
+      "code": "EE09",
+      "description": "Eye Exam",
+      "amount": 75
+    },
+    {
+      "code": "US10",
+      "description": "Ultrasound",
+      "amount": 300
+    },
+    {
+      "code": "HT02",
+      "description": "Hearing Test",
+      "amount": 70
+    },
+    {
+      "code": "XR01",
+      "description": "X-Ray",
+      "amount": 200
+    }
+  ],
+  "patient_id": "MRN38745",
+  "provider_name": null,
+  "bed_id": null
+}

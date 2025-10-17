@@ -5,7 +5,7 @@ services:
   # ---------------------------
   ls-postgres:
     image: postgres:15
-    container_name: ls-postgres
+    #container_name: ls-postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -16,6 +16,11 @@ services:
       - "5432:5432"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   # ---------------------------
   # MinIO object storage
@@ -68,7 +73,53 @@ services:
       - backend
     tty: true
 
+# ---------------------------
+  # FastAPI Parser Service
   # ---------------------------
+  parser:
+    build:
+      context: .
+      dockerfile: Dockerfiles/parser.Dockerfile
+    volumes:                 # <-- ADDED for fast local development
+      - .:/app               # <-- Mounts local code to container's /app directory
+    ports:
+      - "8001:8000"          # HOST PORT 8001 -> CONTAINER PORT 8000 (Avoids Windows conflict)
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
+
+  
+  # ---------------------------
+  # FastAPI service
+  # ---------------------------
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfiles/fastapi.Dockerfile
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    depends_on:
+      ls-postgres:
+        condition: service_healthy
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: med_parsing
+      POSTGRES_HOST: ls-postgres
+      POSTGRES_PORT: 5432
+    networks:
+      - backend
+
   # Benchmark runner (Python/Java/Ghostscript)
   # ---------------------------
   bench:
@@ -82,13 +133,14 @@ services:
       - backend
     tty: true
 
+
 volumes:
   postgres_data:
   minio_data:
 
 networks:
   backend:
-    driver: bridge
+
 
  
 
