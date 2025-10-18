@@ -7,7 +7,7 @@
       "description": "Unique invoice ID"
     },
     "patient_id": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Patient record ID, default"
     },
     "invoice_date": {
@@ -25,36 +25,30 @@
       "description": "Full patient name"
     },
     "patient_age": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "description": "Patient age in years"
     },
     "patient_address": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Patient mailing address"
     },
     "patient_phone": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "description": "Patient phone number (optional)"
     },
     "patient_email": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": ["string", "null"],
       "format": "email",
       "description": "Patient email, typically derived from patient_name"
     },
     "admission_date": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date",
       "description": "Admission date of patient"
     },
     "discharge_date": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date",
       "description": "Discharge date of patient"
     },
@@ -64,7 +58,7 @@
       "description": "Subtotal amount before discounts"
     },
     "discount_amount": {
-      "type": "number",
+      "type": ["number", "null"],
       "minimum": 0,
       "description": "Discount applied to invoice"
     },
@@ -74,11 +68,11 @@
       "description": "Total invoice amount after discounts"
     },
     "provider_name": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Name of the healthcare provider"
     },
     "bed_id": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Assigned bed or room ID"
     },
     "line_items": {
@@ -116,3 +110,4 @@
     "line_items"
   ]
 }
+``
