@@ -83,7 +83,7 @@ services:
     volumes:                 # <-- ADDED for fast local development
       - .:/app               # <-- Mounts local code to container's /app directory
     ports:
-      - "8001:8000"          # HOST PORT 8001 -> CONTAINER PORT 8000 (Avoids Windows conflict)
+      - "8002:8000"          # HOST PORT 8002 -> CONTAINER PORT 8000 (Avoids Windows conflict)
     depends_on:
       ls-postgres:
         condition: service_healthy
@@ -143,4 +143,5 @@ networks:
 
 
  
+
 
