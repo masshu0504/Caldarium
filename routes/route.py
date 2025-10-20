@@ -10,7 +10,7 @@ from typing import Any, Dict
 import pdfplumber, re, json
 from io import BytesIO
 import hashlib
-
+import logging
 
 env_path = Path('.') / '.env.example'
 
@@ -137,7 +137,7 @@ def get_data_by_id(record_id: str) -> dict | None:
         with conn.cursor() as cursor:
             # IMPORTANT: Use parameterized queries to prevent SQL injection.
             # The '%s' is a placeholder, not a Python string format.
-            query = f"SELECT * FROM parsed_d WHERE id = %s;"
+            query = f"SELECT * FROM parsed_data WHERE id = %s;"
             cursor.execute(query, (record_id,))
             
             # Fetch one result
@@ -168,8 +168,9 @@ async def parse(file: UploadFile = File(...)):
     try: 
         filename = file.filename
         content_type = file.content_type
-        file_hash = hashlib.sha256(contents).hexdigest()
         contents = await file.read()
+        file_hash = hashlib.sha256(contents).hexdigest()
+
 
         if "consent" in filename.lower():
             pass
@@ -182,22 +183,22 @@ async def parse(file: UploadFile = File(...)):
             size = len(contents)
             # change after getting parser
             
-            invoice_number = data["invoice_number"]
+            invoice_number = data.get("invoice_number") 
             #patient_id = 0
-            subtotal_amount = data["subtotal_amount"]
-            invoice_date = data["invoice_date"]
-            total_amount = data["total_amount"]
-            line_items = data["line_items"]
+            subtotal_amount = data.get("subtotal_amount")
+            invoice_date = data.get("invoice_date")
+            total_amount = data.get("total_amount")
+            line_items = data.get("line_items")
 
-            due_date = data["due_date"]
-            patient_name = data["patient_name"]
-            patient_age = data["patient_age"]
-            patient_address = data["patient_address"]
+            due_date = data.get("due_date")
+            patient_name = data.get("patient_name")
+            patient_age = data.get("patient_age")
+            patient_address = data.get("patient_address")
             patient_phone = 0
             patient_email = 0
-            admission_date = data["admission_date"]
-            discharge_date = data["discharge_date"]
-            discount_amount = data["discount_amount"]
+            admission_date = data.get("admission_date")
+            discharge_date = data.get("discharge_date")
+            discount_amount = data.get("discount_amount")
             bed_no = 0
             provider_name = 0
             provider_email = 0
@@ -207,12 +208,12 @@ async def parse(file: UploadFile = File(...)):
             bed_no = 0
             consultant = 0
             billed_to_address = 0
-            tax_percent = data["tax_percent"]
+            tax_percent = data.get("tax_percent")
             tax_amount = 0
             currency = 0
             payment_instructions = 0
             disclaimer = 0
-            total_amount = data["total_amount"]
+            total_amount = data.get("total_amount")
 
 
 
@@ -248,7 +249,6 @@ async def parse(file: UploadFile = File(...)):
             admission_date is None and
             discharge_date is None and
             discount_amount is None and
-            tax_percent is None and
             due_date is None):
                 return JSONResponse(
                     status_code=422,
@@ -301,12 +301,7 @@ async def get_parsed_data(run_id: str):
 
         # 3. Structure the response exactly as requested
         response_data = {
-            "input_meta": {
-                "filename": metadata.get("original_filename"),
-                "size": metadata.get("file_size_bytes"),
-                "hash": metadata.get("sha256_hash")
-            },
-            "parser_json": db_record # The rest of the record is the parser JSON
+            "data": db_record # The rest of the record is the parser JSON
         }
         
         return response_data

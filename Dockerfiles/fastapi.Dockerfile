@@ -20,6 +20,6 @@ EXPOSE 8000
 # 2. Wait for 5 seconds to allow the ls-postgres service to fully initialize.
 # 3. Start the uvicorn server.
 # NOTE: Using 'sh -c' requires wrapping the command in a string.
-CMD ["/bin/sh", "-c", "echo 'Waiting 5 seconds for ls-postgres to start...' && sleep 5 && uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["/bin/sh", "-c", "echo 'Waiting 5 seconds for ls-postgres to start...' && sleep 5 && uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}", "--reload"]
 
 
