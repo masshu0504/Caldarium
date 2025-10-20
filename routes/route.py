@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from typing import Any, Dict
 import pdfplumber, re, json
 from io import BytesIO
+import hashlib
 
 
 env_path = Path('.') / '.env.example'
@@ -117,104 +118,155 @@ def insert_data(data: Dict[str, Any], table: str = "parsed_data") -> str:
             conn.close()
 
 
+def get_data_by_id(record_id: str) -> dict | None:
+    """
+    Fetches a single record from the database by its primary key.
+
+    Args:
+        record_id: The unique identifier for the record to retrieve.
+
+    Returns:
+        A dictionary representing the database row if found, otherwise None.
+    """
+    conn = None
+    try:
+        # Establish a connection to the database
+        conn = get_db_connection()
+        
+        # Use a 'with' statement for the cursor to ensure it's closed automatically
+        with conn.cursor() as cursor:
+            # IMPORTANT: Use parameterized queries to prevent SQL injection.
+            # The '%s' is a placeholder, not a Python string format.
+            query = f"SELECT * FROM parsed_d WHERE id = %s;"
+            cursor.execute(query, (record_id,))
+            
+            # Fetch one result
+            record = cursor.fetchone()
+            
+            if not record:
+                return None # No record was found with that ID
+
+            # Get column names from the cursor description
+            column_names = [desc[0] for desc in cursor.description]
+            
+            # Combine column names with the record's values to create a dictionary
+            return dict(zip(column_names, record))
+
+    except psycopg2.Error as e:
+        print(f"Database error in get_data_by_id: {e}")
+        # Re-raise the exception or handle it as needed; here we return None
+        return None
+    finally:
+        # Ensure the connection is closed even if an error occurs
+        if conn:
+            conn.close()
+
+
     
 @routes.post("/v1/parse")
 async def parse(file: UploadFile = File(...)):
     try: 
         filename = file.filename
         content_type = file.content_type
+        file_hash = hashlib.sha256(contents).hexdigest()
+        contents = await file.read()
+
+        if "consent" in filename.lower():
+            pass
+
+        elif "invoice" in filename.lower(): 
 
         # uses parser*
-        contents = await file.read()
-        data = parse_pdf_bytes(contents)
+            data = parse_pdf_bytes(contents)
 
-        size = len(contents)
-        # change after getting parser
-        
-        invoice_number = data["invoice_number"]
-        #patient_id = 0
-        subtotal_amount = data["subtotal_amount"]
-        invoice_date = data["invoice_date"]
-        total_amount = data["total_amount"]
-        line_items = data["line_items"]
-
-        due_date = data["due_date"]
-        patient_name = data["patient_name"]
-        patient_age = data["patient_age"]
-        patient_address = data["patient_address"]
-        patient_phone = 0
-        patient_email = 0
-        admission_date = data["admission_date"]
-        discharge_date = data["discharge_date"]
-        discount_amount = data["discount_amount"]
-        bed_no = 0
-        provider_name = 0
-        provider_email = 0
-        provider_website = 0
-        account_no = 0
-        hospital_no = 0
-        bed_no = 0
-        consultant = 0
-        billed_to_address = 0
-        tax_percent = data["tax_percent"]
-        tax_amount = 0
-        currency = 0
-        payment_instructions = 0
-        disclaimer = 0
-        total_amount = data["total_amount"]
-
-
-
-        extracted_data = {
-            "invoice_number": invoice_number,
-            "subtotal_amount": subtotal_amount,
-            "invoice_date": invoice_date,
-            "total_amount": total_amount,
-            "line_items": line_items,
-            "patient_name": patient_name,
-            "patient_age": patient_age,
-            "patient_address": patient_address,
-            "admission_date": admission_date,
-            "discharge_date": discharge_date,
-            "discount_amount": discount_amount,
-            "due_date": due_date,
-            "file_metadata": {
-                "original_filename": filename,
-                "file_size_bytes": size,
-                "content_type": content_type
-            }
-        }
-
-        if (invoice_number is None and
-        subtotal_amount is None and
-        invoice_date is None and
-        total_amount is None and
-        line_items is None and
-        patient_name is None and
-        patient_age is None and
-        patient_address is None and
-        admission_date is None and
-        discharge_date is None and
-        discount_amount is None and
-        tax_percent is None and
-        due_date is None):
-            return JSONResponse(
-                status_code=422,
-                content={
-                    "status" : "failed to extract all required fields", 
-                    "error": 422
-                }
-            )
-        else:
-            inserted_id = insert_data(data=extracted_data)
+            size = len(contents)
+            # change after getting parser
             
-            # Return Success Response ---
-            return {
-                "status": "success",
-                "message": "File parsed and data stored successfully.",
-                "db_id": inserted_id,
-                "extracted_data": extracted_data # Return the data to confirm storage
+            invoice_number = data["invoice_number"]
+            #patient_id = 0
+            subtotal_amount = data["subtotal_amount"]
+            invoice_date = data["invoice_date"]
+            total_amount = data["total_amount"]
+            line_items = data["line_items"]
+
+            due_date = data["due_date"]
+            patient_name = data["patient_name"]
+            patient_age = data["patient_age"]
+            patient_address = data["patient_address"]
+            patient_phone = 0
+            patient_email = 0
+            admission_date = data["admission_date"]
+            discharge_date = data["discharge_date"]
+            discount_amount = data["discount_amount"]
+            bed_no = 0
+            provider_name = 0
+            provider_email = 0
+            provider_website = 0
+            account_no = 0
+            hospital_no = 0
+            bed_no = 0
+            consultant = 0
+            billed_to_address = 0
+            tax_percent = data["tax_percent"]
+            tax_amount = 0
+            currency = 0
+            payment_instructions = 0
+            disclaimer = 0
+            total_amount = data["total_amount"]
+
+
+
+            extracted_data = {
+                "invoice_number": invoice_number,
+                "subtotal_amount": subtotal_amount,
+                "invoice_date": invoice_date,
+                "total_amount": total_amount,
+                "line_items": line_items,
+                "patient_name": patient_name,
+                "patient_age": patient_age,
+                "patient_address": patient_address,
+                "admission_date": admission_date,
+                "discharge_date": discharge_date,
+                "discount_amount": discount_amount,
+                "due_date": due_date,
+                "file_metadata": {
+                    "original_filename": filename,
+                    "file_size_bytes": size,
+                    "content_type": content_type,
+                    "hash": file_hash
+                }
             }
+
+            if (invoice_number is None and
+            subtotal_amount is None and
+            invoice_date is None and
+            total_amount is None and
+            line_items is None and
+            patient_name is None and
+            patient_age is None and
+            patient_address is None and
+            admission_date is None and
+            discharge_date is None and
+            discount_amount is None and
+            tax_percent is None and
+            due_date is None):
+                return JSONResponse(
+                    status_code=422,
+                    content={
+                        "status" : "failed to extract all required fields", 
+                        "error": 422
+                    }
+                )
+            else:
+                inserted_id = insert_data(data=extracted_data)
+                
+                # Return Success Response ---
+                return {
+                    "status": "success",
+                    "message": "File parsed and data stored successfully.",
+                    "db_id": inserted_id,
+                    "extracted_data": extracted_data # Return the data to confirm storage
+                }
         
     except psycopg2.Error as e:
         # Handle PostgreSQL specific errors
@@ -232,3 +284,34 @@ async def parse(file: UploadFile = File(...)):
         )
 
 
+@routes.get("/v1/runs/{run_id}")
+async def get_parsed_data(run_id: str):
+    """
+    Retrieves parsed invoice data by its unique database ID.
+    """
+    try:
+        # 1. Fetch the complete record from your database
+        db_record = get_data_by_id(run_id)
+
+        if not db_record:
+            raise HTTPException(status_code=404, detail="Record not found")
+
+        # 2. Separate the metadata from the main parser data
+        metadata = db_record.pop("file_metadata", {}) # Use .pop() to remove it from the main dict
+
+        # 3. Structure the response exactly as requested
+        response_data = {
+            "input_meta": {
+                "filename": metadata.get("original_filename"),
+                "size": metadata.get("file_size_bytes"),
+                "hash": metadata.get("sha256_hash")
+            },
+            "parser_json": db_record # The rest of the record is the parser JSON
+        }
+        
+        return response_data
+
+    except Exception as e:
+        print(f"Error fetching record {run_id}: {e}")
+        # Avoid leaking internal error details in the response
+        raise HTTPException(status_code=500, detail="An error occurred while retrieving the record.")
