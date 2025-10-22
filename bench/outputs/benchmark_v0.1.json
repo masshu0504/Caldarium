@@ -1,0 +1,354 @@
+{
+  "metrics": {
+    "invoice_number": {
+      "field": "invoice_number",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 3,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "INV377776",
+          "parser_value": "INV377776",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "INV665469",
+          "parser_value": "INV665469",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "INV701760",
+          "parser_value": "INV701760",
+          "match": true,
+          "match_type": "exact_match"
+        }
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "due_date": {
+      "field": "due_date",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 0,
+      "both_present": 0,
+      "matches": 0,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "2020-04-29",
+          "parser_value": null,
+          "match": false,
+          "match_type": "parser_missing"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "1983-05-25",
+          "parser_value": null,
+          "match": false,
+          "match_type": "parser_missing"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "2012-03-04",
+          "parser_value": null,
+          "match": false,
+          "match_type": "parser_missing"
+        }
+      ],
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0
+    },
+    "patient_name": {
+      "field": "patient_name",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 3,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "Heather Anderson",
+          "parser_value": "Heather Anderson",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "Janet Mckenzie",
+          "parser_value": "Janet Mckenzie",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "Manuel Gutierrez",
+          "parser_value": "Manuel Gutierrez",
+          "match": true,
+          "match_type": "exact_match"
+        }
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "subtotal_amount": {
+      "field": "subtotal_amount",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 3,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "430.00",
+          "parser_value": 430,
+          "match": true,
+          "match_type": "numeric_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "1380.00",
+          "parser_value": 1380,
+          "match": true,
+          "match_type": "numeric_match"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "645.00",
+          "parser_value": 645,
+          "match": true,
+          "match_type": "numeric_match"
+        }
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "invoice_date": {
+      "field": "invoice_date",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 3,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "2020-03-30",
+          "parser_value": "2020-03-30",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "1983-04-25",
+          "parser_value": "1983-04-25",
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "2012-02-03",
+          "parser_value": "2012-02-03",
+          "match": true,
+          "match_type": "exact_match"
+        }
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "total_amount": {
+      "field": "total_amount",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 3,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": "251.55",
+          "parser_value": 251.55,
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": "959.10",
+          "parser_value": 959.1,
+          "match": true,
+          "match_type": "numeric_match"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": "499.88",
+          "parser_value": 499.88,
+          "match": true,
+          "match_type": "exact_match"
+        }
+      ],
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    },
+    "line_items": {
+      "field": "line_items",
+      "total_documents": 3,
+      "gt_present": 3,
+      "parser_present": 3,
+      "both_present": 3,
+      "matches": 1,
+      "document_results": [
+        {
+          "document": "invoice_T1_gen1",
+          "gt_value": [
+            {
+              "description": "Lab Panel",
+              "code": "LP12",
+              "amount": "180.00"
+            },
+            {
+              "description": "Dermatology Consultation",
+              "code": "DC04",
+              "amount": "180.00"
+            },
+            {
+              "description": "Hearing Test",
+              "code": "HT02",
+              "amount": "70.00"
+            }
+          ],
+          "parser_value": [
+            {
+              "code": "LP12",
+              "description": "Lab Panel",
+              "amount": 180
+            },
+            {
+              "code": "DC04",
+              "description": "Dermatology Consultation",
+              "amount": 180
+            },
+            {
+              "code": "HT02",
+              "description": "Hearing Test",
+              "amount": 70
+            }
+          ],
+          "match": true,
+          "match_type": "exact_match"
+        },
+        {
+          "document": "invoice_T1_gen2",
+          "gt_value": [
+            {
+              "description": "HT02 Hearing Test",
+              "code": "HT02",
+              "amount": "70.00"
+            },
+            {
+              "description": "VB08 Vaccination Booster",
+              "code": "VB08",
+              "amount": "55.00"
+            },
+            {
+              "description": "VB08 Vaccination Booster",
+              "code": "VB08",
+              "amount": "55.00"
+            },
+            {
+              "description": "MRI5 MRI Scan",
+              "code": "MRI5",
+              "amount": "1200.00"
+            }
+          ],
+          "parser_value": [
+            {
+              "code": "HT02",
+              "description": "Hearing Test",
+              "amount": 70
+            },
+            {
+              "code": "VB08",
+              "description": "Vaccination Booster",
+              "amount": 55
+            },
+            {
+              "code": "VB08",
+              "description": "Vaccination Booster",
+              "amount": 55
+            }
+          ],
+          "match": false,
+          "match_type": "length_mismatch_4_vs_3"
+        },
+        {
+          "document": "invoice_T1_gen3",
+          "gt_value": [
+            {
+              "description": "EE09 Eye Exam",
+              "code": "EE09",
+              "amount": "75.00"
+            },
+            {
+              "description": "US10 Ultrasound",
+              "code": "US10",
+              "amount": "300.00"
+            },
+            {
+              "description": "HT02 Hearing Test",
+              "code": "HT02",
+              "amount": "70.00"
+            },
+            {
+              "description": "XR01 X-Ray",
+              "code": "XR01",
+              "amount": "200.00"
+            }
+          ],
+          "parser_value": [
+            {
+              "code": "EE09",
+              "description": "Eye Exam",
+              "amount": 75
+            },
+            {
+              "code": "US10",
+              "description": "Ultrasound",
+              "amount": 300
+            },
+            {
+              "code": "HT02",
+              "description": "Hearing Test",
+              "amount": 70
+            },
+            {
+              "code": "XR01",
+              "description": "X-Ray",
+              "amount": 200
+            }
+          ],
+          "match": false,
+          "match_type": "partial_match_0/4"
+        }
+      ],
+      "precision": 0.3333333333333333,
+      "recall": 0.3333333333333333,
+      "f1_score": 0.3333333333333333
+    }
+  },
+  "overall_accuracy": 0.7619047619047619
+}
