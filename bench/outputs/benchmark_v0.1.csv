@@ -1,0 +1,8 @@
+Field,Precision,Recall,F1
+invoice_number,1.0,1.0,1.0
+due_date,0.0,0.0,0.0
+patient_name,1.0,1.0,1.0
+subtotal_amount,1.0,1.0,1.0
+invoice_date,1.0,1.0,1.0
+total_amount,1.0,1.0,1.0
+line_items,0.3333333333333333,0.3333333333333333,0.3333333333333333
