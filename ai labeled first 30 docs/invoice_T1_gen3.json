@@ -17,22 +17,22 @@
   "bed_id": "BED6905",
   "line_items": [
     {
-      "description": "EE09 Eye Exam",
+      "description": "Eye Exam",
       "code": "EE09",
       "amount": "75.00"
     },
     {
-      "description": "US10 Ultrasound",
+      "description": "Ultrasound",
       "code": "US10",
       "amount": "300.00"
     },
     {
-      "description": "HT02 Hearing Test",
+      "description": "Hearing Test",
       "code": "HT02",
       "amount": "70.00"
     },
     {
-      "description": "XR01 X-Ray",
+      "description": "X-Ray",
       "code": "XR01",
       "amount": "200.00"
     }

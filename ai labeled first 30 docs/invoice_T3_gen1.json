@@ -13,26 +13,26 @@
   "subtotal_amount": "1435.00",
   "discount_amount": "14.35",
   "total_amount": "1485.23",
-  "provider_name": "White Petal Hospital Center",
+  "provider_name": "UNSURE",
   "bed_id": null,
   "line_items": [
     {
-      "description": "LP12 Lab Panel",
+      "description": "Lab Panel",
       "code": "LP12",
       "amount": "180.00"
     },
     {
-      "description": "CT15 CT Scan",
+      "description": "CT Scan",
       "code": "CT15",
       "amount": "1000.00"
     },
     {
-      "description": "EE09 Eye Exam",
+      "description": "Eye Exam",
       "code": "EE09",
       "amount": "75.00"
     },
     {
-      "description": "DC04 Dermatology Consultation",
+      "description": "Dermatology Consultation",
       "code": "DC04",
       "amount": "180.00"
     }
