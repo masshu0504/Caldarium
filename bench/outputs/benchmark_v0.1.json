@@ -1,4 +1,54 @@
 {
+  "metadata": {
+    "benchmark_version": "v0.1",
+    "timestamp": "2025-10-24T00:57:23.951912",
+    "python_version": "3.10.12 (main, Aug 15 2025, 14:32:43) [GCC 11.4.0]",
+    "pandas_version": "2.2.2",
+    "numpy_version": "1.26.4",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "random_seed": 42,
+    "git_commit": "c6bb665",
+    "run_id": "run-20251024-005723-b7e79212",
+    "test_documents": [
+      "invoice_T1_gen1",
+      "invoice_T1_gen2",
+      "invoice_T1_gen3"
+    ],
+    "data_hashes": {
+      "gt:invoice_T1_gen1": "33e6c48a2f25b2951e22c71d099e27d9f9e599f589a2536affe0f98dbe149564",
+      "parser:invoice_T1_gen1": "fd72bf6211af6f79f93eaf8dea66465d639f9a7f393a88c99a5ac521a21d3943",
+      "gt:invoice_T1_gen2": "67139590c2246b9c44041a51f6a9195c0471a303ccadcf49f4f9688b07deb78d",
+      "parser:invoice_T1_gen2": "80cd47baad73bb221efb252fbc2285ad4d9fe607914211290e892051dede0c89",
+      "gt:invoice_T1_gen3": "e9c2e63e455c41929348dfb77ef9ad992e546edee023b75611b410a254937488",
+      "parser:invoice_T1_gen3": "c3ac4b2453c958487e2a94fa4fea2174ff9da99f19e782ff6c5db243fa32e107"
+    }
+  },
+  "schema_compliance": {
+    "by_document": {
+      "invoice_T1_gen1": {
+        "missing_in_gt": [],
+        "missing_in_parser": [
+          "due_date"
+        ]
+      },
+      "invoice_T1_gen2": {
+        "missing_in_gt": [],
+        "missing_in_parser": [
+          "due_date"
+        ]
+      },
+      "invoice_T1_gen3": {
+        "missing_in_gt": [],
+        "missing_in_parser": [
+          "due_date"
+        ]
+      }
+    },
+    "missing_in_gt_counts": {},
+    "missing_in_parser_counts": {
+      "due_date": 3
+    }
+  },
   "metrics": {
     "invoice_number": {
       "field": "invoice_number",
@@ -210,7 +260,7 @@
       "gt_present": 3,
       "parser_present": 3,
       "both_present": 3,
-      "matches": 1,
+      "matches": 2,
       "document_results": [
         {
           "document": "invoice_T1_gen1",
@@ -249,7 +299,7 @@
             }
           ],
           "match": true,
-          "match_type": "exact_match"
+          "match_type": "exact_match_by_code_amount"
         },
         {
           "document": "invoice_T1_gen2",
@@ -341,14 +391,28 @@
               "amount": 200
             }
           ],
-          "match": false,
-          "match_type": "partial_match_0/4"
+          "match": true,
+          "match_type": "exact_match_by_code_amount"
         }
       ],
-      "precision": 0.3333333333333333,
-      "recall": 0.3333333333333333,
-      "f1_score": 0.3333333333333333
+      "precision": 0.6666666666666666,
+      "recall": 0.6666666666666666,
+      "f1_score": 0.6666666666666666
     }
   },
-  "overall_accuracy": 0.7619047619047619
+  "diagnostics": {
+    "missing_fields_per_parser": {
+      "due_date": 3
+    },
+    "partial_matches": [
+      {
+        "field": "line_items",
+        "document": "invoice_T1_gen2",
+        "match_type": "length_mismatch_4_vs_3"
+      }
+    ],
+    "date_format_matches": [],
+    "numeric_discrepancies": []
+  },
+  "overall_accuracy": 0.8095238095238095
 }
