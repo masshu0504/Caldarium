@@ -1,5 +1,6 @@
-services:
+# docker-compose.yml
 
+services:
   # ---------------------------
   # Postgres database
   # ---------------------------
@@ -9,13 +10,18 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: med_parsing
+      POSTGRES_DB: labelstudio
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d labelstudio"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # ---------------------------
   # MinIO object storage
@@ -27,8 +33,6 @@ services:
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
-      MINIO_BROWSER: "on"        # enable browser
-      MINIO_DOMAIN: ""  # allow browser requests via localhost
     volumes:
       - minio_data:/data
     ports:
@@ -36,21 +40,33 @@ services:
       - "9001:9001"
     networks:
       - backend
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # ---------------------------
-  # Label Studio 
+  # Label Studio
   # ---------------------------
   labelstudio:
     image: heartexlabs/label-studio:latest
     container_name: labelstudio
     environment:
-      DATABASE_URL: postgres://postgres:postgres@ls_postgres:5432/labelstudio
+      DATABASE_URL: postgres://postgres:postgres@ls-postgres:5432/labelstudio
+      # If you plan to use MinIO as S3, set the following (example):
+      # AWS_ACCESS_KEY_ID: minio
+      # AWS_SECRET_ACCESS_KEY: minio123
+      # AWS_STORAGE_BUCKET_NAME: labelstudio
+      # S3_ENDPOINT: http://ls-minio:9000
+      # USE_MINIO: "true"
     ports:
       - "8080:8080"
     depends_on:
-      - ls-postgres
-      - ls-minio
+      ls-postgres:
+        condition: service_healthy
+      ls-minio:
+        condition: service_started
     networks:
       - backend
 
@@ -67,7 +83,29 @@ services:
     networks:
       - backend
     tty: true
+    depends_on:
+      - ls-postgres
+      - ls-minio
 
+  # ---------------------------
+  # API service with Great Expectations
+  # ---------------------------
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfiles/helper.Dockerfile
+    container_name: api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+      - ./great_expectations:/app/great_expectations
+      - ./data:/app/data
+    networks:
+      - backend
+    depends_on:
+      - ls-postgres
+      - ls-minio
 
 volumes:
   postgres_data:
@@ -76,5 +114,3 @@ volumes:
 networks:
   backend:
     driver: bridge
-
-
