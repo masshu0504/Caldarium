@@ -1,0 +1,4 @@
+path,doc_id,required_pass,missing_required,optional_present_billing_address,optional_present_notes,optional_present_tax_id,crossfield_failures,lineitem_failures,schema_errors
+/data/invoice_T1_gen1.json,,False,invoice_id,False,False,False,,line_items[0].amount missing;line_items[1].amount missing;line_items[2].amount missing,
+/data/invoice_T1_gen2.json,,False,invoice_id,False,False,False,,line_items[0].amount missing;line_items[1].amount missing;line_items[2].amount missing;line_items[3].amount missing,
+/data/invoice_T1_gen3.json,,False,invoice_id,False,False,False,total_amount < subtotal_amount,,
