@@ -1,4 +1,0 @@
-[
-  {"invoice_id":"INV001","patient_id":"P123","date":"2025-09-29","total":100.0},
-  {"invoice_id":"INV002","patient_id":"P456","date":"2025-09-28","total":200.5}
-]
