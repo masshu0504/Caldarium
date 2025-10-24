@@ -1,0 +1,22 @@
+run_id,schema_version,git,document,field,match,match_type,gt_value,parser_value,gt_present,parser_present
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,invoice_number,True,exact_match,INV377776,INV377776,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,invoice_number,True,exact_match,INV665469,INV665469,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,invoice_number,True,exact_match,INV701760,INV701760,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,due_date,False,parser_missing,2020-04-29,,1,0
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,due_date,False,parser_missing,1983-05-25,,1,0
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,due_date,False,parser_missing,2012-03-04,,1,0
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,patient_name,True,exact_match,Heather Anderson,Heather Anderson,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,patient_name,True,exact_match,Janet Mckenzie,Janet Mckenzie,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,patient_name,True,exact_match,Manuel Gutierrez,Manuel Gutierrez,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,subtotal_amount,True,numeric_match,430.00,430,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,subtotal_amount,True,numeric_match,1380.00,1380,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,subtotal_amount,True,numeric_match,645.00,645,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,invoice_date,True,exact_match,2020-03-30,2020-03-30,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,invoice_date,True,exact_match,1983-04-25,1983-04-25,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,invoice_date,True,exact_match,2012-02-03,2012-02-03,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,total_amount,True,exact_match,251.55,251.55,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,total_amount,True,numeric_match,959.10,959.1,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,total_amount,True,exact_match,499.88,499.88,1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen1,line_items,True,exact_match_by_code_amount,"[{'description': 'Lab Panel', 'code': 'LP12', 'amount': '180.00'}, {'description': 'Dermatology Consultation', 'code': 'DC04', 'amount': '180.00'}, {'description': 'Hearing Test', 'code': 'HT02', 'amount': '70.00'}]","[{'code': 'LP12', 'description': 'Lab Panel', 'amount': 180}, {'code': 'DC04', 'description': 'Dermatology Consultation', 'amount': 180}, {'code': 'HT02', 'description': 'Hearing Test', 'amount': 70}]",1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen2,line_items,False,length_mismatch_4_vs_3,"[{'description': 'HT02 Hearing Test', 'code': 'HT02', 'amount': '70.00'}, {'description': 'VB08 Vaccination Booster', 'code': 'VB08', 'amount': '55.00'}, {'description': 'VB08 Vaccination Booster', 'code': 'VB08', 'amount': '55.00'}, {'description': 'MRI5 MRI Scan', 'code': 'MRI5', 'amount': '1200.00'}]","[{'code': 'HT02', 'description': 'Hearing Test', 'amount': 70}, {'code': 'VB08', 'description': 'Vaccination Booster', 'amount': 55}, {'code': 'VB08', 'description': 'Vaccination Booster', 'amount': 55}]",1,1
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_T1_gen3,line_items,True,exact_match_by_code_amount,"[{'description': 'EE09 Eye Exam', 'code': 'EE09', 'amount': '75.00'}, {'description': 'US10 Ultrasound', 'code': 'US10', 'amount': '300.00'}, {'description': 'HT02 Hearing Test', 'code': 'HT02', 'amount': '70.00'}, {'description': 'XR01 X-Ray', 'code': 'XR01', 'amount': '200.00'}]","[{'code': 'EE09', 'description': 'Eye Exam', 'amount': 75}, {'code': 'US10', 'description': 'Ultrasound', 'amount': 300}, {'code': 'HT02', 'description': 'Hearing Test', 'amount': 70}, {'code': 'XR01', 'description': 'X-Ray', 'amount': 200}]",1,1
