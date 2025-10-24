@@ -1,0 +1,17 @@
+name: _tmp
+config_version: 1.0
+class_name: Checkpoint
+run_name_template: "%Y%m%d-%H%M%S"
+validations:
+  - batch_request:
+      datasource_name: files_json_ds
+      data_connector_name: default_inferred_data_connector_name
+      data_asset_name: REPLACE_ME
+    expectation_suite_name: invoices_suite
+action_list:
+  - name: store_validation_result
+    action:
+      class_name: StoreValidationResultAction
+  - name: update_data_docs
+    action:
+      class_name: UpdateDataDocsAction
