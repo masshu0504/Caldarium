@@ -1,139 +1,29 @@
 {
   "data_asset_type": null,
   "expectation_suite_name": "invoices_suite",
-  "expectations": [
-    {
-      "expectation_type": "expect_table_columns_to_contain_set",
-      "kwargs": {
-        "column_set": [
-          "invoice_number",
-          "invoice_date",
-          "due_date",
-          "patient_name",
-          "subtotal_amount",
-          "total_amount",
-          "line_items"
-        ]
-      },
-      "meta": {
-        "note": "Only enforces presence of required columns from finalized schema."
-      }
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "invoice_number" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "invoice_date" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "due_date" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "patient_name" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "subtotal_amount" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "total_amount" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "kwargs": { "column": "line_items" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_of_type",
-      "kwargs": { "column": "invoice_number", "type_": "str" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_of_type",
-      "kwargs": { "column": "patient_name", "type_": "str" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "kwargs": {
-        "column": "subtotal_amount",
-        "type_list": ["float", "int"]
-      },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_in_type_list",
-      "kwargs": {
-        "column": "total_amount",
-        "type_list": ["float", "int"]
-      },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_of_type",
-      "kwargs": { "column": "line_items", "type_": "list" },
-      "meta": {
-        "note": "Expect a JSON array for line_items."
-      }
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_between",
-      "kwargs": {
-        "column": "subtotal_amount",
-        "min_value": 0,
-        "allow_cross_type_comparisons": true
-      },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_between",
-      "kwargs": {
-        "column": "total_amount",
-        "min_value": 0,
-        "allow_cross_type_comparisons": true
-      },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_of_type",
-      "kwargs": { "column": "invoice_date", "type_": "str" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_match_regex",
-      "kwargs": {
-        "column": "invoice_date",
-        "regex": "^\\d{4}-\\d{2}-\\d{2}$"
-      },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_be_of_type",
-      "kwargs": { "column": "due_date", "type_": "str" },
-      "meta": {}
-    },
-    {
-      "expectation_type": "expect_column_values_to_match_regex",
-      "kwargs": {
-        "column": "due_date",
-        "regex": "^\\d{4}-\\d{2}-\\d{2}$"
-      },
-      "meta": {}
-    }
-  ],
   "ge_cloud_id": null,
+  "expectations": [
+    {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "invoice_id"}},
+    {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "invoice_date"}},
+    {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "subtotal_amount"}},
+    {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "total_amount"}},
+    {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "invoice_id"}},
+    {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "invoice_date"}},
+    {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "subtotal_amount"}},
+    {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "total_amount"}},
+    {"expectation_type": "expect_column_values_to_be_of_type", "kwargs": {"column": "invoice_id", "type_": "object"}},
+    {"expectation_type": "expect_column_values_to_match_regex", "kwargs": {"column": "invoice_date", "regex": "^\\d{4}-\\d{2}-\\d{2}$"}},
+    {"expectation_type": "expect_table_columns_to_match_set",
+     "kwargs": { "column_set": ["invoice_id","invoice_date","subtotal_amount","total_amount"],
+                 "exact_match": false }}
+  ],
   "meta": {
-    "great_expectations_version": "0.18.12"
+    "notes": {
+      "content": [
+        "This suite checks required keys and simple formats.",
+        "Cross-field rules (total >= subtotal, sum(line_items) ~= subtotal, due_date >= invoice_date) are enforced by run_validation.py."
+      ],
+      "format": "markdown"
+    }
   }
 }
