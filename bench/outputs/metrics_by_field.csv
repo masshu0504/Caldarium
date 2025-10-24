@@ -1,0 +1,8 @@
+run_id,schema_version,git,field,precision,recall,f1,gt_present,parser_present,matches,total_documents
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_number,1.0,1.0,1.0,3,3,3,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,due_date,0.0,0.0,0.0,3,0,0,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,patient_name,1.0,1.0,1.0,3,3,3,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,subtotal_amount,1.0,1.0,1.0,3,3,3,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,invoice_date,1.0,1.0,1.0,3,3,3,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,total_amount,1.0,1.0,1.0,3,3,3,3
+run-20251024-005723-b7e79212,v0.1,c6bb665,line_items,0.6666666666666666,0.6666666666666666,0.6666666666666666,3,3,2,3
