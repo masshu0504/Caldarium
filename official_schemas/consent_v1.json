@@ -1,0 +1,226 @@
+{
+  "title": "Consent",
+  "type": "object",
+  "properties": {
+    "patient_name": {
+      "type": "string",
+      "description": "Full legal name of patient"
+    },
+    "patient_first_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Patient's first name"
+    },
+    "patient_middle_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Patient's middle name or initial"
+    },
+    "patient_last_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Patient's last name"
+    },
+    "patient_address_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Street address of patient"
+    },
+    "patient_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unique identifier for patient record"
+    },
+    "patient_dob": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Date of birth of patient (YYYY-MM-DD)"
+    },
+    "patient_signature": {
+      "type": "string",
+      "description": "Indicator of patient signature"
+    },
+    "patient_state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "State of patient residence"
+    },
+    "patient_city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "City of patient residence"
+    },
+    "patient_zip_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ZIP code of patient address"
+    },
+    "provider_name": {
+      "type": "string",
+      "description": "Name of healthcare provider"
+    },
+    "provider_address_name": {
+      "type": "string",
+      "description": "Address of healthcare provider"
+    },
+    "provider_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Provider phone number"
+    },
+    "provider_fax": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Provider fax number"
+    },
+    "provider_state": {
+      "type": "string",
+      "description": "State where provider is located"
+    },
+    "provider_city": {
+      "type": "string",
+      "description": "City where provider is located"
+    },
+    "provider_zip_code": {
+      "type": "string",
+      "description": "ZIP code of provider address"
+    },
+    "family_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Full name of family member or emergency contact"
+    },
+    "family_relation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Relationship of family member to patient"
+    },
+    "family_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Contact phone number of family member"
+    },
+    "family_address_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Address of family member or contact"
+    },
+    "family_state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "State of family member residence"
+    },
+    "family_city": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "City of family member residence"
+    },
+    "family_zip_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ZIP code of family member address"
+    },
+    "guardian_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of parent or legal guardian (if patient is a minor)"
+    },
+    "guardian_signature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Signature of guardian signing on behalf of minor"
+    },
+    "guardian_relation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Relation of guardian to patient (e.g., Mother, Father, Legal Guardian)"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date consent was given"
+    },
+    "expiration_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Date consent expires (if applicable)"
+    },
+    "expiration_event": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Event after which consent expires (e.g., end of treatment)"
+    },
+    "translator_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of translator if patient required one"
+    },
+    "translator_signature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Indicator or image reference of translator signature"
+    }
+  },
+  "required": [
+    "patient_name",
+    "patient_signature",
+    "provider_name",
+    "provider_address_name",
+    "provider_city",
+    "provider_state",
+    "provider_zip_code",
+    "date"
+  ]
+}
