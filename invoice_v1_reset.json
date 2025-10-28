@@ -38,7 +38,7 @@
         "string",
         "null"
       ],
-      "description": "Patient phone number (optional)"
+      "description": "Patient phone number"
     },
     "patient_email": {
       "type": [
@@ -73,6 +73,20 @@
       "minimum": 0,
       "description": "Total invoice amount after discounts"
     },
+    "provider_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of the healthcare provider issuing the invoice"
+    },
+    "bed_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Identifier for the bed or room assigned to the patient, if applicable"
+    },
     "line_items": {
       "type": "array",
       "description": "List of individual line items on the invoice",
@@ -92,16 +106,18 @@
         },
         "required": [
           "description",
-          "amount"
+          "amount",
+          "code"
         ]
       }
     }
   },
   "required": [
     "invoice_number",
-    "patient_id",
-    "subtotal_amount",
     "invoice_date",
+    "due_date",
+    "patient_name",
+    "subtotal_amount",
     "total_amount",
     "line_items"
   ]

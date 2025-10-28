@@ -1,23 +1,35 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://example.com/schemas/error-event.schema.json",
-  "title": "Intake Agent Error Event",
+  "title": "Intake Agent Error Event (v2)",
   "type": "object",
+  "additionalProperties": false,
   "required": ["error_code", "stage", "message", "timestamp"],
   "properties": {
     "error_code": {
       "type": "string",
-      "enum": ["EXTRACTION_FAIL", "SCHEMA_MISMATCH", "MISSING_FIELD", "OCR_NOISE"]
+      "enum": ["EXTRACTION_FAIL", "SCHEMA_MISMATCH", "MISSING_FIELD", "TEXT_NOISE", "TABLE_EXTRACTION_FAIL", "FIELD_PARSING_ERROR"],
+      "description": "High-level error category."
     },
     "stage": {
       "type": "string",
-      "enum": ["OCR", "PARSER", "VALIDATOR", "POSTPROC"]
+      "enum": ["EXTRACTOR", "PARSER", "VALIDATOR", "POSTPROC", "TABLE_PARSER"],
+      "description": "Pipeline stage where the error occurred."
     },
-    "message": { "type": "string", "minLength": 1 },
-    "timestamp": { "type": "string", "format": "date-time" },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable summary of the failure."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 UTC timestamp."
+    },
     "source": {
       "type": "object",
       "additionalProperties": false,
+      "description": "Origin of the error (if available).",
       "properties": {
         "file_path": { "type": "string" },
         "document_id": { "type": "string" }
@@ -25,8 +37,8 @@
     },
     "details": {
       "type": "object",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "description": "Extended context (e.g., missing fields, validation output)."
     }
-  },
-  "additionalProperties": false
+  }
 }
