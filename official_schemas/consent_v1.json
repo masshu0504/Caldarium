@@ -210,7 +210,7 @@
         "string",
         "null"
       ],
-      "description": "Indicator or image reference of translator signature"
+      "description": "Indicator of translator signature"
     }
   },
   "required": [
