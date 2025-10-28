@@ -1,0 +1,1458 @@
+
+
+============================================================
+File: invoice_T1_gen4.pdf
+Timestamp: 2025-10-21T16:45:59
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV146372",
+  "patient_id": "MRN92331",
+  "invoice_date": "1998-04-13",
+  "due_date": "1998-05-13",
+  "patient_name": "Brian Johnson",
+  "patient_age": "88",
+  "patient_address": "3856 Matthew Overpass Suite 435, East Paul, DE 39403",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1998-03-31",
+  "discharge_date": "1998-04-12",
+  "subtotal_amount": "$250.00",
+  "discount_amount": "$92.50",
+  "total_amount": "$168.75",
+  "provider_name": "Dr. Adam Diaz",
+  "bed_id": "BED1963",
+  "line_items": [
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": "$90.00"
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": "$100.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen5.pdf
+Timestamp: 2025-10-21T16:46:03
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV970003",
+  "patient_id": "MRN59273",
+  "invoice_date": "1972-03-17",
+  "due_date": "1972-04-16",
+  "patient_name": "Monique Hancock",
+  "patient_age": "60",
+  "patient_address": "2522 Rivera Mountains, Lake Mary, NY 06671",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1972-03-05",
+  "discharge_date": "1972-03-15",
+  "subtotal_amount": "$420.00",
+  "discount_amount": "$189.00",
+  "total_amount": "$249.90",
+  "provider_name": "Dr. Laura Castillo",
+  "bed_id": "BED793",
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": "$180.00"
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": "$150.00"
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "Prescription Refill",
+      "code": "PR06",
+      "amount": "$30.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T3_gen10.pdf
+Timestamp: 2025-10-21T16:46:08
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+Raw output:
+```json
+{
+  "invoice_number": "INV783845",
+  "patient_id": null,
+  "invoice_date": "1989-09-03",
+  "due_date": "1989-10-03",
+  "patient_name": "Michael Glenn",
+  "patient_age": null,
+  "patient_address": "186 Tina Prairie Apt. 154, South Cassandrabury, MT 57525",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$315.00",
+  "discount_amount": "$69.30",
+  "total_amount": "$259.88",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": "$100.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "$75.00"
+    },
+    {
+      "description": "Blood Test",
+      "code": "BT23",
+      "amount": "$80.00"
+    }
+  ]
+}
+```
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T1_gen7.pdf
+Timestamp: 2025-10-21T16:46:11
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV27996",
+  "patient_id": "MRN18987",
+  "invoice_date": "1983-08-04",
+  "due_date": "1983-09-03",
+  "patient_name": "Jason Sandoval",
+  "patient_age": "57",
+  "patient_address": "366 Parker Cape Suite 810, Torresland, OK 01159",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1983-07-20",
+  "discharge_date": "1983-08-02",
+  "subtotal_amount": "$1080.00",
+  "discount_amount": "$194.40",
+  "total_amount": "$934.20",
+  "provider_name": "Dr. Tyler Melton",
+  "bed_id": "BED4220",
+  "line_items": [
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "$1000.00"
+    },
+    {
+      "description": "Blood Test",
+      "code": "BT23",
+      "amount": "$80.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen6.pdf
+Timestamp: 2025-10-21T16:46:14
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV473732",
+  "patient_id": "MRN78120",
+  "invoice_date": "2012-04-16",
+  "due_date": "2012-05-16",
+  "patient_name": "Leslie Marshall",
+  "patient_age": "31",
+  "patient_address": "8979 Stephanie Creek, Walkertown, AS 80021",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2012-04-03",
+  "discharge_date": "2012-04-15",
+  "subtotal_amount": "$345.00",
+  "discount_amount": "$6.90",
+  "total_amount": "$353.62",
+  "provider_name": "Dr. Hunter Mendez",
+  "bed_id": "BED341",
+  "line_items": [
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "$75.00"
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": "$150.00"
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "$120.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen2.pdf
+Timestamp: 2025-10-21T16:46:20
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV665469",
+  "patient_id": "MRN31790",
+  "invoice_date": "1983-04-25",
+  "due_date": "1983-05-25",
+  "patient_name": "Janet Mckenzie",
+  "patient_age": "44",
+  "patient_address": "7442 Alicia Court Suite 507, Rollinsbury, DE 23480",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1983-04-10",
+  "discharge_date": "1983-04-24",
+  "subtotal_amount": "$1380.00",
+  "discount_amount": "$483.00",
+  "total_amount": "$959.10",
+  "provider_name": "Dr. Maurice Williams",
+  "bed_id": "BED1311",
+  "line_items": [
+    {
+      "description": "Hearing Test",
+      "code": "HT02",
+      "amount": "$70.00"
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "$55.00"
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "$55.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "$1200.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen3.pdf
+Timestamp: 2025-10-21T16:46:24
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV701760",
+  "patient_id": "MRN38745",
+  "invoice_date": "2012-02-03",
+  "due_date": "2012-03-04",
+  "patient_name": "Manuel Gutierrez",
+  "patient_age": "83",
+  "patient_address": "143 Graham Key Apt. 753, West Jameschester, IN 41731",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2012-01-25",
+  "discharge_date": "2012-02-01",
+  "subtotal_amount": "645.00",
+  "discount_amount": "174.15",
+  "total_amount": "499.88",
+  "provider_name": "Dr. Carolyn Grant",
+  "bed_id": "BED6905",
+  "line_items": [
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "75.00"
+    },
+    {
+      "description": "Ultrasound",
+      "code": "US10",
+      "amount": "300.00"
+    },
+    {
+      "description": "Hearing Test",
+      "code": "HT02",
+      "amount": "70.00"
+    },
+    {
+      "description": "X-Ray",
+      "code": "XR01",
+      "amount": "200.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen1.pdf
+Timestamp: 2025-10-21T16:46:28
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV377776",
+  "patient_id": "MRN53310",
+  "invoice_date": "2020-03-30",
+  "due_date": "2020-04-29",
+  "patient_name": "Heather Anderson",
+  "patient_age": "80",
+  "patient_address": "684 Adrienne Trafficway Suite 418, Warrenfurt, WY 64879",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2020-03-22",
+  "discharge_date": "2020-03-28",
+  "subtotal_amount": "$430.00",
+  "discount_amount": "$197.80",
+  "total_amount": "$251.55",
+  "provider_name": "Dr. Brittney Santos",
+  "bed_id": "BED4887",
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": "$180.00"
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": "$180.00"
+    },
+    {
+      "description": "Hearing Test",
+      "code": "HT02",
+      "amount": "$70.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T3_gen8.pdf
+Timestamp: 2025-10-21T16:46:32
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+Raw output:
+{
+  "invoice_number": "INV39821",
+  "patient_id": null,
+  "invoice_date": "1971-06-23",
+  "due_date": "1971-07-23",
+  "patient_name": "Christopher Gould",
+  "patient_age": null,
+  "patient_address": "74126 Brian Forest Suite 703, Josephville, DE 83640",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$100.00",
+  "discount_amount": "$43.00",
+  "total_amount": "$61.50",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": "$100.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T2_gen8.pdf
+Timestamp: 2025-10-21T16:46:35
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, line_items
+Fields left blank (7): patient_id, patient_age, admission_date, discharge_date, discount_amount, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV544466",
+  "patient_id": null,
+  "invoice_date": "1995-01-29",
+  "due_date": "1995-02-28",
+  "patient_name": "Timothy Hurley",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "001-920-326-1898",
+  "patient_email": "timothy.hurley@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$120.00",
+  "discount_amount": null,
+  "total_amount": "$125.40",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "$120.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T2_gen10.pdf
+Timestamp: 2025-10-21T16:46:39
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV645730",
+  "patient_id": null,
+  "invoice_date": "1991-11-23",
+  "due_date": "1991-12-23",
+  "patient_name": "Stacey Hawkins",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "435-367-1984",
+  "patient_email": "stacey.hawkins@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$1250.00",
+  "discount_amount": null,
+  "total_amount": "$1306.25",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": "$100.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "$50.00"
+    },
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": "$100.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "$1000.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T2_gen9.pdf
+Timestamp: 2025-10-21T16:46:42
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV287552",
+  "patient_id": null,
+  "invoice_date": "2006-11-20",
+  "due_date": "2006-12-20",
+  "patient_name": "Gabriela Wood",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "+1-537-706-0980",
+  "patient_email": "gabriela.wood@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$385.00",
+  "discount_amount": null,
+  "total_amount": "$402.32",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": "$150.00"
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": "$180.00"
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "$55.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T3_gen9.pdf
+Timestamp: 2025-10-21T16:46:44
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (9): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, line_items
+Fields left blank (8): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV872679",
+  "patient_id": null,
+  "invoice_date": "1993-12-14",
+  "due_date": "1994-01-13",
+  "patient_name": "Taylor Parsons",
+  "patient_age": null,
+  "patient_address": "22162 Renee Canyon, South Ronaldville, MN 50745",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "55.00",
+  "discount_amount": "16.50",
+  "total_amount": "40.98",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "55.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T2_gen1.pdf
+Timestamp: 2025-10-21T16:46:47
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV492305",
+  "patient_id": null,
+  "invoice_date": "1998-04-28",
+  "due_date": "1998-05-28",
+  "patient_name": "Jennifer Patterson",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "940.951.0538",
+  "patient_email": "jennifer.patterson@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$2325.00",
+  "discount_amount": null,
+  "total_amount": "$2429.62",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Surgery Consultation",
+      "code": "SC03",
+      "amount": "$250.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "$1000.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "$1000.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "$75.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T3_gen1.pdf
+Timestamp: 2025-10-21T16:46:50
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+Raw output:
+{
+  "invoice_number": "INV244194",
+  "patient_id": null,
+  "invoice_date": "2003-11-03",
+  "due_date": "2003-12-03",
+  "patient_name": "Mr. Patrick Franklin",
+  "patient_age": null,
+  "patient_address": "769 Victoria Views, New Michaelland, MP 71791",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "1435.00",
+  "discount_amount": "14.35",
+  "total_amount": "1485.23",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": "180.00"
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": "1000.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "75.00"
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": "180.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T1_gen10.pdf
+Timestamp: 2025-10-21T16:46:53
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV644415",
+  "patient_id": "MRN67164",
+  "invoice_date": "2010-02-10",
+  "due_date": "2010-03-12",
+  "patient_name": "Lisa Odom",
+  "patient_age": "70",
+  "patient_address": "1740 Cindy Turnpike, West Valeriemouth, NM 94100",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2010-01-31",
+  "discharge_date": "2010-02-08",
+  "subtotal_amount": "$90.00",
+  "discount_amount": "$5.40",
+  "total_amount": "$88.65",
+  "provider_name": "Dr. Gloria Carroll",
+  "bed_id": "BED7554",
+  "line_items": [
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": "$90.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T3_gen2.pdf
+Timestamp: 2025-10-21T16:46:55
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (9): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, line_items
+Fields left blank (8): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV140822",
+  "patient_id": null,
+  "invoice_date": "2018-08-13",
+  "due_date": "2018-09-12",
+  "patient_name": "Angel Kaiser",
+  "patient_age": null,
+  "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "315.00",
+  "discount_amount": "110.25",
+  "total_amount": "218.93",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "60.00"
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "120.00"
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "60.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "75.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T2_gen2.pdf
+Timestamp: 2025-10-21T16:46:59
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV257144",
+  "patient_id": null,
+  "invoice_date": "2014-10-19",
+  "due_date": "2014-11-18",
+  "patient_name": "David Chan II",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "(421)626-5991",
+  "patient_email": "david.chan@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$425.00",
+  "discount_amount": null,
+  "total_amount": "$444.12",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "X-Ray",
+      "code": "XR01",
+      "amount": "$200.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "$75.00"
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": "$150.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T2_gen3.pdf
+Timestamp: 2025-10-21T16:47:03
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV26344",
+  "patient_id": null,
+  "invoice_date": "2023-12-28",
+  "due_date": "2024-01-27",
+  "patient_name": "Jennifer Cunningham",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "001-646-803-9654",
+  "patient_email": "jennifer.cunningham@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$1595.00",
+  "discount_amount": null,
+  "total_amount": "$1666.78",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": "$40.00"
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "$55.00"
+    },
+    {
+      "description": "Ultrasound",
+      "code": "US10",
+      "amount": "$300.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "$1200.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T3_gen3.pdf
+Timestamp: 2025-10-21T16:47:07
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (9): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, line_items
+Fields left blank (8): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV590270",
+  "patient_id": null,
+  "invoice_date": "2015-10-17",
+  "due_date": "2015-11-16",
+  "patient_name": "Angela Holmes",
+  "patient_age": null,
+  "patient_address": "58605 Ramos Forge, Roachland, FM 45953",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "480.00",
+  "discount_amount": "28.80",
+  "total_amount": "472.80",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Prescription Refill",
+      "code": "PR06",
+      "amount": "30.00"
+    },
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": "100.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "50.00"
+    },
+    {
+      "description": "Ultrasound",
+      "code": "US10",
+      "amount": "300.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T3_gen7.pdf
+Timestamp: 2025-10-21T16:47:10
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (9): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, line_items
+Fields left blank (8): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV294900",
+  "patient_id": null,
+  "invoice_date": "1980-05-23",
+  "due_date": "1980-06-22",
+  "patient_name": "Robert Ferguson",
+  "patient_age": null,
+  "patient_address": "88706 Katherine Lock, Keithbury, MH 33993",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "1570.00",
+  "discount_amount": "15.70",
+  "total_amount": "1624.95",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": "100.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "1200.00"
+    },
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": "90.00"
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": "180.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T2_gen7.pdf
+Timestamp: 2025-10-21T16:47:14
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV948995",
+  "patient_id": null,
+  "invoice_date": "1973-07-03",
+  "due_date": "1973-08-02",
+  "patient_name": "John Walker",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "+1-722-794-3538",
+  "patient_email": "john.walker@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$260.00",
+  "discount_amount": null,
+  "total_amount": "$271.70",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": "$40.00"
+    },
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": "$100.00"
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "$120.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T2_gen6.pdf
+Timestamp: 2025-10-21T16:47:17
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, line_items
+Fields left blank (7): patient_id, patient_age, admission_date, discharge_date, discount_amount, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV668264",
+  "patient_id": null,
+  "invoice_date": "2005-11-10",
+  "due_date": "2005-12-10",
+  "patient_name": "Christopher Olson",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "248-294-2049",
+  "patient_email": "christopher.olson@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "145.00",
+  "discount_amount": null,
+  "total_amount": "151.53",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "55.00"
+    },
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": "40.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "50.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T3_gen6.pdf
+Timestamp: 2025-10-21T16:47:20
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+Raw output:
+{
+  "invoice_number": "INV37657",
+  "patient_id": null,
+  "invoice_date": "1991-03-09",
+  "due_date": "1991-04-08",
+  "patient_name": "Casey King",
+  "patient_age": null,
+  "patient_address": "93042 April Canyon, Anashire, AL 17130",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$1255.00",
+  "discount_amount": "$614.95",
+  "total_amount": "$696.52",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "$55.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "$1200.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T2_gen4.pdf
+Timestamp: 2025-10-21T16:47:23
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV931982",
+  "patient_id": null,
+  "invoice_date": "2020-05-10",
+  "due_date": "2020-06-09",
+  "patient_name": "Diana Osborne",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "663-369-2368",
+  "patient_email": "diana.osborne@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$180.00",
+  "discount_amount": null,
+  "total_amount": "$188.10",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": "$180.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T3_gen4.pdf
+Timestamp: 2025-10-21T16:47:25
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+Raw output:
+{
+  "invoice_number": "INV13151",
+  "patient_id": null,
+  "invoice_date": "2010-12-18",
+  "due_date": "2011-01-17",
+  "patient_name": "David Ortiz",
+  "patient_age": null,
+  "patient_address": "54246 Alexis Turnpike, East Kevinville, NE 97421",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$250.00",
+  "discount_amount": "$22.50",
+  "total_amount": "$238.75",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Surgery Consultation",
+      "code": "SC03",
+      "amount": "$250.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T3_gen5.pdf
+Timestamp: 2025-10-21T16:47:28
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (9): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, line_items
+Fields left blank (8): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, provider_name, bed_id
+Raw output:
+{
+  "invoice_number": "INV498431",
+  "patient_id": null,
+  "invoice_date": "2018-06-29",
+  "due_date": "2018-07-29",
+  "patient_name": "Miss Julie Jackson",
+  "patient_age": null,
+  "patient_address": "040 Cook Points Suite 457, Carrollside, UT 19885",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$220.00",
+  "discount_amount": "$24.20",
+  "total_amount": "$205.70",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Hearing Test",
+      "code": "HT02",
+      "amount": "$70.00"
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": "$150.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T2_gen5.pdf
+Timestamp: 2025-10-21T16:47:31
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+Raw output:
+{
+  "invoice_number": "INV290431",
+  "patient_id": null,
+  "invoice_date": "1988-06-18",
+  "due_date": "1988-07-18",
+  "patient_name": "Robert Martinez",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "001-832-890-6713",
+  "patient_email": "robert.martinez@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$430.00",
+  "discount_amount": null,
+  "total_amount": "$449.35",
+  "provider_name": "UNSURE",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Surgery Consultation",
+      "code": "SC03",
+      "amount": "$250.00"
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": "$180.00"
+    }
+  ]
+}
+Fields marked as UNSURE (1): provider_name
+============================================================
+
+
+============================================================
+File: invoice_T1_gen8.pdf
+Timestamp: 2025-10-21T16:47:34
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV403240",
+  "patient_id": "MRN31909",
+  "invoice_date": "2019-11-05",
+  "due_date": "2019-12-05",
+  "patient_name": "Amy Mitchell",
+  "patient_age": "47",
+  "patient_address": "Unit 9754 Box 7608, DPO AA 72291",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2019-10-25",
+  "discharge_date": "2019-11-03",
+  "subtotal_amount": "$320.00",
+  "discount_amount": "$96.00",
+  "total_amount": "$238.40",
+  "provider_name": "Dr. Adrian Parks",
+  "bed_id": "BED6413",
+  "line_items": [
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": "$90.00"
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "$120.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "$50.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+
+
+============================================================
+File: invoice_T1_gen9.pdf
+Timestamp: 2025-10-21T16:47:39
+Model: openai/gpt-4.1
+Temperature: 0.4
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null. If you think that a field could correspond with a value but not sure put 'UNSURE' as the value. The 'Provider Name' is the name of the Doctor and not the Hospital.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+Raw output:
+{
+  "invoice_number": "INV376323",
+  "patient_id": "MRN86469",
+  "invoice_date": "2024-08-05",
+  "due_date": "2024-09-04",
+  "patient_name": "Nicole Swanson",
+  "patient_age": "41",
+  "patient_address": "569 Christine Coves Suite 770, Lake Lindsaybury, IN 82215",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2024-08-01",
+  "discharge_date": "2024-08-03",
+  "subtotal_amount": "$1490.00",
+  "discount_amount": "$596.00",
+  "total_amount": "$961.05",
+  "provider_name": "Dr. Rachel Pham",
+  "bed_id": "BED1711",
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "$50.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "$1200.00"
+    },
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": "$180.00"
+    }
+  ]
+}
+Fields marked as UNSURE (0): 
+============================================================
+

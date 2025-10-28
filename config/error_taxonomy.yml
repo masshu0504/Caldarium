@@ -1,11 +1,42 @@
-version: 1
+version: 2
 categories:
   - EXTRACTION_FAIL
   - SCHEMA_MISMATCH
   - MISSING_FIELD
-  - OCR_NOISE
+  - TEXT_NOISE
+  - TABLE_EXTRACTION_FAIL
+  - FIELD_PARSING_ERROR
 stages:
-  - OCR
+  - EXTRACTOR
   - PARSER
   - VALIDATOR
   - POSTPROC
+  - TABLE_PARSER
+
+# Live examples from actual benchmark runs (2025-10-10)
+examples:
+  MISSING_FIELD:
+    - document_id: "invoice_T1_gen1.pdf"
+      snippet: "pred_patient_id: empty, pred_total_amount: empty (pdfplumber: 430.0 subtotal extracted)"
+      fix_hint: "Add patient ID regex patterns; improve total amount detection when subtotal exists"
+    - document_id: "invoice_T2_gen1.pdf"
+      snippet: "pred_patient_id: empty, pred_total_amount: empty (pdfplumber: 2325.0 subtotal extracted)"
+      fix_hint: "Patient ID extraction failing across all documents; total amount regex needs improvement"
+  
+  FIELD_PARSING_ERROR:
+    - document_id: "invoice_T3_gen1.pdf"
+      snippet: "pdfminer extracted 'Date' instead of 'INV244194' for invoice_number"
+      fix_hint: "pdfminer text extraction quality issues; use pdfplumber for better results"
+    - document_id: "invoice_T3_gen2.pdf"
+      snippet: "pdfminer extracted 'Date' instead of 'INV140822' for invoice_number"
+      fix_hint: "pdfminer regex pattern matching incorrectly; improve field boundary detection"
+  
+  TABLE_EXTRACTION_FAIL:
+    - document_id: "all_invoices"
+      snippet: "cell_match_rate: empty for all 27 table extraction attempts (camelot_lattice, camelot_stream, tabula)"
+      fix_hint: "Complete table extraction failure; investigate PDF table structure or use alternative methods"
+  
+  SCHEMA_MISMATCH:
+    - document_id: "invoice_T2_gen1.pdf"
+      snippet: "em_invoice_date: 0 (extracted 1998-05-28 vs expected 1998-04-28)"
+      fix_hint: "Date format mismatch; normalize date parsing to handle different formats"

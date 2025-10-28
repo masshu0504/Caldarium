@@ -22,8 +22,6 @@ This project makes use of third-party software. Their licenses are as follows:
 
 - **Apache 2.0**
   - Great Expectations
-  - Tesseract OCR
-  - PaddleOCR
   - Various utility packages
 
 - **MIT**

@@ -1,0 +1,3 @@
+engine,exact_invoice_rate,exact_patient_rate,exact_date_rate,subtotal_within_tol_rate,total_within_tol_rate,line_items_exact_rate,avg_latency_s,n
+pdfminer,0.6666666666666666,0.0,0.3333333333333333,0.2222222222222222,0.0,0.0,0.043000000000000003,9
+pdfplumber,1.0,0.0,0.3333333333333333,1.0,0.0,0.0,0.05077777777777778,9
