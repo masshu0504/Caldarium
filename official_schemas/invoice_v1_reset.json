@@ -106,8 +106,8 @@
         },
         "required": [
           "description",
-          "amount",
-          "code"
+          "code",
+          "amount"
         ]
       }
     }
