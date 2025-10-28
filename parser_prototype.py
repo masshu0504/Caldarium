@@ -460,32 +460,52 @@ def extract_fields(prepped_text: str) -> dict:
         grp = m.groups()[-1] if m.groups() else None
         data[key] = clean_and_convert(key, grp)
 
-    # email: prefer labeled inside patient block; then global labeled; then any email pattern
+    # slice likely patient block once
     patient_blk = _slice_patient_block(prepped_text)
 
+    # ---------- EMAIL (blacklist first) ----------
+    email_val = None
+    # 1) labeled inside patient block
     m_email = EMAIL_LABELED_RE.search(patient_blk)
     if m_email:
-        data["patient_email"] = m_email.group(1)
+        email_val = m_email.group(1).strip()
     else:
-        # Global labeled fallback (handles T2 "E: user@domain" even if outside block)
+        # 2) labeled anywhere
         m_email2 = EMAIL_LABELED_RE.search(prepped_text)
         if m_email2:
-            data["patient_email"] = m_email2.group(1)
+            email_val = m_email2.group(1).strip()
         else:
-            # Last resort: any email-looking string anywhere
+            # 3) any email-looking string anywhere
             m_any = EMAIL_ANY_RE.search(prepped_text)
-            data["patient_email"] = m_any.group(0) if m_any else None
+            email_val = m_any.group(0).strip() if m_any else None
 
-    # phone: prefer labeled inside patient block, else first anywhere
+    # blacklist provider domains/addresses (Hot Springs)
+    EMAIL_BLACKLIST = {"info@hotspringsgen.com"}
+    if email_val and email_val.lower() in EMAIL_BLACKLIST:
+        email_val = None
+
+    data["patient_email"] = email_val
+
+    # ---------- PHONE (blacklist first) ----------
+    # prefer labeled inside patient block; else first anywhere
     m_phone_labeled = re.search(r"(?:Phone|Tel|Contact)\s*[:\-]?\s*(" + PHONE_RE.pattern + ")", patient_blk, re.IGNORECASE)
     if m_phone_labeled:
-        data["patient_phone"] = m_phone_labeled.group(1)
+        phone_val = m_phone_labeled.group(1).strip()
     else:
         phones = PHONE_RE.findall(prepped_text or "")
-        if phones:
-            data["patient_phone"] = phones[0] if isinstance(phones[0], str) else phones[0][0]
+        phone_val = phones[0].strip() if (phones and isinstance(phones[0], str)) else (phones[0][0].strip() if phones else None)
 
-    # Address: use template-specific logic (textual first)
+    # blacklist provider placeholder regardless of formatting or prefixes
+    if phone_val:
+        digits = re.sub(r"\D", "", phone_val)
+        last10 = digits[-10:] if len(digits) >= 10 else digits
+        if last10 == "1234567890":
+            phone_val = None
+
+    data["patient_phone"] = phone_val
+
+    # ---------- ADDRESS ----------
+    # Template-specific extraction (textual first)
     template = detect_template(prepped_text)
     addr = extract_patient_address_by_template(prepped_text, template)
     if addr:
