@@ -1,3 +1,10 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
 
-# bench artifacts
+# Bench outputs 
 bench/outputs/
+
+# Jupyter
+.ipynb_checkpoints/

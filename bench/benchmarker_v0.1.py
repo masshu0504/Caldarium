@@ -272,30 +272,29 @@ class BenchmarkRunner:
             pass
         return str(v).strip() != ''
 
-    def _discover_test_documents(self, limit: Optional[int] = 3) -> List[str]:
+    def _discover_test_documents(self, limit: Optional[int] = None) -> List[str]:
         parser_docs = set()
+        # match files like invoice_T1_gen1_regex.json
         for p in self.config.parser_dir.glob(f"*{self.config.parser_suffix}"):
-            name = p.name[:-len(self.config.parser_suffix)]
+            name = p.name[:-len(self.config.parser_suffix)]   # e.g. "invoice_T1_gen1"
+            if name.startswith("invoice_"):
+                name = name[len("invoice_"):]                 # -> "T1_gen1"
             if name:
                 parser_docs.add(name)
 
         gt_docs = set()
         for p in self.config.ground_truth_dir.glob("invoice_*.json"):
-            stem = p.stem
-            if stem.startswith("invoice_"):
-                doc = stem[len("invoice_"):]
-                if doc:
-                    gt_docs.add(doc)
+            doc = p.stem[len("invoice_"):]                    # "invoice_T1_gen1" -> "T1_gen1"
+            if doc:
+                gt_docs.add(doc)
 
         overlap = sorted(parser_docs & gt_docs)
+        print("Overlapping documents:", overlap)
         if limit:
             overlap = overlap[:limit]
-
-        if not overlap:
-            print("No overlapping documents found between parser outputs and ground truth.")
-        else:
-            print(f"Overlapping documents: {overlap}")
         return overlap
+
+
 
     # ---------------- Loaders ---------------- #
 
@@ -319,7 +318,7 @@ class BenchmarkRunner:
         print("Loading parser JSON files...")
         pr = {}
         for doc in self.config.test_documents:
-            fname = f"{doc}{self.config.parser_suffix}"
+            fname = f"invoice_{doc}{self.config.parser_suffix}"  # <- add invoice_ prefix
             path = self.config.parser_dir / fname
             try:
                 with open(path, "r", encoding="utf-8") as f:
@@ -330,6 +329,7 @@ class BenchmarkRunner:
         print(f"Parser results loaded for {len(pr)} documents")
         self.parser_results = pr
         return pr
+
 
     # ---------------- Environment ---------------- #
 
@@ -491,9 +491,15 @@ class BenchmarkRunner:
         return metrics
 
     def compute_overall_accuracy(self):
-        total = sum(m["total_documents"] for m in self.field_metrics.values())
+        # BEFORE:
+        # total = sum(m["total_documents"] for m in self.field_metrics.values())
+        # matches = sum(m["matches"] for m in self.field_metrics.values())
+        # return matches / total if total else 0.0
+
+        # AFTER (only count pairs where both sides exist):
+        comparable = sum(m["both_present"] for m in self.field_metrics.values())
         matches = sum(m["matches"] for m in self.field_metrics.values())
-        return matches / total if total else 0.0
+        return matches / comparable if comparable else 0.0
 
     # ---------------- Logging & Exports ---------------- #
 
@@ -603,7 +609,7 @@ class BenchmarkRunner:
         print(f"Output dir     : {self.config.output_dir}")
 
         if not self.config.test_documents:
-            self.config.test_documents = self._discover_test_documents(limit=3)
+            self.config.test_documents = self._discover_test_documents(limit=None)
         if not self.config.test_documents:
             print("✗ No test documents to process. Exiting early.")
             return {}
