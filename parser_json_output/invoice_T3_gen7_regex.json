@@ -1,0 +1,34 @@
+{
+  "invoice_number": "INV294900",
+  "invoice_date": "1980-05-23",
+  "due_date": "1980-06-22",
+  "patient_name": "Robert Ferguson",
+  "patient_age": null,
+  "patient_address": "88706 Katherine Lock, Keithbury, MH 33993",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 1570,
+  "discount_amount": 15.7,
+  "total_amount": 1624.95,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": 100
+    },
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": 90
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": 180
+    }
+  ]
+}

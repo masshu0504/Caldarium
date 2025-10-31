@@ -1,0 +1,39 @@
+{
+  "invoice_number": "INV140822",
+  "invoice_date": "2018-08-13",
+  "due_date": "2018-09-12",
+  "patient_name": "Angel Kaiser",
+  "patient_age": null,
+  "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 315,
+  "discount_amount": 110.25,
+  "total_amount": 218.93,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": 120
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": 75
+    }
+  ]
+}
