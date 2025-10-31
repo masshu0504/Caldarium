@@ -1,0 +1,31 @@
+{
+  "title": "Invoice",
+  "invoice_number": "INV27996",
+  "patient_id": "MRN18987",
+  "invoice_date": "08-04-1983",
+  "due_date": "09-03-1983",
+  "patient_name": "Jason Sandoval",
+  "patient_age": 57,
+  "patient_address": "366 Parker Cape Suite 810, Torresland, OK 01159",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "07-20-1983",
+  "discharge_date": "08-02-1983",
+  "subtotal_amount": 1080.0,
+  "discount_amount": 194.4,
+  "total_amount": 934.2,
+  "provider_name": "Dr. Tyler Melton",
+  "bed_id": "BED4220",
+  "line_items": [
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": 1000.0
+    },
+    {
+      "description": "Blood Test",
+      "code": "BT23",
+      "amount": 80.0
+    }
+  ]
+}
