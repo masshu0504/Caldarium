@@ -1,44 +1,3 @@
-<<<<<<< Updated upstream:PDFLogicCode/output_invoices/invoice_T1_gen3.json
-{
-  "invoice_number": "INV701760",
-  "patient_id": "MRN38745",
-  "invoice_date": "2012-02-03",
-  "due_date": "2012-03-04",
-  "patient_name": "Manuel Gutierrez",
-  "patient_age": "83",
-  "patient_address": "143 Graham Key Apt. 753, West Jameschester, IN 41731",
-  "patient_phone": null,
-  "patient_email": null,
-  "admission_date": "2012-01-25",
-  "discharge_date": "2012-02-01",
-  "subtotal_amount": "645.00",
-  "discount_amount": "174.15",
-  "total_amount": "499.88",
-  "provider_name": "Dr. Carolyn Grant",
-  "bed_id": "BED6905",
-  "line_items": [
-    {
-      "description": "Eye Exam",
-      "code": "EE09",
-      "amount": "75.00"
-    },
-    {
-      "description": "Ultrasound",
-      "code": "US10",
-      "amount": "300.00"
-    },
-    {
-      "description": "Hearing Test",
-      "code": "HT02",
-      "amount": "70.00"
-    },
-    {
-      "description": "X-Ray",
-      "code": "XR01",
-      "amount": "200.00"
-    }
-  ]
-=======
 {
   "invoice_number": "INV701760",
   "patient_id": "MRN38745",
@@ -78,5 +37,4 @@
       "amount": "200.00"
     }
   ]
->>>>>>> Stashed changes:PDFLogicCode/output_invoices/invoice_invoice_T1_gen3.json
 }

@@ -1,38 +1,3 @@
-<<<<<<< Updated upstream
-{
-  "invoice_number": "INV665469",
-  "invoice_date": "1983-04-25",
-  "due_date": "1983-05-25",
-  "patient_name": "Janet Mckenzie",
-  "patient_age": 44,
-  "patient_address": "7442 Alicia Court Suite 507, Rollinsbury, DE 23480",
-  "patient_phone": null,
-  "patient_email": null,
-  "admission_date": "1983-04-10",
-  "discharge_date": "1983-04-24",
-  "subtotal_amount": 1380,
-  "discount_amount": 483,
-  "total_amount": 959.1,
-  "provider_name": "Dr. Maurice Williams",
-  "bed_id": "BED1311",
-  "line_items": [
-    {
-      "description": "Hearing Test",
-      "code": "HT02",
-      "amount": 70
-    },
-    {
-      "description": "Vaccination Booster",
-      "code": "VB08",
-      "amount": 55
-    },
-    {
-      "description": "Vaccination Booster",
-      "code": "VB08",
-      "amount": 55
-    }
-  ]
-=======
 {
   "invoice_number": "INV665469",
   "invoice_date": "1983-04-25",
@@ -66,5 +31,4 @@
       "amount": 55
     }
   ]
->>>>>>> Stashed changes
 }

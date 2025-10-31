@@ -1,44 +1,3 @@
-<<<<<<< Updated upstream:PDFLogicCode/output_invoices/invoice_T3_gen2.json
-{
-  "invoice_number": "INV140822",
-  "patient_id": null,
-  "invoice_date": "2018-08-13",
-  "due_date": "2018-09-12",
-  "patient_name": "Angel Kaiser",
-  "patient_age": null,
-  "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",
-  "patient_phone": null,
-  "patient_email": null,
-  "admission_date": null,
-  "discharge_date": null,
-  "subtotal_amount": "315.00",
-  "discount_amount": "110.25",
-  "total_amount": "218.93",
-  "provider_name": null,
-  "bed_id": null,
-  "line_items": [
-    {
-      "description": "Cholesterol Test",
-      "code": "CH05",
-      "amount": "60.00"
-    },
-    {
-      "description": "Physical Therapy",
-      "code": "PT07",
-      "amount": "120.00"
-    },
-    {
-      "description": "Cholesterol Test",
-      "code": "CH05",
-      "amount": "60.00"
-    },
-    {
-      "description": "Eye Exam",
-      "code": "EE09",
-      "amount": "75.00"
-    }
-  ]
-=======
 {
   "invoice_number": "INV140822",
   "patient_id": null,
@@ -78,5 +37,4 @@
       "amount": "75.00"
     }
   ]
->>>>>>> Stashed changes:PDFLogicCode/output_invoices/invoice_invoice_T3_gen2.json
 }

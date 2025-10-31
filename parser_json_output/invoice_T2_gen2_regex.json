@@ -1,38 +1,3 @@
-<<<<<<< Updated upstream
-{
-  "invoice_number": "INV257144",
-  "invoice_date": "2014-11-18",
-  "due_date": "2014-11-18",
-  "patient_name": "David Chan II",
-  "patient_age": null,
-  "patient_address": "4117 Cedarstone Drive, Amherst, NH 03031",
-  "patient_phone": "421-626-5991",
-  "patient_email": "david.chan@gmail.com",
-  "admission_date": null,
-  "discharge_date": null,
-  "subtotal_amount": 425,
-  "discount_amount": null,
-  "total_amount": 444.12,
-  "provider_name": null,
-  "bed_id": null,
-  "line_items": [
-    {
-      "description": "X-Ray",
-      "code": "XR01",
-      "amount": 200
-    },
-    {
-      "description": "Eye Exam",
-      "code": "EE09",
-      "amount": 75
-    },
-    {
-      "description": "Consultation",
-      "code": "C001",
-      "amount": 150
-    }
-  ]
-=======
 {
   "invoice_number": "INV257144",
   "invoice_date": "2014-11-18",
@@ -66,5 +31,4 @@
       "amount": 150
     }
   ]
->>>>>>> Stashed changes
 }
