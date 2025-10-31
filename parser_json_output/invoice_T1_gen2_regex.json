@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 {
   "invoice_number": "INV665469",
   "invoice_date": "1983-04-25",
@@ -31,4 +32,39 @@
       "amount": 55
     }
   ]
+=======
+{
+  "invoice_number": "INV665469",
+  "invoice_date": "1983-04-25",
+  "due_date": null,
+  "patient_name": "Janet Mckenzie",
+  "patient_age": 44,
+  "patient_address": "Admission Dat",
+  "patient_phone": "01 (123) 456-7890",
+  "patient_email": "info@hotspringsgen.com",
+  "admission_date": "1983-04-10",
+  "discharge_date": "1983-04-24",
+  "subtotal_amount": 1380,
+  "discount_amount": 483,
+  "total_amount": 959.1,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "code": "HT02",
+      "description": "Hearing Test",
+      "amount": 70
+    },
+    {
+      "code": "VB08",
+      "description": "Vaccination Booster",
+      "amount": 55
+    },
+    {
+      "code": "VB08",
+      "description": "Vaccination Booster",
+      "amount": 55
+    }
+  ]
+>>>>>>> Stashed changes
 }
