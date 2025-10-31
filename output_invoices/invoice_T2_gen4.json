@@ -1,29 +1,25 @@
 {
-  "title": "Invoice",
-  "type": "object",
-  "properties": {
-    "invoice_number": "INV931982",
-    "patient_id": null,
-    "invoice_date": "05-10-2020",
-    "due_date": "06-09-2020",
-    "patient_name": "Diana Osborne",
-    "patient_age": null,
-    "patient_address": null,
-    "patient_phone": "663-369-2368",
-    "patient_email": "diana.osborne@gmail.com",
-    "admission_date": null,
-    "discharge_date": null,
-    "subtotal_amount": 180.0,
-    "discount_amount": 0,
-    "total_amount": 188.1,
-    "provider_name": null,
-    "bed_id": null,
-    "line_items": [
-      {
-        "description": "Lab Panel",
-        "code": "LP12",
-        "amount": 180.0
-      }
-    ]
-  }
+  "invoice_number": "INV931982",
+  "patient_id": null,
+  "invoice_date": "2020-05-10",
+  "due_date": "2020-06-09",
+  "patient_name": "Diana Osborne",
+  "patient_age": null,
+  "patient_address": null,
+  "patient_phone": "663-369-2368",
+  "patient_email": "diana.osborne@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 180.0,
+  "discount_amount": null,
+  "total_amount": 188.1,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": 180.0
+    }
+  ]
 }

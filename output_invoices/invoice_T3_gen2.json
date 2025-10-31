@@ -1,9 +1,8 @@
 {
-  "title": "Invoice",
   "invoice_number": "INV140822",
   "patient_id": null,
-  "invoice_date": "08-13-2018",
-  "due_date": "09-12-2018",
+  "invoice_date": "2018-08-13",
+  "due_date": "2018-09-12",
   "patient_name": "Angel Kaiser",
   "patient_age": null,
   "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",

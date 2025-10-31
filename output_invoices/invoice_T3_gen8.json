@@ -1,9 +1,8 @@
 {
-  "title": "Invoice",
   "invoice_number": "INV39821",
   "patient_id": null,
-  "invoice_date": "06-23-1971",
-  "due_date": "07-23-1971",
+  "invoice_date": "1971-06-23",
+  "due_date": "1971-07-23",
   "patient_name": "Christopher Gould",
   "patient_age": null,
   "patient_address": "74126 Brian Forest Suite 703, Josephville, DE 83640",

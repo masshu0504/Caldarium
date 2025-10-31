@@ -1,9 +1,8 @@
 {
-  "title": "Invoice",
   "invoice_number": "INV783845",
   "patient_id": null,
-  "invoice_date": "09-03-1989",
-  "due_date": "10-03-1989",
+  "invoice_date": "1989-09-03",
+  "due_date": "1989-10-03",
   "patient_name": "Michael Glenn",
   "patient_age": null,
   "patient_address": "186 Tina Prairie Apt. 154, South Cassandrabury, MT 57525",

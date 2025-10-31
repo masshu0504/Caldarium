@@ -1,44 +1,40 @@
 {
-  "title": "Invoice",
-  "type": "object",
-  "properties": {
-    "invoice_number": "INV970003",
-    "patient_id": "MRN59273",
-    "invoice_date": "03-17-1972",
-    "due_date": "04-16-1972",
-    "patient_name": "Monique Hancock",
-    "patient_age": 60,
-    "patient_address": "2522 Rivera Mountains, Lake Mary, NY 06671",
-    "patient_phone": null,
-    "patient_email": null,
-    "admission_date": "03-05-1972",
-    "discharge_date": "03-15-1972",
-    "subtotal_amount": 420.0,
-    "discount_amount": 189.0,
-    "total_amount": 249.9,
-    "provider_name": "Dr. Laura Castillo",
-    "bed_id": "BED793",
-    "line_items": [
-      {
-        "description": "Lab Panel",
-        "code": "LP12",
-        "amount": 180.0
-      },
-      {
-        "description": "Consultation",
-        "code": "C001",
-        "amount": 150.0
-      },
-      {
-        "description": "Cholesterol Test",
-        "code": "CH05",
-        "amount": 60.0
-      },
-      {
-        "description": "Prescription Refill",
-        "code": "PR06",
-        "amount": 30.0
-      }
-    ]
-  }
+  "invoice_number": "INV970003",
+  "patient_id": "MRN59273",
+  "invoice_date": "1972-03-17",
+  "due_date": "1972-04-16",
+  "patient_name": "Monique Hancock",
+  "patient_age": 60,
+  "patient_address": "2522 Rivera Mountains, Lake Mary, NY 06671",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1972-03-05",
+  "discharge_date": "1972-03-15",
+  "subtotal_amount": 420.0,
+  "discount_amount": 189.0,
+  "total_amount": 249.9,
+  "provider_name": "Dr. Laura Castillo",
+  "bed_id": "BED793",
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": 180.0
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": 150.0
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60.0
+    },
+    {
+      "description": "Prescription Refill",
+      "code": "PR06",
+      "amount": 30.0
+    }
+  ]
 }
