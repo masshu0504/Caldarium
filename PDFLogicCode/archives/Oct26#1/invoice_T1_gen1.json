@@ -10,26 +10,26 @@
   "patient_email": null,
   "admission_date": "2020-03-22",
   "discharge_date": "2020-03-28",
-  "subtotal_amount": "$430.00",
-  "discount_amount": "$197.80",
-  "total_amount": "$251.55",
+  "subtotal_amount": "430.00",
+  "discount_amount": "197.80",
+  "total_amount": "251.55",
   "provider_name": "Dr. Brittney Santos",
   "bed_id": "BED4887",
   "line_items": [
     {
       "description": "Lab Panel",
       "code": "LP12",
-      "amount": "$180.00"
+      "amount": "180.00"
     },
     {
       "description": "Dermatology Consultation",
       "code": "DC04",
-      "amount": "$180.00"
+      "amount": "180.00"
     },
     {
       "description": "Hearing Test",
       "code": "HT02",
-      "amount": "$70.00"
+      "amount": "70.00"
     }
   ]
 }

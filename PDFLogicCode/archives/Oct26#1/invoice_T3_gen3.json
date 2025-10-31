@@ -6,33 +6,33 @@
   "patient_name": "Angela Holmes",
   "patient_age": null,
   "patient_address": "58605 Ramos Forge, Roachland, FM 45953",
-  "patient_phone": null,
-  "patient_email": null,
+  "patient_phone": "+1 (234)-567-8900",
+  "patient_email": "info@whitepetalhospital.org",
   "admission_date": null,
   "discharge_date": null,
   "subtotal_amount": "480.00",
   "discount_amount": "28.80",
   "total_amount": "472.80",
-  "provider_name": null,
+  "provider_name": "White Petal Hospital Center",
   "bed_id": null,
   "line_items": [
     {
-      "description": "Prescription Refill",
+      "description": "PR06 Prescription Refill",
       "code": "PR06",
       "amount": "30.00"
     },
     {
-      "description": "ECG",
+      "description": "ECG2 ECG",
       "code": "ECG2",
       "amount": "100.00"
     },
     {
-      "description": "Vaccination",
+      "description": "VAX9 Vaccination",
       "code": "VAX9",
       "amount": "50.00"
     },
     {
-      "description": "Ultrasound",
+      "description": "US10 Ultrasound",
       "code": "US10",
       "amount": "300.00"
     }

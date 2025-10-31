@@ -10,31 +10,31 @@
   "patient_email": "jennifer.cunningham@gmail.com",
   "admission_date": null,
   "discharge_date": null,
-  "subtotal_amount": 1595.0,
-  "discount_amount": 0,
-  "total_amount": 1666.78,
-  "provider_name": null,
+  "subtotal_amount": "1595.00",
+  "discount_amount": null,
+  "total_amount": "1666.78",
+  "provider_name": "Rose Petal Clinic",
   "bed_id": null,
   "line_items": [
     {
       "description": "Urine Test",
       "code": "UT01",
-      "amount": 40.0
+      "amount": "40.00"
     },
     {
       "description": "Vaccination Booster",
       "code": "VB08",
-      "amount": 55.0
+      "amount": "55.00"
     },
     {
       "description": "Ultrasound",
       "code": "US10",
-      "amount": 300.0
+      "amount": "300.00"
     },
     {
       "description": "MRI Scan",
       "code": "MRI5",
-      "amount": 1200.0
+      "amount": "1200.00"
     }
   ]
 }
