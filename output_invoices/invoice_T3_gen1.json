@@ -1,9 +1,8 @@
 {
-  "title": "Invoice",
   "invoice_number": "INV244194",
   "patient_id": null,
-  "invoice_date": "11-03-2003",
-  "due_date": "12-03-2003",
+  "invoice_date": "2003-11-03",
+  "due_date": "2003-12-03",
   "patient_name": "Mr. Patrick Franklin",
   "patient_age": null,
   "patient_address": "769 Victoria Views, New Michaelland, MP 71791",
@@ -11,31 +10,31 @@
   "patient_email": null,
   "admission_date": null,
   "discharge_date": null,
-  "subtotal_amount": 1435.0,
-  "discount_amount": 14.35,
-  "total_amount": 1485.23,
-  "provider_name": null,
+  "subtotal_amount": "1435.00",
+  "discount_amount": "14.35",
+  "total_amount": "1485.23",
+  "provider_name": "White Petal Hospital Center",
   "bed_id": null,
   "line_items": [
     {
-      "description": "Lab Panel",
+      "description": "LP12 Lab Panel",
       "code": "LP12",
-      "amount": 180.0
+      "amount": "180.00"
     },
     {
-      "description": "CT Scan",
+      "description": "CT15 CT Scan",
       "code": "CT15",
-      "amount": 1000.0
+      "amount": "1000.00"
     },
     {
-      "description": "Eye Exam",
+      "description": "EE09 Eye Exam",
       "code": "EE09",
-      "amount": 75.0
+      "amount": "75.00"
     },
     {
-      "description": "Dermatology Consultation",
+      "description": "DC04 Dermatology Consultation",
       "code": "DC04",
-      "amount": 180.0
+      "amount": "180.00"
     }
   ]
 }

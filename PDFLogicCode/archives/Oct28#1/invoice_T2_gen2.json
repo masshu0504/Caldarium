@@ -10,26 +10,26 @@
   "patient_email": "david.chan@gmail.com",
   "admission_date": null,
   "discharge_date": null,
-  "subtotal_amount": 425.0,
-  "discount_amount": 0.0,
-  "total_amount": 444.12,
+  "subtotal_amount": "425.00",
+  "discount_amount": null,
+  "total_amount": "444.12",
   "provider_name": null,
   "bed_id": null,
   "line_items": [
     {
       "description": "X-Ray",
       "code": "XR01",
-      "amount": 200.0
+      "amount": "200.00"
     },
     {
       "description": "Eye Exam",
       "code": "EE09",
-      "amount": 75.0
+      "amount": "75.00"
     },
     {
       "description": "Consultation",
       "code": "C001",
-      "amount": 150.0
+      "amount": "150.00"
     }
   ]
 }
