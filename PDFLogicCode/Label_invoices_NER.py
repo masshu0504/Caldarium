@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 
@@ -138,3 +139,123 @@ for filename in os.listdir(PDF_DIR):
 
     # Record parsed files as a JSON array (creates file if missing)
    
+=======
+
+
+
+API_KEY ="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"
+
+import os
+import json
+import pdfplumber
+from datetime import datetime
+from openai import OpenAI
+
+PDF_DIR = "input_invoices"
+OUTPUT_DIR = "output_invoices"
+OUTPUT_AUDIT_FILE = "output_audit.txt"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+MODEL_NAME = "google/gemma-3-4b-it"
+TEMPERATURE = 0.5
+
+invoice_formatting = (
+    "invoice_number: null, patient_id: null, invoice_date: null, due_date: null, "
+    "patient_name: null, patient_age: null, patient_address: null, patient_phone: null, "
+    "patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, "
+    "discount_amount: null, total_amount: null, provider_name: null, bed_id: null, "
+    "line_items: [ { description: null, code: null, amount: null } ]"
+)
+
+
+def liteBot(messages, temperature=TEMPERATURE):
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=API_KEY
+    )
+
+    completion = client.chat.completions.create(
+        model=MODEL_NAME,
+        messages=messages,
+        temperature=temperature
+    )
+
+    return completion.choices[0].message.content.strip()
+
+
+def log_audit(filename, fields_filled, fields_null, system_prompt):
+    """Append an audit record to the audit log."""
+    with open(OUTPUT_AUDIT_FILE, "a", encoding="utf-8") as audit:
+        audit.write("\n" + "=" * 60 + "\n")
+        audit.write(f"File: {filename}\n")
+        audit.write(f"Timestamp: {datetime.now().isoformat(timespec='seconds')}\n")
+        audit.write(f"Model: {MODEL_NAME}\n")
+        audit.write(f"Temperature: {TEMPERATURE}\n")
+        audit.write(f"System Prompt:\n{system_prompt}\n")
+        audit.write(f"Fields auto-filled ({len(fields_filled)}): {', '.join(fields_filled)}\n")
+        audit.write(f"Fields left blank ({len(fields_null)}): {', '.join(fields_null)}\n")
+        audit.write("=" * 60 + "\n\n")
+
+
+# ------------------------
+# MAIN EXECUTION
+# ------------------------
+for filename in os.listdir(PDF_DIR):
+    if not filename.lower().endswith(".pdf"):
+        continue
+
+    pdf_path = os.path.join(PDF_DIR, filename)
+    print(f"📄 Processing {filename}...")
+
+    with pdfplumber.open(pdf_path) as pdf:
+        pages_text = [page.extract_text() or "" for page in pdf.pages]
+    full_text = "\n\n".join(pages_text).strip()
+
+    system_prompt = (
+        "You are performing NER labeling on invoices. Extract the following fields "
+        "in strict JSON format (no text outside JSON): " + invoice_formatting +
+        ". If a field is missing, set it to null. The 'Provider Name' is the name of the Doctor and not the hospital."
+    )
+
+    system = [{"role": "system", "content": system_prompt}]
+    user = [{"role": "user", "content": full_text}]
+
+    try:
+        outputJsonString = liteBot(system + user, TEMPERATURE)
+    except Exception as e:
+        print(f"Error calling model for {filename}: {e}")
+        continue
+
+    cleaned = (
+        outputJsonString.strip()
+        .removeprefix("```json")
+        .removesuffix("```")
+        .strip()
+    )
+
+    try:
+        parsed = json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        print(f"Invalid JSON for {filename}: {e}")
+        print("Raw output:\n", outputJsonString[:300], "...\n")
+        continue
+
+    if isinstance(parsed, list) and len(parsed) == 1:
+        invoice_data = parsed[0]
+    else:
+        invoice_data = parsed
+
+    # Analyze fields
+    fields_filled = [k for k, v in invoice_data.items() if v not in (None, "", [], {})]
+    fields_null = [k for k, v in invoice_data.items() if v in (None, "", [], {})]
+
+    # Save output
+    output_filename = os.path.join(OUTPUT_DIR, f"invoice_{os.path.splitext(filename)[0]}.json")
+    with open(output_filename, "w", encoding="utf-8") as f:
+        json.dump(invoice_data, f, indent=2, ensure_ascii=False)
+
+    print(f"Saved {output_filename}")
+
+    # Audit entry
+    log_audit(filename, fields_filled, fields_null, system_prompt)
+>>>>>>> Stashed changes

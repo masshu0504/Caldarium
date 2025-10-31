@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 ============================================================
@@ -1456,3 +1457,113 @@ Raw output:
 Fields marked as UNSURE (0): 
 ============================================================
 
+=======
+
+============================================================
+File: invoice_T1_gen2.pdf
+Timestamp: 2025-10-13T15:49:22
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+============================================================
+
+
+============================================================
+File: invoice_T1_gen3.pdf
+Timestamp: 2025-10-13T15:49:27
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+============================================================
+
+
+============================================================
+File: invoice_T1_gen1.pdf
+Timestamp: 2025-10-13T15:49:32
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (15): invoice_number, patient_id, invoice_date, due_date, patient_name, patient_age, patient_address, admission_date, discharge_date, subtotal_amount, discount_amount, total_amount, provider_name, bed_id, line_items
+Fields left blank (2): patient_phone, patient_email
+============================================================
+
+
+============================================================
+File: invoice_T2_gen1.pdf
+Timestamp: 2025-10-13T15:49:38
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+============================================================
+
+
+============================================================
+File: invoice_T3_gen1.pdf
+Timestamp: 2025-10-13T15:49:44
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (7): patient_id, patient_age, patient_phone, patient_email, admission_date, discharge_date, bed_id
+============================================================
+
+
+============================================================
+File: invoice_T3_gen2.pdf
+Timestamp: 2025-10-13T15:49:49
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (12): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (5): patient_id, patient_age, admission_date, discharge_date, bed_id
+============================================================
+
+
+============================================================
+File: invoice_T2_gen2.pdf
+Timestamp: 2025-10-13T15:49:54
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (10): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, line_items
+Fields left blank (7): patient_id, patient_age, admission_date, discharge_date, discount_amount, provider_name, bed_id
+============================================================
+
+
+============================================================
+File: invoice_T2_gen3.pdf
+Timestamp: 2025-10-13T15:49:59
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (11): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, total_amount, provider_name, line_items
+Fields left blank (6): patient_id, patient_age, admission_date, discharge_date, discount_amount, bed_id
+============================================================
+
+
+============================================================
+File: invoice_T3_gen3.pdf
+Timestamp: 2025-10-13T15:50:04
+Model: google/gemma-3-4b-it
+Temperature: 0.5
+System Prompt:
+You are performing NER labeling on invoices. Extract the following fields in strict JSON format (no text outside JSON): invoice_number: null, patient_id: null, invoice_date: null, due_date: null, patient_name: null, patient_age: null, patient_address: null, patient_phone: null, patient_email: null, admission_date: null, discharge_date: null, subtotal_amount: null, discount_amount: null, total_amount: null, provider_name: null, bed_id: null, line_items: [ { description: null, code: null, amount: null } ]. If a field is missing, set it to null.
+Fields auto-filled (12): invoice_number, invoice_date, due_date, patient_name, patient_address, patient_phone, patient_email, subtotal_amount, discount_amount, total_amount, provider_name, line_items
+Fields left blank (5): patient_id, patient_age, admission_date, discharge_date, bed_id
+============================================================
+
+>>>>>>> Stashed changes
