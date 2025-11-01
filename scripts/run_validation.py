@@ -86,15 +86,16 @@ def check_doc_rules(doc: Dict[str, Any]) -> Dict[str, Any]:
     discount = as_float(doc.get("discount_amount")) if doc.get("discount_amount") not in (None, "") else None
 
     if subtotal is not None and total is not None:
-        # Total should not be less than subtotal (schema description implies discounts reduce from subtotal)
-        if total + 1e-9 < subtotal:
-            results["crossfield_failures"].append("total_amount < subtotal_amount")
-        # If discount is provided, enforce total ≈ subtotal - discount
-        if discount is not None:
-            if abs((subtotal - discount) - total) > 0.01:
-                results["crossfield_failures"].append(
-                    "total_amount != subtotal_amount - discount_amount (±0.01)"
-                )
+       # Total should not be less than subtotal (schema description implies discounts reduce from subtotal)
+       if total + 1e-9 < subtotal:
+           results["crossfield_failures"].append("total_amount < subtotal_amount")
+       # If discount is provided, enforce total ≈ subtotal - discount
+       if discount is not None:
+           if abs((subtotal - discount) - total) > 0.01:
+               results["crossfield_failures"].append(
+                   "total_amount != subtotal_amount - discount_amount (±0.01)"
+               )
+
 
     # Line items checks
     line_items = doc.get("line_items")
@@ -207,9 +208,9 @@ def main():
             ])
 
     # Markdown summary (adds visibility for the new optional fields)
-    md = out_dir / "week5_validation_report.md"
+    md = out_dir / "validation_report.md"
     with open(md, "w", encoding="utf-8") as f:
-        f.write("# Week 5 Validation Report (v1.1)\n\n")
+        f.write("# Validation Report (v1.1)\n\n")
         f.write("## Summary\n")
         f.write(f"- Required-field pass %: {req_pass*100:.1f}%\n")
         f.write(f"- Optional-field presence rates (new fields): {json.dumps(optional_presence)}\n")
