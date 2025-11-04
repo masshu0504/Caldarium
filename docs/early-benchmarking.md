@@ -49,7 +49,7 @@ benchmark.print_summary()
 ### Default Configuration
 ```python
 config = {
-    "pdf_dir": "minio_buckets/invoices",
+    "pdf_dir": "medical_pdfs/invoices",
     "gt_csv": "bench/data/ground_truth/invoice_fields.csv",
     "output_dir": "bench/outputs",
     "test_documents": [
@@ -171,4 +171,5 @@ Results feed into weekly compliance reports:
 - Schema pass rates
 - Performance trends
 - Recommendations
+
 
