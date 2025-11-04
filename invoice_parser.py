@@ -7,13 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1NNOQGFoihZ9Wk8ypDf5-GEBnf5MQQTvt
 """
 
-!pip install pdfplumber
-
 import os
 import pdfplumber
 
 # Directory containing your PDFs
-pdf_folder = "/content/pdfs"
+pdf_folder = "medical_pdfs/invoices"
 output_folder = "parsed_texts"
 os.makedirs(output_folder, exist_ok=True)
 
