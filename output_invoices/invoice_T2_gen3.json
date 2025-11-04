@@ -1,0 +1,44 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": "INV26344",
+    "patient_id": null,
+    "invoice_date": "12-28-2023",
+    "due_date": "01-27-2024",
+    "patient_name": "Jennifer Cunningham",
+    "patient_age": null,
+    "patient_address": null,
+    "patient_phone": null,
+    "patient_email": "jennifer.cunningham@gmail.com",
+    "admission_date": null,
+    "discharge_date": null,
+    "subtotal_amount": 1595.0,
+    "discount_amount": 0,
+    "total_amount": 1666.78,
+    "provider_name": null,
+    "bed_id": null,
+    "line_items": [
+      {
+        "description": "Urine Test",
+        "code": "UT01",
+        "amount": 40.0
+      },
+      {
+        "description": "Vaccination Booster",
+        "code": "VB08",
+        "amount": 55.0
+      },
+      {
+        "description": "Ultrasound",
+        "code": "US10",
+        "amount": 300.0
+      },
+      {
+        "description": "MRI Scan",
+        "code": "MRI5",
+        "amount": 1200.0
+      }
+    ]
+  }
+}

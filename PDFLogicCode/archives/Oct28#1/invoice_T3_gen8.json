@@ -1,0 +1,25 @@
+{
+  "invoice_number": "INV39821",
+  "patient_id": null,
+  "invoice_date": "1971-06-23",
+  "due_date": "1971-07-23",
+  "patient_name": "Christopher Gould",
+  "patient_age": null,
+  "patient_address": "74126 Brian Forest Suite 703, Josephville, DE 83640",
+  "patient_phone": "+1 (234)-567-8900",
+  "patient_email": "info@whitepetalhospital.org",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 100.0,
+  "discount_amount": 43.0,
+  "total_amount": 61.5,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": 100.0
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": "INV377776",
+    "patient_id": "MRN53310",
+    "invoice_date": "03-30-2020",
+    "due_date": "04-29-2020",
+    "patient_name": "Heather Anderson",
+    "patient_age": 80,
+    "patient_address": "684 Adrienne Trafficway Suite 418, Warrenfurt, WY 64879",
+    "patient_phone": null,
+    "patient_email": null,
+    "admission_date": "03-22-2020",
+    "discharge_date": "03-28-2020",
+    "subtotal_amount": 430.0,
+    "discount_amount": 197.8,
+    "total_amount": 251.55,
+    "provider_name": "Dr. Brittney Santos",
+    "bed_id": "BED4887",
+    "line_items": [
+      {
+        "description": "Lab Panel",
+        "code": "LP12",
+        "amount": 180.0
+      },
+      {
+        "description": "Dermatology Consultation",
+        "code": "DC04",
+        "amount": 180.0
+      },
+      {
+        "description": "Hearing Test",
+        "code": "HT02",
+        "amount": 70.0
+      }
+    ]
+  }
+}

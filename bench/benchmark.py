@@ -9,7 +9,7 @@ from table_extract import camelot_extract, tabula_extract, pick_first_table, loa
 from metrics import exact_match, numeric_delta_ok, cell_match_rate
 from audit_logger import audit_logger, log_parsing_success, log_parsing_error
 
-PDF_DIR = Path(os.getenv("PDF_DIR", "minio_buckets/invoices"))
+PDF_DIR = Path(os.getenv("PDF_DIR", "medical_pdfs/invoices"))
 GT_FIELDS_CSV = Path(os.getenv("GT_FIELDS_CSV", "bench/data/ground_truth/invoice_fields.csv"))
 GT_LINEITEMS_DIR = Path(os.getenv("GT_LINEITEMS_DIR", "bench/data/ground_truth/line_items"))
 OUT_DIR = Path(os.getenv("OUT_DIR", "bench/outputs"))
@@ -131,3 +131,4 @@ if __name__ == "__main__":
     print("Step 3: Tables…")
     run_table_benchmark(use_camelot=True, use_tabula=True)
     print("Done. See bench/outputs/")
+

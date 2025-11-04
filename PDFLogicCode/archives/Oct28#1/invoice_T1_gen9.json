@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV376323",
+  "patient_id": "MRN86469",
+  "invoice_date": "2024-08-05",
+  "due_date": "2024-09-04",
+  "patient_name": "Nicole Swanson",
+  "patient_age": 41,
+  "patient_address": "569 Christine Coves Suite 770, Lake Lindsaybury, IN 82215",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2024-08-01",
+  "discharge_date": "2024-08-03",
+  "subtotal_amount": 1490.0,
+  "discount_amount": 596.0,
+  "total_amount": 961.05,
+  "provider_name": "Dr. Rachel Pham",
+  "bed_id": "BED1711",
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60.0
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": 50.0
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": 1200.0
+    },
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": 180.0
+    }
+  ]
+}

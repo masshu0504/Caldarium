@@ -1,0 +1,29 @@
+{
+  "invoice_number": "INV668264",
+  "invoice_date": "2005-11-10",
+  "due_date": "2005-12-10",
+  "patient_name": "Christopher Olson",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH 03031",
+  "patient_phone": "248-294-2049",
+  "patient_email": "christopher.olson@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 145,
+  "discount_amount": null,
+  "total_amount": 151.53,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": 55
+    },
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": 40
+    }
+  ]
+}
