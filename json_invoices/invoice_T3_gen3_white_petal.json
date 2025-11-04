@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV590270",
+  "patient_id": null,
+  "invoice_date": "2015-10-17",
+  "due_date": "2015-11-16",
+  "patient_name": "Angela Holmes",
+  "patient_age": null,
+  "patient_address": "58605 Ramos Forge Roachland, FM 45953",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 480.0,
+  "discount_amount": 28.8,
+  "total_amount": 472.8,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "code": "PR06",
+      "description": "Prescription Refill",
+      "amount": 30.0
+    },
+    {
+      "code": "ECG2",
+      "description": "ECG",
+      "amount": 100.0
+    },
+    {
+      "code": "VAX9",
+      "description": "Vaccination",
+      "amount": 50.0
+    },
+    {
+      "code": "US10",
+      "description": "Ultrasound",
+      "amount": 300.0
+    }
+  ]
+}
