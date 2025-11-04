@@ -205,4 +205,22 @@ CREATE TABLE IF NOT EXISTS parsed_data (
     networks:
       - backend
 
+For audit logs:
+CREATE TABLE IF NOT EXISTS audit_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    "timestamp" TIMESTAMP WITH TIME ZONE NOT NULL,
+    doc_id TEXT,
+    run_id TEXT,
+    role TEXT,
+    actor TEXT NOT NULL,
+    action TEXT NOT NULL,
+    field TEXT,
+    "from" TEXT,
+    "to" TEXT,
+    status TEXT,
+    schema_version TEXT,
+    meta JSONB
+);
+
 
