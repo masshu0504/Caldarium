@@ -1,0 +1,25 @@
+{
+  "invoice_number": "INV544466",
+  "patient_id": null,
+  "invoice_date": "1995-01-29",
+  "due_date": "1995-02-28",
+  "patient_name": "Timothy Hurley",
+  "patient_age": null,
+  "patient_address": null,
+  "patient_phone": "920-326-1898",
+  "patient_email": "timothy.hurley@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 120.0,
+  "discount_amount": null,
+  "total_amount": 125.4,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": 120.0
+    }
+  ]
+}
