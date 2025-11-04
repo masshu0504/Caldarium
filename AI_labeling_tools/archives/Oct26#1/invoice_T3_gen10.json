@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV783845",
+  "patient_id": null,
+  "invoice_date": "1989-09-03",
+  "due_date": "1989-10-03",
+  "patient_name": "Michael Glenn",
+  "patient_age": null,
+  "patient_address": "186 Tina Prairie Apt. 154, South Cassandrabury, MT 57525",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "$315.00",
+  "discount_amount": "$69.30",
+  "total_amount": "$259.88",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": "$100.00"
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": "$75.00"
+    },
+    {
+      "description": "Blood Test",
+      "code": "BT23",
+      "amount": "$80.00"
+    }
+  ]
+}

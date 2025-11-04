@@ -1,0 +1,23 @@
+{
+  "invoice_number": "INV644415",
+  "patient_id": "MRN67164",
+  "invoice_date": "2010-02-10",
+  "due_date": "2010-03-12",
+  "patient_name": "Lisa Odom",
+  "patient_age": 70,
+  "patient_address": "1740 Cindy Turnpike, West Valeriemouth, NM 94100",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2010-01-31",
+  "discharge_date": "2010-02-08",
+  "subtotal_amount": 90.0,
+  "discount_amount": 5.4,
+  "total_amount": 88.65,
+  "provider_name": "Dr. Gloria Carroll",
+  "bed_id": "BED7554",
+  "line_items": {
+    "description": "Allergy Test",
+    "code": "AL07",
+    "amount": 90.0
+  }
+}

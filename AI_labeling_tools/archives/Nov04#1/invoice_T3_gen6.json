@@ -1,0 +1,30 @@
+{
+  "invoice_number": "INV37657",
+  "patient_id": null,
+  "invoice_date": "1991-03-09",
+  "due_date": "1991-04-08",
+  "patient_name": "Casey King",
+  "patient_age": null,
+  "patient_address": "93042 April Canyon\nAnashire, AL 17130",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 1255.0,
+  "discount_amount": 614.95,
+  "total_amount": 696.52,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": 55.0
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": 1200.0
+    }
+  ]
+}

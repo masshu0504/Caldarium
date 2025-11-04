@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV645730",
+  "patient_id": null,
+  "invoice_date": "1991-11-23",
+  "due_date": "1991-12-23",
+  "patient_name": "Stacey Hawkins",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "1-435-367-1984",
+  "patient_email": "stacey.hawkins@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 1250.0,
+  "discount_amount": null,
+  "total_amount": 1306.25,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": 100.0
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": 50.0
+    },
+    {
+      "description": "ECG",
+      "code": "ECG2",
+      "amount": 100.0
+    },
+    {
+      "description": "CT Scan",
+      "code": "CT15",
+      "amount": 1000.0
+    }
+  ]
+}
