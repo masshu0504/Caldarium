@@ -22,6 +22,7 @@ import warnings
 import random
 import uuid
 import subprocess
+import re
 
 warnings.filterwarnings("ignore")
 
@@ -57,20 +58,39 @@ class BenchmarkConfig:
     def __init__(self):
         self.version = "v0.1"
 
-        # Adjusted for your structure
-        self.ground_truth_dir = HERE.parent / "PDFLogicCode" / "output_invoices"
+        # Root folders
+        #self.gt_root = HERE.parent / "PDFLogicCode" / "archives"
+        self.ground_truth_dir = HERE.parent / "PDFLogicCode" / "archives" / "Oct28#3"
         self.parser_dir = HERE.parent / "parser_json_output"
         self.output_dir = HERE / "outputs"
+
+        # Choose the newest archive that contains invoice_*.json
+        #self.ground_truth_dir = self._locate_latest_gt_dir()
 
         # Auto-detect overlapping documents
         self.test_documents: Optional[List[str]] = None
         self.parser_suffix = "_regex.json"
 
-        # Fields to evaluate (required)
+        # Keep this list for reporting (schema compliance), but metrics will
+        # evaluate ALL fields found across files.
         self.fields_to_evaluate = [
             "invoice_number", "due_date", "patient_name",
             "subtotal_amount", "invoice_date", "total_amount", "line_items",
         ]
+
+    def _locate_latest_gt_dir(self) -> Path:
+        if not self.gt_root.exists():
+            raise FileNotFoundError(f"Ground-truth root not found: {self.gt_root}")
+        candidates = [p for p in self.gt_root.iterdir() if p.is_dir()]
+        if not candidates:
+            raise FileNotFoundError(f"No archive folders found under: {self.gt_root}")
+        candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+        for d in candidates:
+            if list(d.glob("invoice_*.json")):
+                print(f"Using ground truth archive: {d}")
+                return d
+        # fallback to the most recent even if it doesn't have files (unlikely)
+        return candidates[0]
 
 
 # ------------------------------------------------------------------------------
@@ -157,6 +177,23 @@ class FieldComparator:
         return str(value).strip().lower()
 
     @staticmethod
+    def _normalize_date_like(s: Optional[str]) -> Optional[str]:
+        if s is None:
+            return None
+        s = str(s).strip()
+        if not s:
+            return None
+        fmts = ["%Y-%m-%d", "%Y/%m/%d", "%m-%d-%Y", "%m/%d/%Y"]
+        for fmt in fmts:
+            try:
+                dt = datetime.strptime(s, fmt)
+                return dt.strftime("%Y%m%d")
+            except Exception:
+                pass
+        digits = re.sub(r"\D", "", s)
+        return digits if len(digits) == 8 else s
+
+    @staticmethod
     def compare_scalar_field(gt_value, parser_value, field_name):
         gt_norm = FieldComparator.normalize_value(gt_value)
         parser_norm = FieldComparator.normalize_value(parser_value)
@@ -174,8 +211,8 @@ class FieldComparator:
         numeric_fields = ['subtotal_amount', 'total_amount', 'discount_amount', 'patient_age']
         if field_name in numeric_fields:
             try:
-                gt_num = float(str(gt_norm).replace('$', '').replace(',', ''))
-                parser_num = float(str(parser_norm).replace('$', '').replace(',', ''))
+                gt_num = float(str(gt_value).replace('$', '').replace(',', ''))
+                parser_num = float(str(parser_value).replace('$', '').replace(',', ''))
                 if abs(gt_num - parser_num) < 0.01:
                     return True, "numeric_match"
             except Exception:
@@ -183,13 +220,48 @@ class FieldComparator:
 
         date_fields = ['invoice_date', 'due_date', 'admission_date', 'discharge_date']
         if field_name in date_fields:
-            try:
-                gt_date = str(gt_norm).replace('-', '').replace('/', '')
-                parser_date = str(parser_norm).replace('-', '').replace('/', '')
-                if gt_date == parser_date:
-                    return True, "date_match"
-            except Exception:
-                pass
+            gt_date = FieldComparator._normalize_date_like(gt_value)
+            pr_date = FieldComparator._normalize_date_like(parser_value)
+            if gt_date is None and pr_date is None:
+                return True, "both_missing"
+            if gt_date is None:
+                return False, "gt_missing"
+            if pr_date is None:
+                return False, "parser_missing"
+            if gt_date == pr_date:
+                return True, "date_match"
+            
+        # Handle phone numbers more flexibly (normalize to 10 digits)
+        if "phone" in field_name:
+            def normalize_phone(p):
+                if p is None:
+                    return ""
+                p = str(p)
+                digits = re.sub(r"\D", "", p)  # keep digits only
+                # Strip leading US country code '1' if present (11 -> 10)
+                if len(digits) == 11 and digits.startswith("1"):
+                    digits = digits[1:]
+                return digits
+
+            gt_phone = normalize_phone(gt_value)
+            pr_phone = normalize_phone(parser_value)
+            if gt_phone and pr_phone and gt_phone == pr_phone:
+                return True, "phone_match"
+            
+        # Handle addresses: ignore case, whitespace, punctuation
+        if "address" in field_name:
+            def normalize_address(s):
+                if not s:
+                    return ""
+                s = str(s).lower()
+                # remove everything except a-z and digits
+                s = re.sub(r"[^a-z0-9]", "", s)
+                return s
+
+            gt_addr = normalize_address(gt_value)
+            pr_addr = normalize_address(parser_value)
+            if gt_addr and pr_addr and gt_addr == pr_addr:
+                return True, "address_match"
 
         return False, "mismatch"
 
@@ -274,17 +346,17 @@ class BenchmarkRunner:
 
     def _discover_test_documents(self, limit: Optional[int] = None) -> List[str]:
         parser_docs = set()
-        # match files like invoice_T1_gen1_regex.json
+        # parser files look like: invoice_T1_gen1_regex.json
         for p in self.config.parser_dir.glob(f"*{self.config.parser_suffix}"):
-            name = p.name[:-len(self.config.parser_suffix)]   # e.g. "invoice_T1_gen1"
+            name = p.name[:-len(self.config.parser_suffix)]  # "invoice_T1_gen1"
             if name.startswith("invoice_"):
-                name = name[len("invoice_"):]                 # -> "T1_gen1"
+                name = name[len("invoice_"):]                 # "T1_gen1"
             if name:
                 parser_docs.add(name)
 
         gt_docs = set()
         for p in self.config.ground_truth_dir.glob("invoice_*.json"):
-            doc = p.stem[len("invoice_"):]                    # "invoice_T1_gen1" -> "T1_gen1"
+            doc = p.stem[len("invoice_"):]                    # "T1_gen1"
             if doc:
                 gt_docs.add(doc)
 
@@ -293,8 +365,6 @@ class BenchmarkRunner:
         if limit:
             overlap = overlap[:limit]
         return overlap
-
-
 
     # ---------------- Loaders ---------------- #
 
@@ -318,7 +388,7 @@ class BenchmarkRunner:
         print("Loading parser JSON files...")
         pr = {}
         for doc in self.config.test_documents:
-            fname = f"invoice_{doc}{self.config.parser_suffix}"  # <- add invoice_ prefix
+            fname = f"invoice_{doc}{self.config.parser_suffix}"
             path = self.config.parser_dir / fname
             try:
                 with open(path, "r", encoding="utf-8") as f:
@@ -329,7 +399,6 @@ class BenchmarkRunner:
         print(f"Parser results loaded for {len(pr)} documents")
         self.parser_results = pr
         return pr
-
 
     # ---------------- Environment ---------------- #
 
@@ -351,7 +420,7 @@ class BenchmarkRunner:
 
         for doc in self.config.test_documents:
             gt_path = self.config.ground_truth_dir / f"invoice_{doc}.json"
-            pr_path = self.config.parser_dir / f"{doc}{self.config.parser_suffix}"
+            pr_path = self.config.parser_dir / f"invoice_{doc}{self.config.parser_suffix}"
             details["data_hashes"][f"gt:{doc}"] = self._file_hash(gt_path)
             details["data_hashes"][f"parser:{doc}"] = self._file_hash(pr_path)
 
@@ -415,7 +484,6 @@ class BenchmarkRunner:
                 if mt == "date_match":
                     diags["date_format_matches"].append({"field": field, "document": doc})
 
-                # numeric discrepancies = numeric field, both present, but mismatch
                 if field in numeric_fields and gt_has and pr_has and not r["match"]:
                     diags["numeric_discrepancies"].append({
                         "field": field, "document": doc,
@@ -459,7 +527,10 @@ class BenchmarkRunner:
             else:
                 is_match, mtype = FieldComparator.compare_scalar_field(gt_value, pr_value, field_name)
 
-            if is_match:
+            #if is_match:
+               # results["matches"] += 1
+            # AFTER: only count when both present
+            if is_match and gt_has and pr_has:
                 results["matches"] += 1
 
             results["document_results"].append({
@@ -483,20 +554,29 @@ class BenchmarkRunner:
 
     def compute_all_field_metrics(self):
         print("Computing metrics for all fields...")
+
+        # Union of keys seen in any GT or parser document
+        union_fields = set()
+        for doc in self.config.test_documents:
+            union_fields.update(self.ground_truth.get(doc, {}).keys())
+            union_fields.update(self.parser_results.get(doc, {}).keys())
+
+        # Ensure our “required” list is included
+        union_fields.update(self.config.fields_to_evaluate)
+
+        # Put line_items last for nicer output
+        ordered = sorted(f for f in union_fields if f != "line_items")
+        if "line_items" in union_fields:
+            ordered.append("line_items")
+
         metrics = {}
-        for f in self.config.fields_to_evaluate:
+        for f in ordered:
             print(f"Computing metrics for field: {f}")
             metrics[f] = self.compute_field_metrics(f)
         self.field_metrics = metrics
         return metrics
 
     def compute_overall_accuracy(self):
-        # BEFORE:
-        # total = sum(m["total_documents"] for m in self.field_metrics.values())
-        # matches = sum(m["matches"] for m in self.field_metrics.values())
-        # return matches / total if total else 0.0
-
-        # AFTER (only count pairs where both sides exist):
         comparable = sum(m["both_present"] for m in self.field_metrics.values())
         matches = sum(m["matches"] for m in self.field_metrics.values())
         return matches / comparable if comparable else 0.0
@@ -619,10 +699,10 @@ class BenchmarkRunner:
         self.load_parser_results()
         self.record_environment_details()
 
-        # Schema compliance BEFORE comparison
+        # Schema compliance BEFORE comparison (for required fields only)
         schema_report = self.verify_schema_compliance()
 
-        # Metrics
+        # Metrics across ALL fields
         self.compute_all_field_metrics()
         acc = self.compute_overall_accuracy()
 
