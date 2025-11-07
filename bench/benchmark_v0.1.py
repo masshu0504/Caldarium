@@ -357,7 +357,6 @@ class BenchmarkRunner:
         print(f"Results saved to: {out_json} and {out_csv}")
         return self.field_metrics
 
-
 # ------------------------------------------------------------------------------
 # Main entry
 # ------------------------------------------------------------------------------
