@@ -162,6 +162,7 @@ def insert_audit_log(data: Dict[str, Any], table: str = "audit_logs", id: str=""
         actor = data.get("actor", "parser") # Providing a default
         schema_version = data.get("schema_version") # Can be None
         doc_id = data.get("doc_id")
+        event_type = data.get("event_type")
 
         # The 'meta' column should store the full data dict as JSON
         json_data_for_meta = json.dumps(data)
@@ -179,7 +180,8 @@ def insert_audit_log(data: Dict[str, Any], table: str = "audit_logs", id: str=""
             "to",
             status,
             schema_version,
-            meta
+            meta,
+            event_type
         )
         VALUES (
         %s,
@@ -194,7 +196,8 @@ def insert_audit_log(data: Dict[str, Any], table: str = "audit_logs", id: str=""
         'parsed_data_db', -- "to" (as a string literal)
         'success',   -- status (as a string literal)
         COALESCE(%s, 'invoice_v1_reset'), -- schema_version
-        %s           -- meta (the full JSON data)
+        %s           -- meta (the full JSON data),
+        %s
         )
         RETURNING status;
     """
@@ -205,7 +208,8 @@ def insert_audit_log(data: Dict[str, Any], table: str = "audit_logs", id: str=""
         doc_id,             # for run_id
         actor,              # for actor
         schema_version,     # for schema_version
-        json_data_for_meta  # for meta
+        json_data_for_meta,  # for meta
+        event_type
         )
         
         # 4. Execute by passing the SQL and the values tuple
