@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV403240",
+  "patient_id": "MRN31909",
+  "invoice_date": "2019-11-05",
+  "due_date": "2019-12-05",
+  "patient_name": "Amy Mitchell",
+  "patient_age": "47",
+  "patient_address": "Unit 9754 Box 7608, DPO AA 72291",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2019-10-25",
+  "discharge_date": "2019-11-03",
+  "subtotal_amount": "$320.00",
+  "discount_amount": "$96.00",
+  "total_amount": "$238.40",
+  "provider_name": "Dr. Adrian Parks",
+  "bed_id": "BED6413",
+  "line_items": [
+    {
+      "description": "Allergy Test",
+      "code": "AL07",
+      "amount": "$90.00"
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": "$60.00"
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": "$120.00"
+    },
+    {
+      "description": "Vaccination",
+      "code": "VAX9",
+      "amount": "$50.00"
+    }
+  ]
+}

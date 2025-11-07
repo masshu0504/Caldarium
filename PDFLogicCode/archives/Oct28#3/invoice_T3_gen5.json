@@ -1,0 +1,31 @@
+{
+  "title": "Invoice",
+  "invoice_number": "INV498431",
+  "patient_id": null,
+  "invoice_date": "06-29-2018",
+  "due_date": "07-29-2018",
+  "patient_name": "Miss Julie Jackson MD",
+  "patient_age": null,
+  "patient_address": "040 Cook Points Suite 457, Carrollside, UT 19885",
+  "patient_phone": "1-234-567-8900",
+  "patient_email": "info@whitepetalhospital.org",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 220.0,
+  "discount_amount": 24.2,
+  "total_amount": 205.7,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Hearing Test",
+      "code": "HT02",
+      "amount": 70.0
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": 150.0
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV140822",
+  "patient_id": null,
+  "invoice_date": "2018-08-13",
+  "due_date": "2018-09-12",
+  "patient_name": "Angel Kaiser",
+  "patient_age": null,
+  "patient_address": "365 Haley Islands Apt. 563, Linmouth, OR 62248",
+  "patient_phone": "+1 (234)-567-8900",
+  "patient_email": "info@whitepetalhospital.org",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 315.0,
+  "discount_amount": 110.25,
+  "total_amount": 218.93,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60.0
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": 120.0
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 60.0
+    },
+    {
+      "description": "Eye Exam",
+      "code": "EE09",
+      "amount": 75.0
+    }
+  ]
+}

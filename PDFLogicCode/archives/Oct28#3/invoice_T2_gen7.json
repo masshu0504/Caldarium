@@ -1,0 +1,35 @@
+{
+  "invoice_number": "INV948995",
+  "patient_id": null,
+  "invoice_date": "07-03-1973",
+  "due_date": "08-02-1973",
+  "patient_name": "John Walker",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst NH, 03031",
+  "patient_phone": "1-722-794-3538",
+  "patient_email": "john.walker@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 260.0,
+  "discount_amount": 0,
+  "total_amount": 271.7,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": 40.0
+    },
+    {
+      "description": "COVID-19 Test",
+      "code": "CV19",
+      "amount": 100.0
+    },
+    {
+      "description": "Physical Therapy",
+      "code": "PT07",
+      "amount": 120.0
+    }
+  ]
+}

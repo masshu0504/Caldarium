@@ -4,8 +4,8 @@
   "due_date": "1998-05-28",
   "patient_name": "Jennifer Patterson",
   "patient_age": null,
-  "patient_address": "4117 Cedarstone Drive, Amherst, NH 03031",
-  "patient_phone": "940-951-0538",
+  "patient_address": "4117 Cedarstone Drive Amherst NH 03031",
+  "patient_phone": "05\n940.951.0538",
   "patient_email": "jennifer.patterson@gmail.com",
   "admission_date": null,
   "discharge_date": null,
@@ -16,23 +16,23 @@
   "bed_id": null,
   "line_items": [
     {
-      "description": "Surgery Consultation",
       "code": "SC03",
+      "description": "Surgery Consultation",
       "amount": 250
     },
     {
-      "description": "CT Scan",
       "code": "CT15",
+      "description": "CT Scan",
       "amount": 1000
     },
     {
-      "description": "CT Scan",
       "code": "CT15",
+      "description": "CT Scan",
       "amount": 1000
     },
     {
-      "description": "Eye Exam",
       "code": "EE09",
+      "description": "Eye Exam",
       "amount": 75
     }
   ]

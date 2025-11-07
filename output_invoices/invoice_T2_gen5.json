@@ -1,0 +1,30 @@
+{
+  "invoice_number": "INV290431",
+  "patient_id": null,
+  "invoice_date": "06-18-1988",
+  "due_date": "07-18-1988",
+  "patient_name": "Robert Martinez",
+  "patient_age": null,
+  "patient_address": null,
+  "patient_phone": "1-832-890-6713",
+  "patient_email": "robert.martinez@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 430.0,
+  "discount_amount": 0,
+  "total_amount": 449.35,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Surgery Consultation",
+      "code": "SC03",
+      "amount": 250.0
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": 180.0
+    }
+  ]
+}

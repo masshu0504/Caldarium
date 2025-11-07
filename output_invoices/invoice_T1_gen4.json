@@ -1,0 +1,39 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": "INV146372",
+    "patient_id": "MRN92331",
+    "invoice_date": "04-13-1998",
+    "due_date": "05-13-1998",
+    "patient_name": "Brian Johnson",
+    "patient_age": 88,
+    "patient_address": "3856 Matthew Overpass Suite 435, East Paul, DE 39403",
+    "patient_phone": null,
+    "patient_email": null,
+    "admission_date": "03-31-1998",
+    "discharge_date": "04-12-1998",
+    "subtotal_amount": 250.0,
+    "discount_amount": 92.5,
+    "total_amount": 168.75,
+    "provider_name": "Dr. Adam Diaz",
+    "bed_id": "BED1963",
+    "line_items": [
+      {
+        "description": "Allergy Test",
+        "code": "AL07",
+        "amount": 90.0
+      },
+      {
+        "description": "Cholesterol Test",
+        "code": "CH05",
+        "amount": 60.0
+      },
+      {
+        "description": "ECG",
+        "code": "ECG2",
+        "amount": 100.0
+      }
+    ]
+  }
+}

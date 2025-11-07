@@ -1,33 +1,33 @@
 {
   "invoice_number": "INV665469",
   "invoice_date": "1983-04-25",
-  "due_date": "1983-05-25",
+  "due_date": null,
   "patient_name": "Janet Mckenzie",
   "patient_age": 44,
-  "patient_address": "7442 Alicia Court Suite 507, Rollinsbury, DE 23480",
-  "patient_phone": null,
-  "patient_email": null,
+  "patient_address": "Admission Dat",
+  "patient_phone": "01 (123) 456-7890",
+  "patient_email": "info@hotspringsgen.com",
   "admission_date": "1983-04-10",
   "discharge_date": "1983-04-24",
   "subtotal_amount": 1380,
   "discount_amount": 483,
   "total_amount": 959.1,
-  "provider_name": "Dr. Maurice Williams",
-  "bed_id": "BED1311",
+  "provider_name": null,
+  "bed_id": null,
   "line_items": [
     {
-      "description": "Hearing Test",
       "code": "HT02",
+      "description": "Hearing Test",
       "amount": 70
     },
     {
-      "description": "Vaccination Booster",
       "code": "VB08",
+      "description": "Vaccination Booster",
       "amount": 55
     },
     {
-      "description": "Vaccination Booster",
       "code": "VB08",
+      "description": "Vaccination Booster",
       "amount": 55
     }
   ]

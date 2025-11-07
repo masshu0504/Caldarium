@@ -1,0 +1,25 @@
+{
+  "invoice_number": "INV872679",
+  "patient_id": null,
+  "invoice_date": "1993-12-14",
+  "due_date": "1994-01-13",
+  "patient_name": "Taylor Parsons",
+  "patient_age": null,
+  "patient_address": "22162 Renee Canyon South Ronaldville, MN 50745",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 55.0,
+  "discount_amount": 16.5,
+  "total_amount": 40.98,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "code": "VB08",
+      "description": "Vaccination Booster",
+      "amount": 55.0
+    }
+  ]
+}

@@ -82,6 +82,5 @@ def reset_output(audit_path: str = OUTPUT_AUDIT_FILE, out_dir: str = OUTPUT_DIR,
                 audit.write(f"- {typ}: {path}\n")
 
 
-if __name__ == "__main__":
-    reset_output()
+reset_output()
 

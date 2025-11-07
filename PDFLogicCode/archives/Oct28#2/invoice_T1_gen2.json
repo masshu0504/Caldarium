@@ -1,0 +1,44 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": "INV665469",
+    "patient_id": "MRN31790",
+    "invoice_date": "04-25-1983",
+    "due_date": "05-25-1983",
+    "patient_name": "Janet Mckenzie",
+    "patient_age": 44,
+    "patient_address": "7442 Alicia Court Suite 507, Rollinsbury, DE 23480",
+    "patient_phone": null,
+    "patient_email": null,
+    "admission_date": "04-10-1983",
+    "discharge_date": "04-24-1983",
+    "subtotal_amount": 1380.0,
+    "discount_amount": 483.0,
+    "total_amount": 959.1,
+    "provider_name": "Dr. Maurice Williams",
+    "bed_id": "BED1311",
+    "line_items": [
+      {
+        "description": "Hearing Test",
+        "code": "HT02",
+        "amount": 70.0
+      },
+      {
+        "description": "Vaccination Booster",
+        "code": "VB08",
+        "amount": 55.0
+      },
+      {
+        "description": "Vaccination Booster",
+        "code": "VB08",
+        "amount": 55.0
+      },
+      {
+        "description": "MRI Scan",
+        "code": "MRI5",
+        "amount": 1200.0
+      }
+    ]
+  }
+}

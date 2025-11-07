@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV244194",
+  "patient_id": null,
+  "invoice_date": "2003-11-03",
+  "due_date": "2003-12-03",
+  "patient_name": "Mr. Patrick Franklin",
+  "patient_age": null,
+  "patient_address": "769 Victoria Views New Michaelland, MP 71791",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 1435.0,
+  "discount_amount": 14.35,
+  "total_amount": 1485.23,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "code": "LP12",
+      "description": "Lab Panel",
+      "amount": 180.0
+    },
+    {
+      "code": "CT15",
+      "description": "CT Scan",
+      "amount": 1000.0
+    },
+    {
+      "code": "EE09",
+      "description": "Eye Exam",
+      "amount": 75.0
+    },
+    {
+      "code": "DC04",
+      "description": "Dermatology Consultation",
+      "amount": 180.0
+    }
+  ]
+}

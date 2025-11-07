@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV26344",
+  "patient_id": null,
+  "invoice_date": "2023-12-28",
+  "due_date": "2024-01-27",
+  "patient_name": "Jennifer Cunningham",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst NH, 03031",
+  "patient_phone": "001-646-803-9654",
+  "patient_email": "jennifer.cunningham@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "1595.00",
+  "discount_amount": null,
+  "total_amount": "1666.78",
+  "provider_name": "Rose Petal Clinic",
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Urine Test",
+      "code": "UT01",
+      "amount": "40.00"
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": "55.00"
+    },
+    {
+      "description": "Ultrasound",
+      "code": "US10",
+      "amount": "300.00"
+    },
+    {
+      "description": "MRI Scan",
+      "code": "MRI5",
+      "amount": "1200.00"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "invoice_number": "INV287552",
+  "patient_id": null,
+  "invoice_date": "2006-11-20",
+  "due_date": "2006-12-20",
+  "patient_name": "Gabriela Wood",
+  "patient_age": null,
+  "patient_address": "4117 Cedarstone Drive, Amherst, NH, 03031",
+  "patient_phone": "+1-537-706-0980",
+  "patient_email": "gabriela.wood@gmail.com",
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": 385.0,
+  "discount_amount": 0,
+  "total_amount": 402.32,
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": 150.0
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "DC04",
+      "amount": 180.0
+    },
+    {
+      "description": "Vaccination Booster",
+      "code": "VB08",
+      "amount": 55.0
+    }
+  ]
+}

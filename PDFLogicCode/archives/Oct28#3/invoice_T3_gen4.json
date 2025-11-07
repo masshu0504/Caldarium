@@ -1,0 +1,29 @@
+{
+  "title": "Invoice",
+  "type": "object",
+  "properties": {
+    "invoice_number": "INV13151",
+    "patient_id": null,
+    "invoice_date": "12-18-2010",
+    "due_date": "01-17-2011",
+    "patient_name": "David Ortiz",
+    "patient_age": null,
+    "patient_address": "54246 Alexis Turnpike, East Kevinville, NE 97421",
+    "patient_phone": "1-234-567-8900",
+    "patient_email": "info@whitepetalhospital.org",
+    "admission_date": null,
+    "discharge_date": null,
+    "subtotal_amount": 250.0,
+    "discount_amount": 22.5,
+    "total_amount": 238.75,
+    "provider_name": null,
+    "bed_id": null,
+    "line_items": [
+      {
+        "description": "Surgery Consultation",
+        "code": "SC03",
+        "amount": 250.0
+      }
+    ]
+  }
+}
