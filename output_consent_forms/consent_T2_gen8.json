@@ -1,8 +1,8 @@
 {
   "patient_name": "Lawrence Thornton",
-  "patient_first_name": "Lawrence",
+  "patient_first_name": null,
   "patient_middle_name": null,
-  "patient_last_name": "Thornton",
+  "patient_last_name": null,
   "patient_address_name": "194 Joshua Village Suite 757",
   "patient_id": "MRN93450",
   "patient_dob": "1958-08-02",

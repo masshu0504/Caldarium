@@ -1,8 +1,8 @@
 {
   "patient_name": "Amy Nelson",
-  "patient_first_name": "Amy",
+  "patient_first_name": null,
   "patient_middle_name": null,
-  "patient_last_name": "Nelson",
+  "patient_last_name": null,
   "patient_address_name": "7038 Christine Forest",
   "patient_id": "MRN54715",
   "patient_dob": "1973-07-18",

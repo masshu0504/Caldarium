@@ -1,8 +1,8 @@
 {
   "patient_name": "Courtney Wilcox",
-  "patient_first_name": "Courtney",
+  "patient_first_name": null,
   "patient_middle_name": null,
-  "patient_last_name": "Wilcox",
+  "patient_last_name": null,
   "patient_address_name": null,
   "patient_id": null,
   "patient_dob": null,
