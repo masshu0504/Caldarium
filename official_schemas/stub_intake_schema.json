@@ -1,0 +1,49 @@
+{
+  "title": "Intake",
+  "type": "object",
+  "properties": {
+    "patient_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Full legal name of patient"
+    },
+    "patient_dob": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "Date of birth of the patient (YYYY-MM-DD)"
+    },
+    "patient_phone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary contact phone number of the patient"
+    },
+    "referral_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of referring provider"
+    },
+    "provider_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of the healthcare provider"
+    }
+  },
+  "required": [
+    "patient_name",
+    "patient_dob",
+    "patient_phone",
+    "referral_name",
+    "provider_name"
+  ]
+}
