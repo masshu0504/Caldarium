@@ -3,34 +3,29 @@
   "type": "object",
   "properties": {
     "patient_name": {
-      "type": [
-        "string"
-      ],
+      "type":
+        "string",
       "description": "Full legal name of patient"
     },
     "patient_dob": {
-      "type": [
-        "string"
-      ],
+      "type":
+        "string",
       "format": "date",
       "description": "Date of birth of the patient (YYYY-MM-DD)"
     },
     "patient_phone": {
-      "type": [
-        "string"
-      ],
+      "type":
+        "string",
       "description": "Primary contact phone number of the patient"
     },
     "referral_name": {
-      "type": [
+      "type":
         "string",
-      ],
       "description": "Name of referring provider"
     },
     "provider_name": {
-      "type": [
+      "type":
         "string",
-      ],
       "description": "Name of the healthcare provider"
     }
   },
