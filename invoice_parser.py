@@ -39,13 +39,21 @@ print("All PDFs parsed.")
 import os
 import re
 import json
+import uuid
+from parser_audit_logger import AuditLogger, iso_yyyymmdd
 
 # -----------------------------
 # CONFIG
 # -----------------------------
+SCHEMA_VERSION = "invoice_v1_reset"
+PARSER_VERSION = "rules-0.3"
+AUDIT_LOG_PATH = "logs/invoice_audit.jsonl"
 input_folder = "parsed_texts"
 output_folder = "json_invoices"
 os.makedirs(output_folder, exist_ok=True)
+
+# Initialize the AuditLogger
+invoice_logger = AuditLogger(actor="minna_d", role="parser", schema_version=SCHEMA_VERSION, parser_version=PARSER_VERSION, log_path=AUDIT_LOG_PATH)
 
 
 # -----------------------------
@@ -81,7 +89,9 @@ def base_schema():
         "line_items": []
     }
 
-
+def _count_non_null(d: dict) -> int:
+    """Counts the number of non-null, non-empty values in a dictionary."""
+    return sum(v not in (None, "", []) for v in d.values())
 
 # -----------------------------
 # TEMPLATE PARSERS
@@ -98,7 +108,7 @@ def _find_last_amount_line(text):
     return float(matches[-1].replace(",", "")) if matches else None
 
 
-def parse_hot_springs(text):
+def parse_hot_springs(text: str, run_id: str, doc_id: str, logger: AuditLogger) -> dict:
     invoice = base_schema()  # start with consistent schema
 
     # -----------------------------
@@ -107,8 +117,10 @@ def parse_hot_springs(text):
     provider_match = re.findall(r"Dr\.\s+[A-Z][a-zA-Z'-]+\s+[A-Z][a-zA-Z'-]+", text)
     if provider_match:
         invoice["provider_name"] = ", ".join(provider_match)
+        logger.auto_extract_parser(run_id, doc_id, "provider_name", invoice["provider_name"], status="success")
     else:
         invoice["provider_name"] = "Hot Springs General Hospital"
+        logger.auto_extract_parser(run_id, doc_id, "provider_name", invoice["provider_name"], status="success")
 
     # -----------------------------
     # Invoice/date/patient ID
@@ -119,6 +131,10 @@ def parse_hot_springs(text):
         invoice["invoice_date"] = inv_line.group(2)
         invoice["due_date"] = inv_line.group(3)
         invoice["patient_id"] = inv_line.group(4)
+        logger.auto_extract_parser(run_id, doc_id, "invoice_number", invoice["invoice_number"], status="success")
+        logger.auto_extract_parser(run_id, doc_id, "invoice_date", invoice["invoice_date"], status="success")
+        logger.auto_extract_parser(run_id, doc_id, "due_date", invoice["due_date"], status="success")
+        logger.auto_extract_parser(run_id, doc_id, "patient_id", invoice["patient_id"], status="success")
 
     # -----------------------------
     # Patient details
@@ -126,14 +142,17 @@ def parse_hot_springs(text):
     name_match = re.search(r"Patient Name:\s*(.+?)\s*Hospital No:", text)
     if name_match:
         invoice["patient_name"] = name_match.group(1).strip()
+        logger.auto_extract_parser(run_id, doc_id, "patient_name", invoice["patient_name"], status="success")
 
     age_match = re.search(r"Patient Age:\s*(\d+)", text)
     if age_match:
         invoice["patient_age"] = int(age_match.group(1))
+        logger.auto_extract_parser(run_id, doc_id, "patient_age", invoice["patient_age"], status="success")
 
     bed_match = re.search(r"Bed No:\s*(\S+)", text)
     if bed_match:
         invoice["bed_id"] = bed_match.group(1)
+        logger.auto_extract_parser(run_id, doc_id, "bed_id", invoice["bed_id"], status="success")
 
     # -----------------------------
     # Patient address (merge split lines)
@@ -144,6 +163,7 @@ def parse_hot_springs(text):
     )
     if addr_match:
         invoice["patient_address"] = f"{addr_match.group(1).strip()}, {addr_match.group(2).strip()}"
+        logger.auto_extract_parser(run_id, doc_id, "patient_address", invoice["patient_address"], status="success")
 
     # -----------------------------
     # Admission/discharge dates
@@ -152,11 +172,13 @@ def parse_hot_springs(text):
     dc_match = re.search(r"Discharge Date:\s*([\d-]+)", text)
     if ad_match:
         invoice["admission_date"] = ad_match.group(1)
+        logger.auto_extract_parser(run_id, doc_id, "admission_date", invoice["admission_date"], status="success")
     if dc_match:
         invoice["discharge_date"] = dc_match.group(1)
+        logger.auto_extract_parser(run_id, doc_id, "discharge_date", invoice["discharge_date"], status="success")
 
     # -----------------------------
-    # Financials
+    # Financials (money extraction)
     # -----------------------------
     def _parse_money_line_exact(text, label):
         pattern = rf"(?m)^\s*{re.escape(label)}\s*\$?([\d,]+\.\d{{2}})\s*$"
@@ -172,8 +194,12 @@ def parse_hot_springs(text):
     invoice["discount_amount"] = _parse_money_line_exact(text, "Discount")
     invoice["total_amount"] = _find_last_amount_line(text)
 
+    logger.auto_extract_parser(run_id, doc_id, "subtotal_amount", invoice["subtotal_amount"], status="success")
+    logger.auto_extract_parser(run_id, doc_id, "discount_amount", invoice["discount_amount"], status="success")
+    logger.auto_extract_parser(run_id, doc_id, "total_amount", invoice["total_amount"], status="success")
+
     # -----------------------------
-    # Line items
+    # Line items (items sold)
     # -----------------------------
     line_pattern = re.compile(r"(?m)^\s*([A-Z0-9]{2,})\s+(.+?)\s+\$([\d,]+\.\d{2})\s*$")
     items = []
@@ -187,9 +213,13 @@ def parse_hot_springs(text):
         })
     invoice["line_items"] = items
 
+    for item in items:
+        logger.auto_extract_parser(run_id, doc_id, "line_items", item, status="success")
+
     return invoice
 
-def parse_rose_petal(text):
+
+def parse_rose_petal(text: str, run_id: str, doc_id: str, logger: AuditLogger) -> dict:
     invoice = base_schema()  # consistent schema
 
     # -----------------------------
@@ -197,24 +227,26 @@ def parse_rose_petal(text):
     # -----------------------------
     provider_match = re.search(r"(?i)Doctor[:\s]*(Dr\.\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)", text)
     invoice["provider_name"] = provider_match.group(1).strip() if provider_match else None
+    logger.auto_extract_parser(run_id, doc_id, "provider_name", invoice["provider_name"])
 
     # -----------------------------
     # Invoice number
     # -----------------------------
     inv_match = re.search(r"Invoice\s*No[:\s]*([A-Z0-9-]+)", text)
     invoice["invoice_number"] = inv_match.group(1).strip() if inv_match else None
+    logger.auto_extract_parser(run_id, doc_id, "invoice_number", invoice["invoice_number"])
 
     # -----------------------------
     # Invoice and due dates
     # -----------------------------
-    # Due date (explicit match)
     due_match = re.search(r"Due\s*Date[:\s]*(\d{4}-\d{2}-\d{2})", text, re.IGNORECASE)
     invoice["due_date"] = due_match.group(1).strip() if due_match else None
+    logger.auto_extract_parser(run_id, doc_id, "due_date", invoice["due_date"])
 
     # Invoice date (must NOT be preceded by "Due")
     date_match = re.search(r"(?<!Due\s)Date[:\s]*(\d{4}-\d{2}-\d{2})", text, re.IGNORECASE)
     invoice["invoice_date"] = date_match.group(1).strip() if date_match else None
-
+    logger.auto_extract_parser(run_id, doc_id, "invoice_date", invoice["invoice_date"])
 
     # -----------------------------
     # Patient name (line between clinic address and Invoice No)
@@ -223,20 +255,21 @@ def parse_rose_petal(text):
     patient_name = None
     for i, line in enumerate(lines):
         if "ROSE PETAL CLINIC" in line.upper() and i + 2 < len(lines):
-            # assume next line is clinic address, then patient name
             patient_name = lines[i + 2].strip()
             break
     invoice["patient_name"] = patient_name if patient_name else None
+    logger.auto_extract_parser(run_id, doc_id, "patient_name", invoice["patient_name"])
 
     # -----------------------------
     # Patient contact info
     # -----------------------------
     patient_phone_match = re.search(r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}", text)
     invoice["patient_phone"] = patient_phone_match.group(0).strip() if patient_phone_match else None
-
+    logger.auto_extract_parser(run_id, doc_id, "patient_phone", invoice["patient_phone"])
 
     email_match = re.search(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", text)
     invoice["patient_email"] = email_match.group(0).strip() if email_match else None
+    logger.auto_extract_parser(run_id, doc_id, "patient_email", invoice["patient_email"])
 
     # -----------------------------
     # Patient address — not provided
@@ -263,42 +296,53 @@ def parse_rose_petal(text):
                     "amount": float(amt.replace(",", ""))
                 })
     invoice["line_items"] = items
+    logger.auto_extract_parser(run_id, doc_id, "line_items", len(items))
 
     # -----------------------------
     # Financials
     # -----------------------------
     subtotal_match = re.search(r"(?:Sub\s?Total|Subtotal)[:\s]*\$?([\d,]+\.\d{2})", text)
     invoice["subtotal_amount"] = float(subtotal_match.group(1).replace(",", "")) if subtotal_match else None
+    logger.auto_extract_parser(run_id, doc_id, "subtotal_amount", invoice["subtotal_amount"])
 
     discount_match = re.search(r"Discount[:\s]*\$?([\d,]+\.\d{2})", text)
     invoice["discount_amount"] = float(discount_match.group(1).replace(",", "")) if discount_match else None
+    logger.auto_extract_parser(run_id, doc_id, "discount_amount", invoice["discount_amount"])
 
     total_match = re.findall(r"Total[:\s]*\$?([\d,]+\.\d{2})", text)
     invoice["total_amount"] = float(total_match[-1].replace(",", "")) if total_match else None
+    logger.auto_extract_parser(run_id, doc_id, "total_amount", invoice["total_amount"])
 
     return invoice
 
-def parse_white_petal(text):
+
+def parse_white_petal(text: str, run_id: str, doc_id: str, logger: AuditLogger) -> dict:
     invoice = base_schema()  # start from consistent schema
 
     # Invoice number
     inv_match = re.search(r"Invoice #\s*(\S+)", text)
     invoice["invoice_number"] = inv_match.group(1) if inv_match else None
+    logger.auto_extract_parser(run_id, doc_id, "invoice_number", invoice["invoice_number"])
 
     # Dates
     date_match = re.search(r"Date of Issue\s*(\d{4}-\d{2}-\d{2})", text)
-    due_match = re.search(r"Due Date\s*(\d{4}-\d{2}-\d{2})", text)
     invoice["invoice_date"] = date_match.group(1) if date_match else None
+    logger.auto_extract_parser(run_id, doc_id, "invoice_date", invoice["invoice_date"])
+
+    due_match = re.search(r"Due Date\s*(\d{4}-\d{2}-\d{2})", text)
     invoice["due_date"] = due_match.group(1) if due_match else None
+    logger.auto_extract_parser(run_id, doc_id, "due_date", invoice["due_date"])
 
     # Patient name
     patient_match = re.search(r"BILLED TO:\s*(.+)", text)
     invoice["patient_name"] = patient_match.group(1).strip() if patient_match else None
+    logger.auto_extract_parser(run_id, doc_id, "patient_name", invoice["patient_name"])
 
     # Patient address: next 2 lines after BILLED TO
     address_lines = re.findall(r"BILLED TO:.*\n(.+)\n(.+)\n", text)
     if address_lines:
         invoice["patient_address"] = " ".join([line.strip() for line in address_lines[0]])
+    logger.auto_extract_parser(run_id, doc_id, "patient_address", invoice["patient_address"])
 
     # Line items
     line_items = []
@@ -314,20 +358,26 @@ def parse_white_petal(text):
                     "amount": float(amt.replace(",", ""))
                 })
     invoice["line_items"] = line_items
+    logger.auto_extract_parser(run_id, doc_id, "line_items", len(line_items))
 
     # Subtotal, discount, total
     subtotal = re.search(r"Subtotal\s*\$([\d,]+\.\d{2})", text)
-    discount = re.search(r"Discount\s*\$([\d,]+\.\d{2})", text)
-    total = re.search(r"TOTAL\s*\$([\d,]+\.\d{2})", text)
-
     invoice["subtotal_amount"] = float(subtotal.group(1).replace(",", "")) if subtotal else None
+    logger.auto_extract_parser(run_id, doc_id, "subtotal_amount", invoice["subtotal_amount"])
+
+    discount = re.search(r"Discount\s*\$([\d,]+\.\d{2})", text)
     invoice["discount_amount"] = float(discount.group(1).replace(",", "")) if discount else None
+    logger.auto_extract_parser(run_id, doc_id, "discount_amount", invoice["discount_amount"])
+
+    total = re.search(r"TOTAL\s*\$([\d,]+\.\d{2})", text)
     invoice["total_amount"] = float(total.group(1).replace(",", "")) if total else None
+    logger.auto_extract_parser(run_id, doc_id, "total_amount", invoice["total_amount"])
 
     # Provider_name remains None
     invoice["provider_name"] = None
 
     return invoice
+
 
 
 
@@ -342,19 +392,36 @@ for filename in os.listdir(input_folder):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
 
+    # Generate unique IDs for the run and document
+    run_id = str(uuid.uuid4())
+    doc_id = os.path.splitext(filename)[0]
+
+    # Log the start of parsing for the document
+    invoice_logger.parse_start(run_id, doc_id, meta={"stage": "invoice_parsing"})
+
     if "HOT SPRINGS GENERAL" in text:
         template = "hot_springs"
-        parsed = parse_hot_springs(text)
+        parsed = parse_hot_springs(text, run_id, doc_id, invoice_logger)
     elif "ROSE PETAL CLINIC" in text:
         template = "rose_petal"
-        parsed = parse_rose_petal(text)
+        parsed = parse_rose_petal(text, run_id, doc_id, invoice_logger)
     elif "WHITE PETAL HOSPITAL" in text.upper():
         template = "white_petal"
-        parsed = parse_white_petal(text)
+        parsed = parse_white_petal(text, run_id, doc_id, invoice_logger)
     else:
         template = "unknown"
         parsed = base_schema()
         parsed["error"] = "Unknown template"
+
+    # Log the end of parsing for the document
+    invoice_logger.parse_end(
+        run_id=run_id,
+        doc_id=doc_id,
+        fields_extracted_count=_count_non_null(parsed),  # Optional: If you want to count extracted fields
+        required_total=None,  # Optional: If you have a required total to match against
+        status="success",  # Set the status to "success" if parsing was successful
+        meta={"stage": "end_parsing", "template": template}
+    )
 
     out_path = os.path.join(output_folder, f"{os.path.splitext(filename)[0]}_{template}.json")
     with open(out_path, "w", encoding="utf-8") as f:
