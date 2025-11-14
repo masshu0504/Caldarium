@@ -15,6 +15,7 @@ from audit_logger_v1 import validate_log_entry, audit_log
 import uuid
 from validate_invoices import validate
 import io
+from working_consent_parser import base_schema, parse_city_state_zip, assemble_patient_name, parse_nih_consent, parse_hipaa_consent
 
 
 env_path = Path('.') / '.env.example'
@@ -397,100 +398,30 @@ async def parse(file: UploadFile = File(...)):
         elif "consent" in filename:
             content_type = file.content_type
             contents = await file.read()
-            file_hash = hashlib.sha256(contents).hexdigest()
+            #file_hash = hashlib.sha256(contents).hexdigest()
 
             # uses parser*
-            data = parse_pdf_bytes(contents)
+            
+            if "NIH Occupational" in contents:
+                parsed = parse_nih_consent(contents)
+            elif "HIPAA Authorization" in contents:
+                parsed = parse_hipaa_consent(contents)
+            else:
+                parsed = base_schema()
 
             size = len(contents)
-            # change after getting parser
-            
-            invoice_number = data.get("invoice_number") 
-            #patient_id = 0
-            subtotal_amount = data.get("subtotal_amount")
-            invoice_date = data.get("invoice_date")
-            total_amount = data.get("total_amount")
-            line_items = data.get("line_items")
 
-            due_date = data.get("due_date")
-            patient_name = data.get("patient_name")
-            patient_age = data.get("patient_age")
-            patient_address = data.get("patient_address")
-            patient_phone = 0
-            patient_email = 0
-            admission_date = data.get("admission_date")
-            discharge_date = data.get("discharge_date")
-            discount_amount = data.get("discount_amount")
-            bed_no = 0
-            provider_name = 0
-            provider_email = 0
-            provider_website = 0
-            account_no = 0
-            hospital_no = 0
-            bed_no = 0
-            consultant = 0
-            billed_to_address = 0
-            tax_percent = data.get("tax_percent")
-            tax_amount = 0
-            currency = 0
-            payment_instructions = 0
-            disclaimer = 0
-            total_amount = data.get("total_amount")
-
-
-
-            extracted_data = {
-                "invoice_number": invoice_number,
-                "subtotal_amount": subtotal_amount,
-                "invoice_date": invoice_date,
-                "total_amount": total_amount,
-                "line_items": line_items,
-                "patient_name": patient_name,
-                "patient_age": patient_age,
-                "patient_address": patient_address,
-                "admission_date": admission_date,
-                "discharge_date": discharge_date,
-                "discount_amount": discount_amount,
-                "due_date": due_date,
-                "file_metadata": {
-                    "original_filename": filename,
-                    "file_size_bytes": size,
-                    "content_type": content_type,
-                    "hash": file_hash
-                }
+            random_id = uuid.uuid4().hex
+            inserted_id = insert_data(data=parsed, doc_id=random_id)
+            status = insert_audit_log(data=parsed, id=random_id)
+            # Return Success Response ---
+            return {
+                "status": "success",
+                "message": "File parsed and data stored successfully.",
+                "db_id": inserted_id,
+                "extracted_data": parsed, # Return the data to confirm storage
+                "audit_log_status": status
             }
-
-            if (invoice_number is None and
-            subtotal_amount is None and
-            invoice_date is None and
-            total_amount is None and
-            line_items is None and
-            patient_name is None and
-            patient_age is None and
-            patient_address is None and
-            admission_date is None and
-            discharge_date is None and
-            discount_amount is None and
-            due_date is None):
-                return JSONResponse(
-                    status_code=422,
-                    content={
-                        "status" : "failed to extract all required fields", 
-                        "error": 422
-                    }
-                )
-            else:
-                random_id = uuid.uuid4().hex
-                inserted_id = insert_data(data=extracted_data, doc_id=random_id)
-                status = insert_audit_log(data=extracted_data, id=random_id)
-                # Return Success Response ---
-                return {
-                    "status": "success",
-                    "message": "File parsed and data stored successfully.",
-                    "db_id": inserted_id,
-                    "extracted_data": extracted_data, # Return the data to confirm storage
-                    "audit_log_status": status
-                }
             
         elif "intake" in filename:
             content_type = file.content_type
