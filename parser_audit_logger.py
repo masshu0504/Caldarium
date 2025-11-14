@@ -1,6 +1,7 @@
 # audit_logger.py
 import os, json, uuid, datetime
 from typing import Optional, Dict, Any
+import re
 
 class AuditLogger:
     def __init__(self, actor: str, role: str, schema_version: str,

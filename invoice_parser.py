@@ -11,9 +11,10 @@ import os
 import pdfplumber
 
 # Directory containing your PDFs
-pdf_folder = "medical_pdfs/invoices"
-output_folder = "parsed_texts"
+pdf_folder = "medical_pdfs/unknown"
+output_folder = "parsed_texts_invoice"
 os.makedirs(output_folder, exist_ok=True)
+UNKNOWN_REPORT_PATH = "logs/unknown_templates_report.jsonl"
 
 # Loop through each PDF file
 for filename in os.listdir(pdf_folder):
@@ -48,7 +49,7 @@ from parser_audit_logger import AuditLogger, iso_yyyymmdd
 SCHEMA_VERSION = "invoice_v1_reset"
 PARSER_VERSION = "rules-0.3"
 AUDIT_LOG_PATH = "logs/invoice_audit.jsonl"
-input_folder = "parsed_texts"
+input_folder = "parsed_texts_invoice"
 output_folder = "json_invoices"
 os.makedirs(output_folder, exist_ok=True)
 
@@ -378,8 +379,33 @@ def parse_white_petal(text: str, run_id: str, doc_id: str, logger: AuditLogger) 
 
     return invoice
 
+import datetime
 
-
+def log_unknown_template_for_report(filename: str, doc_id: str, text: str, report_path: str):
+    """
+    Analyzes minimal info for an unknown template and immediately appends it
+    as a JSON line to the specified report file.
+    """
+    # 1. Analyze and collect data
+    detection_info = {
+        "timestamp": iso_yyyymmdd(datetime.datetime.now().isoformat()),
+        "filename": filename,
+        "doc_id": doc_id,
+        "status": "Awaiting Review",
+        "identified_keywords": re.findall(r"(?:INVOICE|BILL|RECEIPT|STATEMENT|TOTAL|AMOUNT)", text.upper()),
+        "first_500_chars_snippet": text[:500].replace('\n', ' ').strip() + "...",
+        "confidence_score": 0.0 # Unknown templates are assigned 0 confidence
+    }
+    
+    # 2. Append data directly to the report file (Audit Log style)
+    try:
+        with open(report_path, "a", encoding="utf-8") as f:
+            # Write the dictionary as a single JSON line
+            f.write(json.dumps(detection_info) + "\n")
+        return True
+    except Exception as e:
+        print(f"Error writing to unknown report file: {e}")
+        return False
 
 # -----------------------------
 # MAIN PARSING LOOP
@@ -412,6 +438,10 @@ for filename in os.listdir(input_folder):
         template = "unknown"
         parsed = base_schema()
         parsed["error"] = "Unknown template"
+# 🎯 Immediately log to the report file
+        log_success = log_unknown_template_for_report(filename, doc_id, text, UNKNOWN_REPORT_PATH)
+        if log_success:
+            print(f"⚠️ Detected **{filename}** as unknown template. Logged to {UNKNOWN_REPORT_PATH}")
 
     # Log the end of parsing for the document
     invoice_logger.parse_end(
@@ -427,7 +457,8 @@ for filename in os.listdir(input_folder):
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(parsed, f, indent=2)
 
-    print(f"✅ Parsed {filename} as {template} → {out_path}")
+    if template != "unknown":
+            print(f"✅ Parsed {filename} as {template} → {out_path}")
 
 print("All invoices processed.")
 
