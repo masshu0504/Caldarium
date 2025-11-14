@@ -1,0 +1,29 @@
+{
+ "data_asset_type": null,
+ "expectation_suite_name": "invoices_suite",
+ "ge_cloud_id": null,
+ "expectations": [
+   {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "invoice_number"}},
+   {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "invoice_date"}},
+   {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "subtotal_amount"}},
+   {"expectation_type": "expect_column_to_exist", "kwargs": {"column": "total_amount"}},
+   {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "invoice_number"}},
+   {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "invoice_date"}},
+   {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "subtotal_amount"}},
+   {"expectation_type": "expect_column_values_to_not_be_null", "kwargs": {"column": "total_amount"}},
+   {"expectation_type": "expect_column_values_to_be_of_type", "kwargs": {"column": "invoice_number", "type_": "object"}},
+   {"expectation_type": "expect_column_values_to_match_regex", "kwargs": {"column": "invoice_date", "regex": "^\\d{4}-\\d{2}-\\d{2}$"}},
+   {"expectation_type": "expect_table_columns_to_match_set",
+    "kwargs": { "column_set": ["invoice_number","invoice_date","subtotal_amount","total_amount"],
+                "exact_match": false }}
+ ],
+ "meta": {
+   "notes": {
+     "content": [
+       "This suite checks required keys and simple formats.",
+       "Cross-field rules (total >= subtotal, sum(line_items) ~= subtotal, due_date >= invoice_date) are enforced by run_validation.py."
+     ],
+     "format": "markdown"
+   }
+ }
+}

@@ -152,3 +152,36 @@ The script takes the following arguments:
 1. instance: [REQUIRED] the file path to the .json file you want to compare to the schema.
 2. schema: [OPTIONAL, ENABLE WITH '--schema' FLAG] the file path to the .json schema that the instance will be compared against. Default file path is: schemas/invoice.json.
 
+## Great Expectations Validation (Week 1)
+
+This repo includes a lightweight **Great Expectations (GX)** suite to sanity-check parsed JSON.  
+(**Note:** This project uses the new GX folder layout: `gx/`.)
+
+### What is validated
+- **Presence:** `invoice_id`, `patient_id`, `date`, `total`
+- **Types/Format:**  
+  - `invoice_id` → string  
+  - `patient_id` → string  
+  - `date` → `YYYY-MM-DD` (regex)  
+  - `total` → float
+- **Checkpoint:** `invoices_checkpoint` runs the suite and writes a summary to `validation_logs/`.
+
+### Prereqs
+- Docker services are running:
+  ```bash
+  docker compose up -d --build
+  docker compose run --rm helper bash -lc "pip3 install --break-system-packages -r requirements.txt"
+
+### Rerun (Pass)
+docker compose run --rm helper bash -lc "python3 validate_invoices.py"
+
+### Force fail (Negative Test)
+docker compose run --rm helper bash -lc '
+python3 - <<PY
+import json
+p="data/dummy_invoices.json"
+d=json.load(open(p)); d[0].pop("total", None)   # remove required field
+json.dump(d, open(p,"w"), indent=2)
+PY
+python3 validate_invoices.py
+'

@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y \
+    wget bash ca-certificates unzip iputils-ping netcat-openbsd curl dos2unix \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc && chmod +x /usr/local/bin/mc
+
+WORKDIR /workspace
+
+COPY requirements.txt /workspace/requirements.txt
+RUN pip install --no-cache-dir -r /workspace/requirements.txt && pip install --no-cache-dir great_expectations pandas jsonschema
+
+COPY gx /workspace/gx
+COPY scripts/entrypoint.sh /workspace/entrypoint.sh
+COPY scripts/run_validation.py /workspace/run_validation.py
+RUN chmod +x /workspace/entrypoint.sh
+
+ENV GE_PROJECT_DIR=/workspace/gx
+ENV DATA_DIR=/data
+ENV OUTPUT_DIR=/output
+ENV CHECKPOINT_NAME=validation_checkpoint
+
+RUN mkdir -p /data /output /output/data_docs /output/logs
+
+ENTRYPOINT ["/workspace/entrypoint.sh"]
