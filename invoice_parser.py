@@ -98,9 +98,8 @@ def _find_last_amount_line(text):
     return float(matches[-1].replace(",", "")) if matches else None
 
 
-def parse_hot_springs(text):
-    invoice = base_schema()  # start with consistent schema
-
+def parse_hot_springs(schema):
+    invoice = schema
     # -----------------------------
     # Provider (doctor names)
     # -----------------------------
@@ -189,8 +188,8 @@ def parse_hot_springs(text):
 
     return invoice
 
-def parse_rose_petal(text):
-    invoice = base_schema()  # consistent schema
+def parse_rose_petal(schema):
+    invoice = schema
 
     # -----------------------------
     # Provider / doctor
@@ -278,8 +277,8 @@ def parse_rose_petal(text):
 
     return invoice
 
-def parse_white_petal(text):
-    invoice = base_schema()  # start from consistent schema
+def parse_white_petal(schema):
+    invoice = schema
 
     # Invoice number
     inv_match = re.search(r"Invoice #\s*(\S+)", text)
