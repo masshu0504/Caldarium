@@ -297,23 +297,43 @@ async def parse(file: UploadFile = File(...)):
                 data = parse_hot_springs(contents)
                 data = parse_rose_petal(contents)
                 data = parse_white_petal(contents)
-
-                random_id = uuid.uuid4().hex
-                inserted_id = insert_data(data=extracted_data, doc_id=random_id)
-                status = insert_audit_log(data=extracted_data, id=random_id)
                 # Return Success Response ---
-                if (invoice_number is None and
-                subtotal_amount is None and
-                invoice_date is None and
-                total_amount is None and
-                line_items is None and
-                patient_name is None and
-                patient_age is None and
-                patient_address is None and
-                admission_date is None and
-                discharge_date is None and
-                discount_amount is None and
-                due_date is None):
+                if (
+                    data.get("patient_name") is None and
+                    data.get("patient_first_name") is None and
+                    data.get("patient_middle_name") is None and
+                    data.get("patient_last_name") is None and
+                    data.get("patient_address_name") is None and
+                    data.get("patient_id") is None and
+                    data.get("patient_dob") is None and
+                    data.get("patient_signature") is None and
+                    data.get("patient_state") is None and
+                    data.get("patient_city") is None and
+                    data.get("patient_zip_code") is None and
+                    data.get("provider_name") is None and
+                    data.get("provider_address_name") is None and
+                    data.get("provider_phone") is None and
+                    data.get("provider_fax") is None and
+                    data.get("provider_state") is None and
+                    data.get("provider_city") is None and
+                    data.get("provider_zip_code") is None and
+                    data.get("family_name") is None and
+                    data.get("family_relation") is None and
+                    data.get("family_phone") is None and
+                    data.get("family_address_name") is None and
+                    data.get("family_state") is None and
+                    data.get("family_city") is None and
+                    data.get("family_zip_code") is None and
+                    data.get("guardian_name") is None and
+                    data.get("guardian_signature") is None and
+                    data.get("guardian_relation") is None and
+                    data.get("date") is None and
+                    data.get("expiration_date") is None and
+                    data.get("expiration_event") is None and
+                    data.get("translator_name") is None and
+                    data.get("translator_signature") is None
+
+                ):
                     return JSONResponse(
                     status_code=422,
                     content={
@@ -321,13 +341,17 @@ async def parse(file: UploadFile = File(...)):
                         "error": 422
                     }
                 )
-                return {
-                    "status": "success",
-                    "message": "File parsed and data stored successfully.",
-                    "db_id": inserted_id,
-                    "extracted_data": extracted_data, # Return the data to confirm storage
-                    "audit_log_status": status
-                }
+                else:
+                    random_id = uuid.uuid4().hex
+                    inserted_id = insert_data(data=extracted_data, doc_id=random_id)
+                    status = insert_audit_log(data=extracted_data, id=random_id)
+                    return {
+                        "status": "success",
+                        "message": "File parsed and data stored successfully.",
+                        "db_id": inserted_id,
+                        "extracted_data": extracted_data, # Return the data to confirm storage
+                        "audit_log_status": status
+                    }
             else:
                 return JSONResponse(
                     status_code=422,
@@ -351,12 +375,40 @@ async def parse(file: UploadFile = File(...)):
                 parsed = parse_hipaa_consent(contents)
             else:
                 parsed = consent_schema()
-
             size = len(contents)
+
+            if (
+                    data.get("invoice_number") is None and
+                    data.get("patient_id") is None and
+                    data.get("invoice_date") is None and
+                    data.get("due_date") is None and
+                    data.get("patient_name") is None and
+                    data.get("patient_age") is None and
+                    data.get("patient_address") is None and
+                    data.get("patient_phone") is None and
+                    data.get("patient_email") is None and
+                    data.get("admission_date") is None and
+                    data.get("discharge_date") is None and
+                    data.get("subtotal_amout") is None and
+                    data.get("discount_amount") is None and
+                    data.get("total_amount") is None and
+                    data.get("provider_name") is None and
+                    data.get("bed_id") is None and
+                    data.get("line_items") is None
+                ):
+                    return JSONResponse(
+                    status_code=422,
+                    content={
+                        "status" : "failed to extract all required fields", 
+                        "error": 422
+                    }
+                )
 
             random_id = uuid.uuid4().hex
             inserted_id = insert_data(data=parsed, doc_id=random_id)
             status = insert_audit_log(data=parsed, id=random_id)
+
+            
             # Return Success Response ---
             return {
                 "status": "success",
