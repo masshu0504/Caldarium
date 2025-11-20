@@ -297,11 +297,30 @@ async def parse(file: UploadFile = File(...)):
                 data = parse_hot_springs(contents)
                 data = parse_rose_petal(contents)
                 data = parse_white_petal(contents)
-                                
+
                 random_id = uuid.uuid4().hex
                 inserted_id = insert_data(data=extracted_data, doc_id=random_id)
                 status = insert_audit_log(data=extracted_data, id=random_id)
                 # Return Success Response ---
+                if (invoice_number is None and
+                subtotal_amount is None and
+                invoice_date is None and
+                total_amount is None and
+                line_items is None and
+                patient_name is None and
+                patient_age is None and
+                patient_address is None and
+                admission_date is None and
+                discharge_date is None and
+                discount_amount is None and
+                due_date is None):
+                    return JSONResponse(
+                    status_code=422,
+                    content={
+                        "status" : "failed to extract all required fields", 
+                        "error": 422
+                    }
+                )
                 return {
                     "status": "success",
                     "message": "File parsed and data stored successfully.",
@@ -485,3 +504,36 @@ async def get_parsed_data(run_id: str):
 
     except Exception as e:
         print(f"Error fetching record {run_id}: {e}")
+
+
+@routes.get("/v1/report/template_detection")
+async def template_detection_report():
+    pass
+
+@routes.get("/v1/report/duplicate_detection")
+async def duplicate_detection_report():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, extracted_data FROM parsed_data")
+    rows = cursor.fetchall()
+
+    seen = set()
+    duplicates = []
+
+    for row_id, extracted in rows:
+        canonical = json.dumps(extracted, sort_keys=True)
+        h = hash(canonical)
+
+        if h in seen:
+            duplicates.append(row_id)
+        else:
+            seen.add(h)
+    if len(duplicates) >= 1:
+        return {
+            "status": "success",
+            "duplicates": duplicates
+        }
+    else:
+        return {
+            "status": "no duplicates found"
+        }
