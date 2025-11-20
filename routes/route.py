@@ -558,11 +558,24 @@ async def get_parsed_data(run_id: str):
         print(f"Error fetching record {run_id}: {e}")
 
 
-@routes.get("/v1/report/template_detection")
+@routes.post("/v1/report/template_detection")
 async def template_detection_report():
     pass
 
-@routes.get("/v1/report/duplicate_detection")
+@routes.post("/v1/report/blank_fields")
+async def blank_fields_report():
+    pass
+
+@routes.post("/v1/report/standardization")
+async def standardization_report():
+    pass
+
+@routes.post("/v1/report/hit1")
+async def hit1_report():
+    pass
+
+
+@routes.post("/v1/report/duplicate_detection")
 async def duplicate_detection_report():
     conn = get_db_connection()
     cursor = conn.cursor()
