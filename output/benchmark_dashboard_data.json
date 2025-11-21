@@ -1,0 +1,58 @@
+{
+  "per_doc_type": {
+    "invoice": {
+      "doc_type": "invoice",
+      "f1_avg": null,
+      "recall_avg": null,
+      "precision_avg": null
+    },
+    "consent": {
+      "doc_type": "consent",
+      "f1_avg": null,
+      "recall_avg": null,
+      "precision_avg": null
+    },
+    "intake": {
+      "doc_type": "intake",
+      "f1_avg": 0.85,
+      "recall_avg": 0.85,
+      "kappa_avg": 0.8241758241758241,
+      "exact_match_avg": 0.85,
+      "per_field_metrics": {
+        "patient_dob": {
+          "metric": "exact_match_rate",
+          "value": 1.0
+        },
+        "patient_name": {
+          "metric": "exact_match_rate",
+          "value": 1.0
+        },
+        "patient_phone": {
+          "metric": "exact_match_rate",
+          "value": 0.5
+        },
+        "provider_name": {
+          "metric": "exact_match_rate",
+          "value": 0.75
+        },
+        "referral_name": {
+          "metric": "exact_match_rate",
+          "value": 1.0
+        }
+      },
+      "validation_rate": 1.0,
+      "standardization_rate": 1.0,
+      "blank_field_count": 0,
+      "blank_field_rate": 0.0
+    }
+  },
+  "overall": {
+    "f1_overall_avg": 0.85,
+    "recall_overall_avg": 0.85,
+    "document_count": {
+      "invoice": 0,
+      "consent": 0,
+      "intake": 4
+    }
+  }
+}

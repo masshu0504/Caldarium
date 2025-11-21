@@ -1,0 +1,11 @@
+field,metric,value
+patient_dob,cohens_kappa,1.0
+patient_dob,exact_match_rate,1.0
+patient_name,cohens_kappa,1.0
+patient_name,exact_match_rate,1.0
+patient_phone,cohens_kappa,0.42857142857142855
+patient_phone,exact_match_rate,0.5
+provider_name,cohens_kappa,0.6923076923076923
+provider_name,exact_match_rate,0.75
+referral_name,cohens_kappa,1.0
+referral_name,exact_match_rate,1.0
