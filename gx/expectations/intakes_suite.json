@@ -1,0 +1,99 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "intakes_suite",
+  "ge_cloud_id": null,
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "patient_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "patient_dob"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "patient_phone"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "referral_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {
+        "column": "provider_name"
+      }
+    },
+
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "patient_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "patient_dob"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "patient_phone"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "referral_name"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "provider_name"
+      }
+    },
+
+    {
+      "expectation_type": "expect_column_values_to_match_regex",
+      "kwargs": {
+        "column": "patient_dob",
+        "regex": "^\\d{4}-\\d{2}-\\d{2}$"
+      }
+    },
+
+    {
+      "expectation_type": "expect_table_columns_to_match_set",
+      "kwargs": {
+        "column_set": [
+          "patient_name",
+          "patient_dob",
+          "patient_phone",
+          "referral_name",
+          "provider_name"
+        ],
+        "exact_match": false
+      }
+    }
+  ],
+  "meta": {
+    "notes": {
+      "content": [
+        "Minimal suite for intake forms, modeled on consents_suite: core required keys + simple date format for patient_dob.",
+        "All cross-field / conditional rules should be enforced in the custom validation code (e.g., run_validation_intakes.py)."
+      ],
+      "format": "markdown"
+    }
+  }
+}
