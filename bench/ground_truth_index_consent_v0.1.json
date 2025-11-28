@@ -1,0 +1,21 @@
+{
+  "docs": [
+    {"document_id": "consent_T1_gen1", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen1.json", "schema_version": null},
+    {"document_id": "consent_T1_gen2", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen2.json", "schema_version": null},
+    {"document_id": "consent_T1_gen3", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen3.json", "schema_version": null},
+    {"document_id": "consent_T1_gen4", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen4.json", "schema_version": null},
+    {"document_id": "consent_T1_gen5", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen5.json", "schema_version": null},
+    {"document_id": "consent_T1_gen6", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen6.json", "schema_version": null},
+    {"document_id": "consent_T1_gen7", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen7.json", "schema_version": null},
+    {"document_id": "consent_T1_gen8", "template_id": "T1", "file": "output_consent_forms/consent_T1_gen8.json", "schema_version": null},
+
+    {"document_id": "consent_T2_gen1", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen1.json", "schema_version": null},
+    {"document_id": "consent_T2_gen2", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen2.json", "schema_version": null},
+    {"document_id": "consent_T2_gen3", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen3.json", "schema_version": null},
+    {"document_id": "consent_T2_gen4", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen4.json", "schema_version": null},
+    {"document_id": "consent_T2_gen5", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen5.json", "schema_version": null},
+    {"document_id": "consent_T2_gen6", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen6.json", "schema_version": null},
+    {"document_id": "consent_T2_gen7", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen7.json", "schema_version": null},
+    {"document_id": "consent_T2_gen8", "template_id": "T2", "file": "output_consent_forms/consent_T2_gen8.json", "schema_version": null}
+  ]
+}
