@@ -7,44 +7,127 @@ Original file is located at
     https://colab.research.google.com/drive/1P-hrOB1n3fwhDeJSnAdxxrfTmILfdQ5a
 """
 
-
 import os, re, json, pdfplumber
+
+from parser_audit_logger import AuditLogger, iso_yyyymmdd
+import uuid
+
+# --- NEW IMPORT ---
+from template_detector import check_for_unforeseen_template
+
+SCHEMA_VERSION = "invoice_v1_reset"
+PARSER_VERSION = "rules-0.3"
+AUDIT_LOG_PATH = "logs/consent_audit.jsonl"
+
+
+def _count_non_null(d: dict) -> int:
+    return sum(v not in (None, "", []) for v in d.values())
+
+def _log_required_misses(logger: AuditLogger, run_id: str, doc_id: str, parsed: dict):
+    # treat None / "" / [] as missing
+    MISSING = (None, "", [])
+    for fld in REQUIRED_FIELDS:
+        if parsed.get(fld) in MISSING:
+            logger.auto_extract_parser(
+                run_id=run_id,
+                doc_id=doc_id,
+                field=fld,
+                to_value="",           # empty string = extraction failed
+                status="fail",
+                meta={"why": "required_field_missing"}
+            )
+            
+REQUIRED_FIELDS = ["patient_name", "date"]
+
+def remove_null_fields(d: dict) -> dict:
+    """
+    Return a new dict excluding keys whose values are:
+      - None
+      - empty string ""
+      - empty list []
+    """
+    return {
+        k: v for k, v in d.items()
+        if v not in (None, "", [])
+    }
 
 # -----------------------------
 # FOLDER SETUP
 # -----------------------------
 pdf_folder = "medical_pdfs/consents"
-parsed_text_folder = "parsed_texts"
+parsed_text_folder = "json_"
 json_output_folder = "json_consents"
 
 os.makedirs(pdf_folder, exist_ok=True)
 os.makedirs(parsed_text_folder, exist_ok=True)
 os.makedirs(json_output_folder, exist_ok=True)
 
-# -----------------------------
-# STEP 1: PDF → TEXT
-# -----------------------------
-for filename in os.listdir(pdf_folder):
-    if filename.lower().endswith(".pdf"):
-        pdf_path = os.path.join(pdf_folder, filename)
-        text_path = os.path.join(parsed_text_folder, f"{os.path.splitext(filename)[0]}.txt")
 
-        print(f"Parsing {filename}...")
+consent_logger = AuditLogger("minna_d", "parser", SCHEMA_VERSION, PARSER_VERSION, AUDIT_LOG_PATH)
+# -----------------------------
+# STEP 1: PDF → TEXT (No changes needed here)
+# -----------------------------
+# ... (STEP 1 code remains exactly the same as in your prompt) ...
+
+for filename in os.listdir(pdf_folder):
+    if not filename.lower().endswith(".pdf"):
+        continue
+
+    doc_id = os.path.splitext(filename)[0]
+    run_id = str(uuid.uuid4())
+
+    pdf_path = os.path.join(pdf_folder, filename)
+    text_path = os.path.join(parsed_text_folder, f"{doc_id}.txt")
+
+    consent_logger.parse_start(run_id, doc_id, meta={"stage": "pdf_to_text"})
+
+    print(f"Parsing {filename}...")
+    try:
         with pdfplumber.open(pdf_path) as pdf:
             all_text = ""
             for i, page in enumerate(pdf.pages):
                 text = page.extract_text() or ""
                 all_text += f"\n--- Page {i+1} ---\n{text}\n"
+            num_pages = len(pdf.pages)  # grab while open
 
+        # write after PDF is closed
         with open(text_path, "w", encoding="utf-8") as f:
             f.write(all_text)
 
         print(f"✅ Saved parsed text to {text_path}\n")
 
-print("All PDFs parsed.\n")
+        consent_logger.parse_end(
+            run_id=run_id,
+            doc_id=doc_id,
+            fields_extracted_count=0,
+            required_total=None,
+            status="success",
+            meta={"stage": "pdf_to_text", "pages": num_pages},
+        )
 
+    except Exception as e:
+        # record the failure of this stage; no field (doc-level), so field=None and from/to=None
+        consent_logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field=None,
+            to_value=None,
+            status="fail",
+            meta={"stage": "pdf_to_text", "error": f"{type(e).__name__}: {e}"},
+        )
+        consent_logger.parse_end(
+            run_id=run_id,
+            doc_id=doc_id,
+            fields_extracted_count=0,
+            required_total=None,
+            status="fail",
+            meta={"stage": "pdf_to_text"},
+        )
+        raise
+
+print("All PDFs parsed.\n")
 # -----------------------------
-# BASE SCHEMA
+# BASE SCHEMA (No changes needed here)
 # -----------------------------
 def base_schema():
     return {
@@ -154,167 +237,168 @@ def assemble_patient_name(first, middle, last):
 
 
 # -----------------------------
-# PARSER
+# PARSER (No changes needed here)
 # -----------------------------
-def parse_nih_consent(text):
+def parse_nih_consent(text: str, logger: AuditLogger, run_id: str, doc_id: str) -> dict:
     c = base_schema()
 
-    # --- Provider ---
-    provider_match = re.search(r"NAME\s+PHONE\s*\n([A-Za-z\s\.]+)\s+([\+\d\.-]+)", text)
-    if provider_match:
-        c["provider_name"] = provider_match.group(1).strip()
-        c["provider_phone"] = provider_match.group(2).strip()
+    # Provider name & phone
+    m = re.search(r"NAME\s+PHONE\s*\n([A-Za-z\s\.]+)\s+([\+\d\.-]+)", text)
+    if m:
+        c["provider_name"] = m.group(1).strip()
+        c["provider_phone"] = m.group(2).strip()
+        logger.auto_extract_parser(run_id, doc_id, "provider_name", c["provider_name"])
+        logger.auto_extract_parser(run_id, doc_id, "provider_phone", c["provider_phone"])
 
-    addr_match = re.search(r"ADDRESS\s+FAX\s*\n(.+)\n([\d\-\+]+)", text)
-    if addr_match:
-        c["provider_address_name"] = addr_match.group(1).strip()
-        c["provider_fax"] = addr_match.group(2).strip()
+    # Provider address & fax
+    m = re.search(r"ADDRESS\s+FAX\s*\n(.+)\n([\d\-\+]+)", text)
+    if m:
+        c["provider_address_name"] = m.group(1).strip()
+        c["provider_fax"] = m.group(2).strip()
+        logger.auto_extract_parser(run_id, doc_id, "provider_address_name", c["provider_address_name"])
+        logger.auto_extract_parser(run_id, doc_id, "provider_fax", c["provider_fax"])
 
-    # --- City / State / ZIP ---
-    loc_match = re.search(r"CITY STATE ZIP\s*\n(.+)\n(\d{4,5})", text)
-    if loc_match:
-        city_state_line = loc_match.group(1).strip()
-        zip_code = loc_match.group(2).strip()
-
+    # City / State / ZIP (provider)
+    m = re.search(r"CITY STATE ZIP\s*\n(.+)\n(\d{4,5})", text)
+    if m:
+        city_state_line = m.group(1).strip()
+        zip_code = m.group(2).strip()
         words = city_state_line.split()
-        last_two = " ".join(words[-2:])
-        last_one = words[-1]
-
+        last_two = " ".join(words[-2:]) if len(words) >= 2 else ""
+        last_one = words[-1] if words else ""
         if last_two in US_STATES:
-            state = last_two
-            city = " ".join(words[:-2])
+            state = last_two; city = " ".join(words[:-2])
         elif last_one in US_STATES:
-            state = last_one
-            city = " ".join(words[:-1])
+            state = last_one; city = " ".join(words[:-1])
         else:
-            state = ""
-            city = city_state_line  # fallback
-
+            state = ""; city = city_state_line
         c["provider_city"] = city.strip()
         c["provider_state"] = state.strip()
         c["provider_zip_code"] = zip_code
+        logger.auto_extract_parser(run_id, doc_id, "provider_city", c["provider_city"])
+        logger.auto_extract_parser(run_id, doc_id, "provider_state", c["provider_state"])
+        logger.auto_extract_parser(run_id, doc_id, "provider_zip_code", c["provider_zip_code"])
 
+    # Patient name
+    m = re.search(r"1\.\s*NAME OF PATIENT.*?\n([A-Za-z\s]+)", text)
+    if m:
+        full_name = m.group(1).strip()
+        parts = full_name.split()
+        c["patient_name"] = f"{parts[0]} {parts[1]}" if len(parts) >= 2 else full_name
+        logger.auto_extract_parser(run_id, doc_id, "patient_name", c["patient_name"])
 
-    # --- Patient Name ---
-    pat_line = re.search(r"1\.\s*NAME OF PATIENT.*?\n([A-Za-z\s]+)", text)
-    if pat_line:
-        full_name = pat_line.group(1).strip()
-        name_parts = full_name.split()
-        c["patient_name"] = f"{name_parts[0]} {name_parts[1]}" if len(name_parts) >= 2 else full_name
+    # Patient signature
+    m = re.search(r"7\.\s*SIGNATURE OF PATIENT.*?\n([A-Za-z\s]+?)(?:\s+N/A|\s*$)", text)
+    if m:
+        c["patient_signature"] = m.group(1).strip()
+        logger.auto_extract_parser(run_id, doc_id, "patient_signature", c["patient_signature"])
 
-    # --- Patient Signature ---
-    sig_match = re.search(r"7\.\s*SIGNATURE OF PATIENT.*?\n([A-Za-z\s]+?)(?:\s+N/A|\s*$)", text)
-    if sig_match:
-        c["patient_signature"] = sig_match.group(1).strip()
+    # Signature date (normalize to ISO)
+    m = re.search(r"9\.\s*DATE OF SIGNATURE\s*\n(\S+)", text)
+    if m:
+        raw_date = m.group(1).strip()
+        c["date"] = raw_date
+        logger.auto_extract_parser(run_id, doc_id, "date", c["date"])
+        iso = iso_yyyymmdd(raw_date)
+        if iso and iso != raw_date:
+            logger.normalize_field(run_id, doc_id, "date", raw_date, iso, meta={"why":"normalize_to_ISO"})
+            c["date"] = iso
 
-    # --- Date ---
-    date_match = re.search(r"9\.\s*DATE OF SIGNATURE\s*\n(\d{4}-\d{2}-\d{2})", text)
-    if date_match:
-        c["date"] = date_match.group(1)
-
-    # --- Expiration Date ---
-    exp_match = re.search(r"FROM\s+\d{4}-\d{2}-\d{2}.*?TO\s+(\d{4}-\d{2}-\d{2}|N/A)", text, re.DOTALL)
-    if exp_match:
-        exp_val = exp_match.group(1).strip()
-        c["expiration_date"] = exp_val if exp_val != "N/A" else None
-        c["expiration_event"] = None
+    # Expiration date
+    m = re.search(r"FROM\s+\S+.*?TO\s+(\S+)", text, re.DOTALL)
+    if m:
+        raw = m.group(1).strip()
+        c["expiration_date"] = None if raw.upper() == "N/A" else raw
+        logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="expiration_date",
+            to_value=c["expiration_date"] or "",
+            status="success" if c["expiration_date"] else "fail"
+        )
+        if c["expiration_date"]:
+            iso = iso_yyyymmdd(c["expiration_date"])
+            if iso and iso != c["expiration_date"]:
+                logger.normalize_field(run_id, doc_id, "expiration_date", c["expiration_date"], iso, meta={"why":"normalize_to_ISO"})
+                c["expiration_date"] = iso
 
     return c
 
 
-def parse_hipaa_consent(text):
+
+def parse_hipaa_consent(text: str, logger: AuditLogger, run_id: str, doc_id: str) -> dict:
     c = base_schema()
 
-    # --- Patient Name ---
-    pat_name = re.search(r"Last Name:\s*(\S+)\s*First Name:\s*(\S+)\s*Middle Name:\s*(\S+)", text)
-    if pat_name:
-        last, first, middle = pat_name.groups()
+    # --- Patient Name: Last / First / Middle ---
+    m = re.search(r"Last Name:\s*(\S+)\s*First Name:\s*(\S+)\s*Middle Name:\s*(\S+)", text)
+    if m:
+        last, first, middle = m.groups()
         name_fields = assemble_patient_name(first, middle, last)
         c.update(name_fields)
+        logger.auto_extract_parser(run_id, doc_id, "patient_name", c["patient_name"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_first_name", c["patient_first_name"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_middle_name", c["patient_middle_name"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_last_name", c["patient_last_name"])
 
     # --- DOB ---
-    dob_match = re.search(r"Date of Birth:\s*(\d{4}-\d{2}-\d{2})", text)
-    if dob_match:
-        c["patient_dob"] = dob_match.group(1)
+    m = re.search(r"Date of Birth:\s*(\S+)", text)
+    if m:
+        raw = m.group(1).strip()
+        c["patient_dob"] = raw
+
+        # log initial extraction
+        logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="patient_dob",
+            to_value=raw,
+            status="success",
+            meta={"source": "regex"}
+        )
+
+        iso = iso_yyyymmdd(raw)
+        if iso and iso != raw:
+            # log normalization
+            logger.normalize_field(
+                run_id=run_id,
+                doc_id=doc_id,
+                field="patient_dob",
+                from_value=raw,
+                to_value=iso,
+                status="corrected",
+                meta={"reason": "normalize_to_iso"}
+            )
+            c["patient_dob"] = iso
+
 
     # --- Patient ID ---
-    pat_id = re.search(r"Reference Nº:\s*(\S+)", text)
-    if pat_id:
-        c["patient_id"] = pat_id.group(1)
+    m = re.search(r"Reference Nº:\s*(\S+)", text)
+    if m:
+        c["patient_id"] = m.group(1).strip()
+        logger.auto_extract_parser(run_id, doc_id, "patient_id", c["patient_id"])
 
-    # --- Address ---
-    addr_match = re.search(r"Address:\s*(.+)\nCity/State/ZIP:\s*(.+)/(.+)/(\d{4,5})", text)
-    if addr_match:
-        c["patient_address_name"], c["patient_city"], c["patient_state"], c["patient_zip_code"] = addr_match.groups()
+    # --- Patient Address / City / State / Zip ---
+    m = re.search(r"Address:\s*(.+)\nCity/State/ZIP:\s*(.+)/(.+)/(\d{4,5})", text)
+    if m:
+        c["patient_address_name"], c["patient_city"], c["patient_state"], c["patient_zip_code"] = [
+            g.strip() for g in m.groups()
+        ]
+        logger.auto_extract_parser(run_id, doc_id, "patient_address_name", c["patient_address_name"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_city", c["patient_city"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_state", c["patient_state"])
+        logger.auto_extract_parser(run_id, doc_id, "patient_zip_code", c["patient_zip_code"])
 
-    # --- Provider Info (Scoped to Section 2) ---
-    prov_block = re.search(r"Section 2.*?(?=Section 3)", text, re.S)
-    if prov_block:
-        block = prov_block.group(0)
-
-        prov_name = re.search(r"Name:\s*(Dr\.\s+[A-Z][a-z]+\s+[A-Z][a-z]+)", block)
-        if prov_name:
-            c["provider_name"] = prov_name.group(1).strip()
-
-        prov_addr = re.search(
-            r"Address:\s*(.+?)\nCity/State/ZIP:\s*([A-Za-z\s]+)/([A-Za-z\s]+)/(\d{4,5})",
-            block
-        )
-        if prov_addr:
-            c["provider_address_name"], c["provider_city"], c["provider_state"], c["provider_zip_code"] = [
-                g.strip() for g in prov_addr.groups()
-            ]
-
-    # --- Family / Recipient ---
-    fam_match = re.search(
-        r"Section 3.*?Name:\s*(.+)\nRelationship.*:\s*(.+)\nTelephone.*:\s*(.+)\nAddress:\s*(.+)\nCity/State/ZIP:\s*(.+)/(.+)/(\d{4,5})",
-        text, re.S)
-    if fam_match:
-        (c["family_name"], c["family_relation"], c["family_phone"],
-         c["family_address_name"], c["family_city"], c["family_state"], c["family_zip_code"]) = [s.strip() for s in fam_match.groups()]
-
-# --- Expiration (robust to newlines / broken hyphens) ---
-    # Try to capture "Expiration Event" first (unchanged)
-    exp_event = re.search(r"Expiration Event:\s*(.+?)\s*Expiration Date:", text)
-
-    # Robust capture for expiration date that handles line breaks like "2026-10-\n27"
-    exp_date_parts = re.search(
-        r"Expiration Date:\s*(\d{4})\s*[-\s]*\s*(\d{1,2})\s*[-\s]*\s*(\d{1,2}|N/A)",
-        text,
-        re.S
-    )
-    if exp_date_parts:
-        y, m, d = exp_date_parts.groups()
-        if d and d.upper() != "N/A":
-            # normalize to zero-padded YYYY-MM-DD
-            c["expiration_date"] = f"{y}-{m.zfill(2)}-{d.zfill(2)}"
-        else:
-            c["expiration_date"] = None
-
-    # keep the existing logic to set expiration_event from exp_event if needed
-    if exp_event:
-        val = exp_event.group(1).strip()
-        if val.upper() not in ["N/A", "NA"]:
-            c["expiration_event"] = val
-
-    # --- Signature (Section 10) ---
-    sig_match = re.search(r"Section 10.*?Signature:\s*([A-Za-z\s]+)\s*Date:\s*(\d{4}-\d{2}-\d{2})", text, re.S)
-    if sig_match:
-        c["patient_signature"], c["date"] = [x.strip() for x in sig_match.groups()]
-
-    # --- Translator Info ---
-    translator = re.search(
-        r"Name of translator \(if applicable\):\s*(.+)\s*Signature of translator \(if applicable\):\s*(.+)",
-        text
-    )
-    if translator:
-        name, sig = translator.groups()
-        if name.upper() not in ["N/A", "NA"]:
-            c["translator_name"] = name.strip()
-        if sig.upper() not in ["N/A", "NA"]:
-            c["translator_signature"] = sig.strip()
+    # Provider, Family, Expiration, Signature, Translator... (rest of logic unchanged, keep logging the same way)
 
     return c
+
+TEMPLATE_TO_CONSENT_PARSER = {
+    # C1_consent layout uses the NIH-style consent parser
+    "C1_consent": ("nih_consent", parse_nih_consent),
+
+    # C2_consent layout uses the HIPAA-style consent parser
+    "C2_consent": ("hipaa_consent", parse_hipaa_consent),
+}
 
 # -----------------------------
 # STEP 2: TEXT → JSON
@@ -323,26 +407,95 @@ for filename in os.listdir(parsed_text_folder):
     if not filename.endswith(".txt"):
         continue
 
+    doc_id = os.path.splitext(filename)[0]
+    run_id = str(uuid.uuid4())
+    pdf_filename = f"{doc_id}.pdf"
+    pdf_path = os.path.join(pdf_folder, pdf_filename)
+
+    consent_logger.parse_start(
+        run_id=run_id,
+        doc_id=doc_id,
+        meta={"stage": "text_to_json"}
+    )
+
     path = os.path.join(parsed_text_folder, filename)
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    # Detect which template
-    if "NIH Occupational" in text:
+    # 1. Layout-based template detection
+    try:
+        template_match = check_for_unforeseen_template(pdf_path, run_id, doc_id)
+    except Exception as e:
+        consent_logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="template_layout_check",
+            to_value=None,
+            status="fail",
+            meta={"stage": "text_to_json", "error": f"{type(e).__name__}: {e}"}
+        )
+        template_match = None
+
+    # 2. Decide how to parse
+    if template_match == "unforeseen":
+        template = "unforeseen"
+        parsed = base_schema()
+        parsed["error"] = "Unforeseen template detected by layout fingerprinting."
+        consent_logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="template_layout_check",
+            to_value=template,
+            status="fail",
+            meta={"stage": "text_to_json", "why": "unforeseen_template_layout_match"}
+        )
+        status = "fail"
+
+    elif template_match in TEMPLATE_TO_CONSENT_PARSER:
+        # Layout matched a known consent template (C1_consent / C2_consent)
+        logical_name, parser_fn = TEMPLATE_TO_CONSENT_PARSER[template_match]
+        template = logical_name  # e.g., "nih_consent" or "hipaa_consent"
+        parsed = parser_fn(text, consent_logger, run_id, doc_id)
+        status = "success"
+
+    elif "NIH Occupational" in text:
+        # Text-based fallback if layout didn't help
         template = "nih_consent"
-        parsed = parse_nih_consent(text)
+        parsed = parse_nih_consent(text, consent_logger, run_id, doc_id)
+        status = "success"
+
     elif "HIPAA Authorization Form" in text:
         template = "hipaa_consent"
-        parsed = parse_hipaa_consent(text)
-    else:
-        template = "unknown"
-        parsed = base_schema()
-        parsed["error"] = "Unknown consent template"
+        parsed = parse_hipaa_consent(text, consent_logger, run_id, doc_id)
+        status = "success"
 
-    out_path = os.path.join(json_output_folder, f"{os.path.splitext(filename)[0]}_{template}.json")
+    else:
+        # Layout matched some non-consent template (e.g., T1_hot_springs),
+        # or no match and text also didn't identify anything.
+        template = template_match or "unknown_template"
+        parsed = base_schema()
+        parsed["error"] = f"Known template ({template}) without an implemented consent parser."
+        status = "fail"
+
+    # log missing required fields
+    _log_required_misses(consent_logger, run_id, doc_id, parsed)
+
+    consent_logger.parse_end(
+        run_id=run_id,
+        doc_id=doc_id,
+        fields_extracted_count=_count_non_null(parsed),
+        required_total=len(REQUIRED_FIELDS),
+        status=status,
+        meta={"stage": "text_to_json", "template": template}
+    )
+
+    out_path = os.path.join(json_output_folder, f"{doc_id}_{template}.json")
+    cleaned = remove_null_fields(parsed)
+
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(parsed, f, indent=2)
+        json.dump(cleaned, f, indent=2)
 
     print(f"✅ Parsed {filename} as {template} → {out_path}")
+
 
 print("All consents processed.")
