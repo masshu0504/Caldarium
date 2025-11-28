@@ -7,11 +7,13 @@ Original file is located at
     https://colab.research.google.com/drive/1P-hrOB1n3fwhDeJSnAdxxrfTmILfdQ5a
 """
 
-
 import os, re, json, pdfplumber
 
 from parser_audit_logger import AuditLogger, iso_yyyymmdd
 import uuid
+
+# --- NEW IMPORT ---
+from template_detector import check_for_unforeseen_template
 
 SCHEMA_VERSION = "invoice_v1_reset"
 PARSER_VERSION = "rules-0.3"
@@ -41,7 +43,7 @@ REQUIRED_FIELDS = ["patient_name", "date"]
 # FOLDER SETUP
 # -----------------------------
 pdf_folder = "medical_pdfs/consents"
-parsed_text_folder = "json_parsed_texts"
+parsed_text_folder = "json_"
 json_output_folder = "json_consents"
 
 os.makedirs(pdf_folder, exist_ok=True)
@@ -51,8 +53,10 @@ os.makedirs(json_output_folder, exist_ok=True)
 
 consent_logger = AuditLogger("minna_d", "parser", SCHEMA_VERSION, PARSER_VERSION, AUDIT_LOG_PATH)
 # -----------------------------
-# STEP 1: PDF → TEXT
+# STEP 1: PDF → TEXT (No changes needed here)
 # -----------------------------
+# ... (STEP 1 code remains exactly the same as in your prompt) ...
+
 for filename in os.listdir(pdf_folder):
     if not filename.lower().endswith(".pdf"):
         continue
@@ -111,7 +115,7 @@ for filename in os.listdir(pdf_folder):
 
 print("All PDFs parsed.\n")
 # -----------------------------
-# BASE SCHEMA
+# BASE SCHEMA (No changes needed here)
 # -----------------------------
 def base_schema():
     return {
@@ -221,7 +225,7 @@ def assemble_patient_name(first, middle, last):
 
 
 # -----------------------------
-# PARSER
+# PARSER (No changes needed here)
 # -----------------------------
 def parse_nih_consent(text: str, logger: AuditLogger, run_id: str, doc_id: str) -> dict:
     c = base_schema()
@@ -376,6 +380,13 @@ def parse_hipaa_consent(text: str, logger: AuditLogger, run_id: str, doc_id: str
 
     return c
 
+TEMPLATE_TO_CONSENT_PARSER = {
+    # C1_consent layout uses the NIH-style consent parser
+    "C1_consent": ("nih_consent", parse_nih_consent),
+
+    # C2_consent layout uses the HIPAA-style consent parser
+    "C2_consent": ("hipaa_consent", parse_hipaa_consent),
+}
 
 # -----------------------------
 # STEP 2: TEXT → JSON
@@ -384,10 +395,11 @@ for filename in os.listdir(parsed_text_folder):
     if not filename.endswith(".txt"):
         continue
 
-    doc_id = os.path.splitext(filename)[0]              # define per-text doc_id
-    run_id = str(uuid.uuid4())                          # new run_id per doc
+    doc_id = os.path.splitext(filename)[0]
+    run_id = str(uuid.uuid4())
+    pdf_filename = f"{doc_id}.pdf"
+    pdf_path = os.path.join(pdf_folder, pdf_filename)
 
-    # log: start of text->json stage
     consent_logger.parse_start(
         run_id=run_id,
         doc_id=doc_id,
@@ -398,34 +410,64 @@ for filename in os.listdir(parsed_text_folder):
     with open(path, "r", encoding="utf-8") as f:
         text = f.read()
 
-    # Detect template and parse
-    if "NIH Occupational" in text:
+    # 1. Layout-based template detection
+    try:
+        template_match = check_for_unforeseen_template(pdf_path, run_id, doc_id)
+    except Exception as e:
+        consent_logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="template_layout_check",
+            to_value=None,
+            status="fail",
+            meta={"stage": "text_to_json", "error": f"{type(e).__name__}: {e}"}
+        )
+        template_match = None
+
+    # 2. Decide how to parse
+    if template_match == "unforeseen":
+        template = "unforeseen"
+        parsed = base_schema()
+        parsed["error"] = "Unforeseen template detected by layout fingerprinting."
+        consent_logger.auto_extract_parser(
+            run_id=run_id,
+            doc_id=doc_id,
+            field="template_layout_check",
+            to_value=template,
+            status="fail",
+            meta={"stage": "text_to_json", "why": "unforeseen_template_layout_match"}
+        )
+        status = "fail"
+
+    elif template_match in TEMPLATE_TO_CONSENT_PARSER:
+        # Layout matched a known consent template (C1_consent / C2_consent)
+        logical_name, parser_fn = TEMPLATE_TO_CONSENT_PARSER[template_match]
+        template = logical_name  # e.g., "nih_consent" or "hipaa_consent"
+        parsed = parser_fn(text, consent_logger, run_id, doc_id)
+        status = "success"
+
+    elif "NIH Occupational" in text:
+        # Text-based fallback if layout didn't help
         template = "nih_consent"
         parsed = parse_nih_consent(text, consent_logger, run_id, doc_id)
         status = "success"
+
     elif "HIPAA Authorization Form" in text:
         template = "hipaa_consent"
         parsed = parse_hipaa_consent(text, consent_logger, run_id, doc_id)
         status = "success"
+
     else:
-        template = "unknown"
+        # Layout matched some non-consent template (e.g., T1_hot_springs),
+        # or no match and text also didn't identify anything.
+        template = template_match or "unknown_template"
         parsed = base_schema()
-        parsed["error"] = "Unknown consent template"
-        # log the template detection failure (field-level)
-        consent_logger.auto_extract_parser(
-            run_id=run_id,
-            doc_id=doc_id,
-            field="template",
-            to_value=template,
-            status="fail",
-            meta={"stage": "text_to_json", "why": "unknown_template"}
-        )
+        parsed["error"] = f"Known template ({template}) without an implemented consent parser."
         status = "fail"
 
-    # log fails for required fields (patient_name, date) if missing
+    # log missing required fields
     _log_required_misses(consent_logger, run_id, doc_id, parsed)
 
-    # doc-level end for STEP 2
     consent_logger.parse_end(
         run_id=run_id,
         doc_id=doc_id,
@@ -440,5 +482,6 @@ for filename in os.listdir(parsed_text_folder):
         json.dump(parsed, f, indent=2)
 
     print(f"✅ Parsed {filename} as {template} → {out_path}")
+
 
 print("All consents processed.")
