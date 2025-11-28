@@ -11,8 +11,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 WORKDIR /app
 
 # Install Python deps for the benchmark
-COPY bench/requirements.txt /app/bench/requirements.txt
-RUN pip install --no-cache-dir -r /app/bench/requirements.txt
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy the benchmark code (we also bind-mount at runtime)
 COPY bench /app/bench

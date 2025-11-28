@@ -1,0 +1,71 @@
+{
+  "C1_consent": {
+    "page_count": 2.0,
+    "avg_width": 612.0,
+    "avg_height": 792.0,
+    "header_text_density": 0.2308654135626228,
+    "footer_text_density": 0.1843423556123791,
+    "body_text_density": 0.5847922308249981,
+    "avg_font_size": 9.593545615774987,
+    "top_fonts": [
+      "BAAAAA+Carlito",
+      "EAAAAA+Carlito-BoldItalic",
+      "CAAAAA+Carlito-Bold"
+    ]
+  },
+  "C2_consent": {
+    "page_count": 4.0,
+    "avg_width": 612.0,
+    "avg_height": 792.0,
+    "header_text_density": 0.10906698719462801,
+    "footer_text_density": 0.05604766891141216,
+    "body_text_density": 0.8348853438939599,
+    "avg_font_size": 14.01924121303737,
+    "top_fonts": [
+      "BAAAAA+Carlito",
+      "CAAAAA+Carlito-Bold"
+    ]
+  },
+  "T1_hot_springs": {
+    "page_count": 1.0,
+    "avg_width": 612.0,
+    "avg_height": 792.0,
+    "header_text_density": 0.23423585860103574,
+    "footer_text_density": 0.047480241608318055,
+    "body_text_density": 0.7182838997906462,
+    "avg_font_size": 12.538359828109506,
+    "top_fonts": [
+      "CAAAAA+Carlito",
+      "EAAAAA+Carlito-Bold",
+      "BAAAAA+DejaVuSans-Bold"
+    ]
+  },
+  "T2_rose_petal": {
+    "page_count": 1.0,
+    "avg_width": 612.0,
+    "avg_height": 792.0,
+    "header_text_density": 0.17099243206054354,
+    "footer_text_density": 0.4099931200550395,
+    "body_text_density": 0.41901444788441694,
+    "avg_font_size": 12.252098383212934,
+    "top_fonts": [
+      "CAAAAA+Carlito",
+      "DAAAAA+Carlito-Bold",
+      "BAAAAA+DejaVuSans-Bold"
+    ]
+  },
+  "T3_white_petal": {
+    "page_count": 2.0,
+    "avg_width": 560.012598425197,
+    "avg_height": 792.0,
+    "header_text_density": 0.14198011756505402,
+    "footer_text_density": 0.42320996581891107,
+    "body_text_density": 0.4348099166160349,
+    "avg_font_size": 11.071693622636305,
+    "top_fonts": [
+      "CAAAAA+LiberationSans-Bold",
+      "DAAAAA+LiberationSans",
+      "BAAAAA+Carlito"
+    ]
+  }
+}
