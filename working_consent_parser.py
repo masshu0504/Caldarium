@@ -39,6 +39,18 @@ def _log_required_misses(logger: AuditLogger, run_id: str, doc_id: str, parsed: 
             
 REQUIRED_FIELDS = ["patient_name", "date"]
 
+def remove_null_fields(d: dict) -> dict:
+    """
+    Return a new dict excluding keys whose values are:
+      - None
+      - empty string ""
+      - empty list []
+    """
+    return {
+        k: v for k, v in d.items()
+        if v not in (None, "", [])
+    }
+
 # -----------------------------
 # FOLDER SETUP
 # -----------------------------
@@ -478,8 +490,10 @@ for filename in os.listdir(parsed_text_folder):
     )
 
     out_path = os.path.join(json_output_folder, f"{doc_id}_{template}.json")
+    cleaned = remove_null_fields(parsed)
+
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(parsed, f, indent=2)
+        json.dump(cleaned, f, indent=2)
 
     print(f"✅ Parsed {filename} as {template} → {out_path}")
 
