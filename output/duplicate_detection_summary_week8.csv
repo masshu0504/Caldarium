@@ -1,0 +1,3 @@
+patient_name,patient_id,provider_name,record_count,doc_type,source_file
+Angel Kaiser,,,2,invoice,parser_json_output/invoice_T3_gen2_regex.json
+Angel Kaiser,,,2,invoice,parser_json_output/invoice_T3_gen3_regex.json
