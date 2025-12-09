@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV294900",
+  "patient_id": "88706",
+  "invoice_date": "1980-05-23",
+  "due_date": "1980-06-22",
+  "patient_name": "Katherine Lock",
+  "patient_age": null,
+  "patient_address": "Keithbury, MH 33993",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": null,
+  "discharge_date": null,
+  "subtotal_amount": "1570.00",
+  "discount_amount": null,
+  "total_amount": "1624.95",
+  "provider_name": null,
+  "bed_id": null,
+  "line_items": [
+    {
+      "description": "COVID-19 Test",
+      "code": "DC04",
+      "amount": 100.0
+    },
+    {
+      "description": "MRI Scan",
+      "code": "AL07",
+      "amount": 1200.0
+    },
+    {
+      "description": "Allergy Test",
+      "code": "MRI5",
+      "amount": 90.0
+    },
+    {
+      "description": "Dermatology Consultation",
+      "code": "CV19",
+      "amount": 180.0
+    }
+  ]
+}

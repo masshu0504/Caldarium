@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV376323",
+  "patient_id": null,
+  "invoice_date": "2024-08-05",
+  "due_date": "2024-09-04",
+  "patient_name": "Nicole Swanson",
+  "patient_age": "41",
+  "patient_address": "3705 Bridge Avenue, Tulsa OK",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "2024-08-01",
+  "discharge_date": "2024-08-03",
+  "subtotal_amount": "1490.00",
+  "discount_amount": "596.00",
+  "total_amount": "961.05",
+  "provider_name": null,
+  "bed_id": "1711",
+  "line_items": [
+    {
+      "description": "MRI Scan",
+      "code": "CH05",
+      "amount": 60.0
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "VAX9",
+      "amount": 50.0
+    },
+    {
+      "description": "Vaccination",
+      "code": "MRI5",
+      "amount": 1200.0
+    },
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": 180.0
+    }
+  ]
+}

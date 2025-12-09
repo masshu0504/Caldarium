@@ -1,0 +1,40 @@
+{
+  "invoice_number": "INV970003",
+  "patient_id": null,
+  "invoice_date": "1972-03-17",
+  "due_date": "1972-04-16",
+  "patient_name": "Monique Hancock",
+  "patient_age": "60",
+  "patient_address": "2522 Rivera Mountains",
+  "patient_phone": null,
+  "patient_email": null,
+  "admission_date": "1972-03-05",
+  "discharge_date": "1972-03-15",
+  "subtotal_amount": "$420.00",
+  "discount_amount": "$189.00",
+  "total_amount": "$249.90",
+  "provider_name": null,
+  "bed_id": "793",
+  "line_items": [
+    {
+      "description": "Lab Panel",
+      "code": "LP12",
+      "amount": 30.0
+    },
+    {
+      "description": "Consultation",
+      "code": "C001",
+      "amount": 60.0
+    },
+    {
+      "description": "Cholesterol Test",
+      "code": "CH05",
+      "amount": 150.0
+    },
+    {
+      "description": "Prescription Refill",
+      "code": "PR06",
+      "amount": 180.0
+    }
+  ]
+}
