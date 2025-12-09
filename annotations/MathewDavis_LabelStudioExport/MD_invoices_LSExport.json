@@ -1,0 +1,1370 @@
+[
+{
+  "text": "MEDICAL\nHOT SPRINGS GENERAL\nINVOICE HOSPITAL\n3705 Bridge Avenue, Tulsa OK, 74101 (123) 456-7890 info@hotspringsgen.com www.hotspringsgen.com\nInvoice Details\nDue Account\nInvoice # INV377776 Date: 2020-03-30 2020-04-29 MRN53310\nDate No.\nPatient Details\nPatient Name: Heather Anderson Hospital No: HS-123548-18\nPatient Age: 80 Bed No: BED4887\n684 Adrienne Trafficway Suite 418\nAddress: Admission Date: 2020-03-22\nWarrenfurt, WY 64879\nConsultant: Dr. Brittney Santos Discharge Date: 2020-03-28\nCode Particulars Amount\nLP12 Lab Panel $180.00\nDC04 Dermatology Consultation $180.00\nHT02 Hearing Test $70.00\nSub Total $430.00\nDiscount $197.80\nTax: 4.5%\nTotal $251.55\nTHANK YOU!",
+  "filename": "invoice_T1_gen1.pdf",
+  "id": 1,
+  "label": [
+    {
+      "start": 179,
+      "end": 188,
+      "text": "INV377776",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 195,
+      "end": 205,
+      "text": "2020-03-30",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 206,
+      "end": 216,
+      "text": "2020-04-29",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 265,
+      "end": 281,
+      "text": "Heather Anderson",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 321,
+      "end": 323,
+      "text": "80",
+      "labels": [
+        "patient_age"
+      ]
+    },
+    {
+      "start": 340,
+      "end": 373,
+      "text": "684 Adrienne Trafficway Suite 418",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 399,
+      "end": 409,
+      "text": "2020-03-22",
+      "labels": [
+        "admission_date"
+      ]
+    },
+    {
+      "start": 479,
+      "end": 489,
+      "text": "2020-03-28",
+      "labels": [
+        "discharge_date"
+      ]
+    },
+    {
+      "start": 611,
+      "end": 617,
+      "text": "430.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 628,
+      "end": 634,
+      "text": "197.80",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 652,
+      "end": 658,
+      "text": "251.55",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 443,
+      "end": 462,
+      "text": "Dr. Brittney Santos",
+      "labels": [
+        "provider_name"
+      ]
+    },
+    {
+      "start": 332,
+      "end": 339,
+      "text": "BED4887",
+      "labels": [
+        "bed_id"
+      ]
+    },
+    {
+      "start": 519,
+      "end": 528,
+      "text": "Lab Panel",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 514,
+      "end": 518,
+      "text": "LP12",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 530,
+      "end": 536,
+      "text": "180.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 542,
+      "end": 566,
+      "text": "Dermatology Consultation",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 575,
+      "end": 579,
+      "text": "HT02",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 537,
+      "end": 541,
+      "text": "DC04",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 594,
+      "end": 599,
+      "text": "70.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 568,
+      "end": 574,
+      "text": "180.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 580,
+      "end": 592,
+      "text": "Hearing Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 217,
+      "end": 225,
+      "text": "MRN53310",
+      "labels": [
+        "patient_id"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 1,
+  "created_at": "2025-10-13T21:05:53.997582Z",
+  "updated_at": "2025-10-16T20:19:49.947972Z",
+  "lead_time": 287.406
+},
+{
+  "text": "MEDICAL\nHOT SPRINGS GENERAL\nINVOICE HOSPITAL\n3705 Bridge Avenue, Tulsa OK, 74101 (123) 456-7890 info@hotspringsgen.com www.hotspringsgen.com\nInvoice Details\nDue Account\nInvoice # INV970003 Date: 1972-03-17 1972-04-16 MRN59273\nDate No.\nPatient Details\nPatient Name: Monique Hancock Hospital No: HS-123548-18\nPatient Age: 60 Bed No: BED793\n2522 Rivera Mountains\nAddress: Admission Date: 1972-03-05\nLake Mary, NY 06671\nConsultant: Dr. Laura Castillo Discharge Date: 1972-03-15\nCode Particulars Amount\nLP12 Lab Panel $180.00\nC001 Consultation $150.00\nCH05 Cholesterol Test $60.00\nPR06 Prescription Refill $30.00\nSub Total $420.00\nDiscount $189.00\nTax: 4.5%\nTotal $249.90\nTHANK YOU!",
+  "filename": "invoice_T1_gen5.pdf",
+  "id": 6,
+  "label": [
+    {
+      "start": 179,
+      "end": 188,
+      "text": "INV970003",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 195,
+      "end": 205,
+      "text": "1972-03-17",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 206,
+      "end": 216,
+      "text": "1972-04-16",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 217,
+      "end": 225,
+      "text": "MRN59273",
+      "labels": [
+        "patient_id"
+      ]
+    },
+    {
+      "start": 265,
+      "end": 280,
+      "text": "Monique Hancock",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 320,
+      "end": 322,
+      "text": "60",
+      "labels": [
+        "patient_age"
+      ]
+    },
+    {
+      "start": 338,
+      "end": 359,
+      "text": "2522 Rivera Mountains",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 396,
+      "end": 415,
+      "text": "Lake Mary, NY 06671",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 385,
+      "end": 395,
+      "text": "1972-03-05",
+      "labels": [
+        "admission_date"
+      ]
+    },
+    {
+      "start": 463,
+      "end": 473,
+      "text": "1972-03-15",
+      "labels": [
+        "discharge_date"
+      ]
+    },
+    {
+      "start": 619,
+      "end": 625,
+      "text": "420.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 636,
+      "end": 642,
+      "text": "189.00",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 660,
+      "end": 666,
+      "text": "249.90",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 428,
+      "end": 446,
+      "text": "Dr. Laura Castillo",
+      "labels": [
+        "provider_name"
+      ]
+    },
+    {
+      "start": 331,
+      "end": 337,
+      "text": "BED793",
+      "labels": [
+        "bed_id"
+      ]
+    },
+    {
+      "start": 503,
+      "end": 512,
+      "text": "Lab Panel",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 526,
+      "end": 538,
+      "text": "Consultation",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 552,
+      "end": 568,
+      "text": "Cholesterol Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 581,
+      "end": 600,
+      "text": "Prescription Refill",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 498,
+      "end": 502,
+      "text": "LP12",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 521,
+      "end": 525,
+      "text": "C001",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 547,
+      "end": 551,
+      "text": "CH05",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 576,
+      "end": 580,
+      "text": "PR06",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 514,
+      "end": 520,
+      "text": "180.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 540,
+      "end": 546,
+      "text": "150.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 570,
+      "end": 575,
+      "text": "60.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 602,
+      "end": 607,
+      "text": "30.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 6,
+  "created_at": "2025-10-16T20:22:11.409815Z",
+  "updated_at": "2025-10-16T20:22:11.409833Z",
+  "lead_time": 161.305
+},
+{
+  "text": "MEDICAL\nHOT SPRINGS GENERAL\nINVOICE HOSPITAL\n3705 Bridge Avenue, Tulsa OK, 74101 (123) 456-7890 info@hotspringsgen.com www.hotspringsgen.com\nInvoice Details\nDue Account\nInvoice # INV376323 Date: 2024-08-05 2024-09-04 MRN86469\nDate No.\nPatient Details\nPatient Name: Nicole Swanson Hospital No: HS-123548-18\nPatient Age: 41 Bed No: BED1711\n569 Christine Coves Suite 770\nAddress: Admission Date: 2024-08-01\nLake Lindsaybury, IN 82215\nConsultant: Dr. Rachel Pham Discharge Date: 2024-08-03\nCode Particulars Amount\nCH05 Cholesterol Test $60.00\nVAX9 Vaccination $50.00\nMRI5 MRI Scan $1200.00\nLP12 Lab Panel $180.00\nSub Total $1490.00\nDiscount $596.00\nTax: 4.5%\nTotal $961.05\nTHANK YOU!",
+  "filename": "invoice_T1_gen9.pdf",
+  "id": 10,
+  "label": [
+    {
+      "start": 179,
+      "end": 188,
+      "text": "INV376323",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 217,
+      "end": 225,
+      "text": "MRN86469",
+      "labels": [
+        "patient_id"
+      ]
+    },
+    {
+      "start": 195,
+      "end": 205,
+      "text": "2024-08-05",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 206,
+      "end": 216,
+      "text": "2024-09-04",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 265,
+      "end": 279,
+      "text": "Nicole Swanson",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 319,
+      "end": 321,
+      "text": "41",
+      "labels": [
+        "patient_age"
+      ]
+    },
+    {
+      "start": 404,
+      "end": 430,
+      "text": "Lake Lindsaybury, IN 82215",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 338,
+      "end": 367,
+      "text": "569 Christine Coves Suite 770",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 475,
+      "end": 485,
+      "text": "2024-08-03",
+      "labels": [
+        "discharge_date"
+      ]
+    },
+    {
+      "start": 393,
+      "end": 403,
+      "text": "2024-08-01",
+      "labels": [
+        "admission_date"
+      ]
+    },
+    {
+      "start": 620,
+      "end": 627,
+      "text": "1490.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 638,
+      "end": 644,
+      "text": "596.00",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 662,
+      "end": 668,
+      "text": "961.05",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 443,
+      "end": 458,
+      "text": "Dr. Rachel Pham",
+      "labels": [
+        "provider_name"
+      ]
+    },
+    {
+      "start": 330,
+      "end": 337,
+      "text": "BED1711",
+      "labels": [
+        "bed_id"
+      ]
+    },
+    {
+      "start": 515,
+      "end": 531,
+      "text": "Cholesterol Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 544,
+      "end": 555,
+      "text": "Vaccination",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 568,
+      "end": 576,
+      "text": "MRI Scan",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 591,
+      "end": 600,
+      "text": "Lab Panel",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 510,
+      "end": 514,
+      "text": "CH05",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 539,
+      "end": 543,
+      "text": "VAX9",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 563,
+      "end": 567,
+      "text": "MRI5",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 586,
+      "end": 590,
+      "text": "LP12",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 533,
+      "end": 538,
+      "text": "60.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 557,
+      "end": 562,
+      "text": "50.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 578,
+      "end": 585,
+      "text": "1200.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 602,
+      "end": 608,
+      "text": "180.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 8,
+  "created_at": "2025-10-16T20:30:15.086417Z",
+  "updated_at": "2025-10-16T20:30:15.086453Z",
+  "lead_time": 199.145
+},
+{
+  "text": "ROSE PETAL CLINIC INVOICE\n4117 Cedarstone Drive, Amherst, NH, 03031\nStacey Hawkins\nInvoice No: INV645730\nE: stacey.hawkins@gmail.com\n435-367-1984\nDate: 1991-11-23\nDue Date: 1991-12-23\nDescription Code Total\nCOVID-19 Test CV19 $100.00\nVaccination VAX9 $50.00\nECG ECG2 $100.00\nCT Scan CT15 $1000.00\nSubtotal: $1250.00\nTax (X%) 4.5%\nTotal: $1306.25\nThank you for choosing Rose Petal Clinic.\nFor any questions regarding this invoice, please contact (123) 456-7890 or info@rosepetalclinic.org.\nAddress: 4117 Cedarstone Drive, Amherst NH, 03031\nPhone Number: (123) 456-7890\nEmail: info@rosepetalclinic.org\nWebsite: www.rosepetalclinic.org",
+  "filename": "invoice_T2_gen10.pdf",
+  "id": 12,
+  "label": [
+    {
+      "start": 95,
+      "end": 104,
+      "text": "INV645730",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 152,
+      "end": 162,
+      "text": "1991-11-23",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 173,
+      "end": 183,
+      "text": "1991-12-23",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 68,
+      "end": 82,
+      "text": "Stacey Hawkins",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 133,
+      "end": 145,
+      "text": "435-367-1984",
+      "labels": [
+        "patient_phone"
+      ]
+    },
+    {
+      "start": 108,
+      "end": 132,
+      "text": "stacey.hawkins@gmail.com",
+      "labels": [
+        "patient_email"
+      ]
+    },
+    {
+      "start": 308,
+      "end": 315,
+      "text": "1250.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 338,
+      "end": 345,
+      "text": "1306.25",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 207,
+      "end": 220,
+      "text": "COVID-19 Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 234,
+      "end": 245,
+      "text": "Vaccination",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 258,
+      "end": 261,
+      "text": "ECG",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 275,
+      "end": 282,
+      "text": "CT Scan",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 283,
+      "end": 288,
+      "text": "CT15 ",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 262,
+      "end": 267,
+      "text": "ECG2 ",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 246,
+      "end": 251,
+      "text": "VAX9 ",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 221,
+      "end": 226,
+      "text": "CV19 ",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 227,
+      "end": 233,
+      "text": "100.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 252,
+      "end": 257,
+      "text": "50.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 268,
+      "end": 274,
+      "text": "100.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 289,
+      "end": 296,
+      "text": "1000.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 7,
+  "created_at": "2025-10-16T20:26:25.512975Z",
+  "updated_at": "2025-10-16T20:26:25.513002Z",
+  "lead_time": 242.353
+},
+{
+  "text": "ROSE PETAL CLINIC INVOICE\n4117 Cedarstone Drive, Amherst, NH, 03031\nJennifer Cunningham\nInvoice No: INV26344\n001-646-803-9654\nE: jennifer.cunningham@gmail.com\nDue Date: 2024-01-27\nDate: 2023-12-28\nDescription Code Total\nUrine Test UT01 $40.00\nVaccination Booster VB08 $55.00\nUltrasound US10 $300.00\nMRI Scan MRI5 $1200.00\nSubtotal: $1595.00\nTax (X%) 4.5%\nTotal: $1666.78\nThank you for choosing Rose Petal Clinic.\nFor any questions regarding this invoice, please contact (123) 456-7890 or info@rosepetalclinic.org.\nAddress: 4117 Cedarstone Drive, Amherst NH, 03031\nPhone Number: (123) 456-7890\nEmail: info@rosepetalclinic.org\nWebsite: www.rosepetalclinic.org",
+  "filename": "invoice_T2_gen3.pdf",
+  "id": 14,
+  "label": [
+    {
+      "start": 100,
+      "end": 108,
+      "text": "INV26344",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 186,
+      "end": 196,
+      "text": "2023-12-28",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 169,
+      "end": 179,
+      "text": "2024-01-27",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 68,
+      "end": 625,
+      "text": "",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 109,
+      "end": 125,
+      "text": "001-646-803-9654",
+      "labels": [
+        "patient_phone"
+      ]
+    },
+    {
+      "start": 129,
+      "end": 158,
+      "text": "jennifer.cunningham@gmail.com",
+      "labels": [
+        "patient_email"
+      ]
+    },
+    {
+      "start": 333,
+      "end": 340,
+      "text": "1595.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 363,
+      "end": 370,
+      "text": "1666.78",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 220,
+      "end": 230,
+      "text": "Urine Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 243,
+      "end": 262,
+      "text": "Vaccination Booster",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 275,
+      "end": 285,
+      "text": "Ultrasound",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 299,
+      "end": 307,
+      "text": "MRI Scan",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 231,
+      "end": 235,
+      "text": "UT01",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 286,
+      "end": 290,
+      "text": "US10",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 308,
+      "end": 312,
+      "text": "MRI5",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 237,
+      "end": 242,
+      "text": "40.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 263,
+      "end": 267,
+      "text": "VB08",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 269,
+      "end": 274,
+      "text": "55.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 292,
+      "end": 298,
+      "text": "300.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 314,
+      "end": 321,
+      "text": "1200.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 2,
+  "created_at": "2025-10-13T21:29:10.776557Z",
+  "updated_at": "2025-10-13T21:29:10.776587Z",
+  "lead_time": 399.698
+},
+{
+  "text": "White Petal Hospital Center\nInvoice\nBILLED TO: David Ortiz\n54246 Alexis Turnpike\nEast Kevinville, NE 97421\nINVOICE DETAILS:\nInvoice # INV13151\nDate of Issue 2010-12-18\nDue Date 2011-01-17\nCODE DESCRIPTION AMOUNT\nSC03 Surgery Consultation $250.00\nSubtotal $250.00\nDiscount $22.50\nTax Rate 4.5%\nTOTAL $238.75\nPayment Instructions:\nPlease remit payment within 30 days of the invoice date. We accept checks, credit cards, and online\npayments through our patient portal.\nDisclaimer:\nThis invoice is generated for services rendered. If you believe any information is incorrect, please contact\nour billing department immediately.\n\ninfo@whitepetalhospital.org +1 (234)-567-8900 www.whitepetalhospital.org",
+  "filename": "invoice_T3_gen4.pdf",
+  "id": 25,
+  "label": [
+    {
+      "start": 134,
+      "end": 142,
+      "text": "INV13151",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 157,
+      "end": 167,
+      "text": "2010-12-18",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 177,
+      "end": 187,
+      "text": "2011-01-17",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 47,
+      "end": 58,
+      "text": "David Ortiz",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 59,
+      "end": 106,
+      "text": "54246 Alexis Turnpike\\nEast Kevinville, NE 97421",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 256,
+      "end": 262,
+      "text": "250.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 273,
+      "end": 278,
+      "text": "22.50",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 300,
+      "end": 306,
+      "text": "238.75",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 217,
+      "end": 237,
+      "text": "Surgery Consultation",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 212,
+      "end": 216,
+      "text": "SC03",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 239,
+      "end": 245,
+      "text": "250.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 5,
+  "created_at": "2025-10-16T20:17:44.671620Z",
+  "updated_at": "2025-10-16T20:17:44.671638Z",
+  "lead_time": 101.282
+},
+{
+  "text": "White Petal Hospital Center\nInvoice\nBILLED TO: Robert Ferguson\n88706 Katherine Lock\nKeithbury, MH 33993\nINVOICE DETAILS:\nInvoice # INV294900\nDate of Issue 1980-05-23\nDue Date 1980-06-22\nCODE DESCRIPTION AMOUNT\nCV19 COVID-19 Test $100.00\nMRI5 MRI Scan $1200.00\nAL07 Allergy Test $90.00\nDC04 Dermatology Consultation $180.00\nSubtotal $1570.00\nDiscount $15.70\nTax Rate 4.5%\nTOTAL $1624.95\nPayment Instructions:\nPlease remit payment within 30 days of the invoice date. We accept checks, credit cards, and online\npayments through our patient portal.\nDisclaimer:\nThis invoice is generated for services rendered. If you believe any information is incorrect, please contact\nour billing department immediately.\n\ninfo@whitepetalhospital.org +1 (234)-567-8900 www.whitepetalhospital.org",
+  "filename": "invoice_T3_gen7.pdf",
+  "id": 28,
+  "label": [
+    {
+      "start": 131,
+      "end": 140,
+      "text": "INV294900",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 155,
+      "end": 165,
+      "text": "1980-05-23",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 175,
+      "end": 185,
+      "text": "1980-06-22",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 47,
+      "end": 62,
+      "text": "Robert Ferguson",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 63,
+      "end": 103,
+      "text": "88706 Katherine Lock\\nKeithbury, MH 33993",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 333,
+      "end": 340,
+      "text": "1570.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 351,
+      "end": 356,
+      "text": "15.70",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 378,
+      "end": 385,
+      "text": "1624.95",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 215,
+      "end": 228,
+      "text": "COVID-19 Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 242,
+      "end": 250,
+      "text": "MRI Scan",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 265,
+      "end": 277,
+      "text": "Allergy Test",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 290,
+      "end": 314,
+      "text": "Dermatology Consultation",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 237,
+      "end": 241,
+      "text": "MRI5",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 210,
+      "end": 214,
+      "text": "CV19",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 260,
+      "end": 264,
+      "text": "AL07",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 285,
+      "end": 289,
+      "text": "DC04",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 316,
+      "end": 322,
+      "text": "180.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 279,
+      "end": 284,
+      "text": "90.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 252,
+      "end": 703,
+      "text": "",
+      "labels": [
+        "line_item_amount"
+      ]
+    },
+    {
+      "start": 230,
+      "end": 236,
+      "text": "100.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 4,
+  "created_at": "2025-10-13T21:36:26.338262Z",
+  "updated_at": "2025-10-13T21:36:26.338289Z",
+  "lead_time": 261.824
+},
+{
+  "text": "White Petal Hospital Center\nInvoice\nBILLED TO: Taylor Parsons\n22162 Renee Canyon\nSouth Ronaldville, MN 50745\nINVOICE DETAILS:\nInvoice # INV872679\nDate of Issue 1993-12-14\nDue Date 1994-01-13\nCODE DESCRIPTION AMOUNT\nVB08 Vaccination Booster $55.00\nSubtotal $55.00\nDiscount $16.50\nTax Rate 4.5%\nTOTAL $40.98\nPayment Instructions:\nPlease remit payment within 30 days of the invoice date. We accept checks, credit cards, and online\npayments through our patient portal.\nDisclaimer:\nThis invoice is generated for services rendered. If you believe any information is incorrect, please contact\nour billing department immediately.\n\ninfo@whitepetalhospital.org +1 (234)-567-8900 www.whitepetalhospital.org",
+  "filename": "invoice_T3_gen9.pdf",
+  "id": 30,
+  "label": [
+    {
+      "start": 136,
+      "end": 145,
+      "text": "INV872679",
+      "labels": [
+        "invoice_number"
+      ]
+    },
+    {
+      "start": 160,
+      "end": 170,
+      "text": "1993-12-14",
+      "labels": [
+        "invoice_date"
+      ]
+    },
+    {
+      "start": 180,
+      "end": 190,
+      "text": "1994-01-13",
+      "labels": [
+        "due_date"
+      ]
+    },
+    {
+      "start": 47,
+      "end": 61,
+      "text": "Taylor Parsons",
+      "labels": [
+        "patient_name"
+      ]
+    },
+    {
+      "start": 62,
+      "end": 108,
+      "text": "22162 Renee Canyon\\nSouth Ronaldville, MN 50745",
+      "labels": [
+        "patient_address"
+      ]
+    },
+    {
+      "start": 257,
+      "end": 262,
+      "text": "55.00",
+      "labels": [
+        "subtotal_amount"
+      ]
+    },
+    {
+      "start": 273,
+      "end": 278,
+      "text": "16.50",
+      "labels": [
+        "discount_amount"
+      ]
+    },
+    {
+      "start": 300,
+      "end": 305,
+      "text": "40.98",
+      "labels": [
+        "total_amount"
+      ]
+    },
+    {
+      "start": 220,
+      "end": 239,
+      "text": "Vaccination Booster",
+      "labels": [
+        "line_item_description"
+      ]
+    },
+    {
+      "start": 215,
+      "end": 219,
+      "text": "VB08",
+      "labels": [
+        "line_item_code"
+      ]
+    },
+    {
+      "start": 241,
+      "end": 246,
+      "text": "55.00",
+      "labels": [
+        "line_item_amount"
+      ]
+    }
+  ],
+  "annotator": 1,
+  "annotation_id": 3,
+  "created_at": "2025-10-13T21:31:48.236524Z",
+  "updated_at": "2025-10-13T21:31:48.236586Z",
+  "lead_time": 146.974
+}
+]
