@@ -1,0 +1,45 @@
+import json
+import os
+
+def remove_null_fields(input_path, output_path=None):
+    
+    #If no output file is specified -> overwrites (what you typically will want)
+    if output_path is None:
+        output_path = input_path
+
+    with open(input_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    def clean(obj):
+    # Will remove null values
+        if isinstance(obj, dict):
+            cleaned = {}
+            for key, value in obj.items():
+                if value is None:
+                    continue 
+                    
+                if isinstance(value, str) and value.strip().lower() == "null":
+                    continue  
+                
+                cleaned[key] = clean(value)
+            return cleaned
+        
+        elif isinstance(obj, list):
+
+            return [
+                clean(item) for item in obj
+                if not (
+                    item is None or
+                    (isinstance(item, str) and item.strip().lower() == "null")
+                )
+            ]
+        
+        return obj
+
+    cleaned_data = clean(data)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(cleaned_data, f, indent=2)
+        
+    # Confirms where file was written in case overwriting is not desired
+    print(f"Clean document at: {output_path}")
